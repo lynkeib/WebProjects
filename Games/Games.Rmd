@@ -1,0 +1,371 @@
+---
+title: "Games"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load Packages
+
+```{r Load Packages, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+```
+
+# Read In Data
+
+```{r Read In Data}
+data = read.csv('/Users/chengyinliu/D/Projects/Pet_Project/Games/Data/ign.csv', na.strings = '')
+```
+
+# EDA
+
+```{r}
+summary(data)
+```
+
+Year: from 1970 to 2016
+
+We can see that there are Null Value in genre, so we delete them at the beginning
+
+```{r}
+data_c <- data %>%
+  filter(!is.na(data$genre))
+```
+
+## Questions want to answer:
+
+1. Which platforms are popular?
+
+2. Which kinds of genre are popular?
+
+3. When is the best time to release a game?
+
+4. What are the main topic of games?
+
+## Which platforms are popular?
+
+```{r}
+data_c %>%
+  group_by(platform) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) %>%
+  ggplot(mapping = aes(x = reorder(platform, count), 
+                       y = count)) +
+  geom_bar(stat = 'identity') +
+  coord_flip()
+```
+
+### Top 20 
+
+```{r}
+data_c %>%
+  group_by(platform) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) %>%
+  head(20) %>%
+  ggplot(mapping = aes(x = reorder(platform, count), 
+                       y = count)) +
+  geom_bar(stat = 'identity') +
+  coord_flip()
+```
+
+### Top 20 percentage
+
+```{r}
+total_num = 18589
+data_c %>%
+  group_by(platform) %>%
+  summarise(count = n()) %>%
+  mutate(count_per = count / total_num) %>%
+  arrange(desc(count_per)) %>%
+  mutate(pre = '%') %>%
+  mutate(label = as.character(round(count_per * 100, digits = 2))) %>%
+  mutate(label_1 = paste0(label, pre)) %>%
+  head(20) %>%
+  ggplot(mapping = aes(x = reorder(platform, count_per), 
+                       y = count_per)) +
+  geom_bar(stat = 'identity') +
+  geom_text(aes(label = label_1), 
+            color = 'red', 
+            vjust = .5, 
+            hjust = -.3) +
+  scale_y_continuous(limits = c(0,0.2)) +
+  coord_flip()
+rm(total_num)
+```
+
+Observation:
+
+1. PC has the most games on it compared to other platforms, more than about twice as many as the second, which is PlayStation 2
+2. 50% of the games supports the platforms of PC, PlayStation 2, Xbox 360, Wii, PlayStation 3
+
+## Which kinds of genre are popular?
+
+### For game maker
+
+### Regarding Count
+
+```{r}
+data_c %>%
+  group_by(genre) %>%
+  summarise(count = n()) %>%
+  ggplot(mapping = aes(x = reorder(genre,count),
+                       y = count)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  theme(axis.text.y = element_text(size = 3))
+```
+
+### Top 20
+
+```{r}
+data_c %>%
+  group_by(genre) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) %>%
+  head(20) %>%
+  ggplot(mapping = aes(x = reorder(genre,count),
+                       y = count)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() 
+```
+
+### Top 20 Percentage
+
+```{r}
+total_num = 18589
+data_c %>%
+  group_by(genre) %>%
+  summarise(count = n()) %>%
+  mutate(count_per = count / total_num) %>%
+  arrange(desc(count_per)) %>%
+  mutate(pre = '%') %>%
+  mutate(label = as.character(round(count_per * 100, digits = 2))) %>%
+  mutate(label_1 = paste0(label, pre)) %>%
+  head(20) %>%
+  ggplot(mapping = aes(x = reorder(genre,count_per),
+                       y = count_per)) +
+  geom_bar(stat = 'identity') +
+  geom_text(aes(label = label_1), 
+            color = 'red', 
+            vjust = .5, 
+            hjust = -.3) +
+  scale_y_continuous(limits = c(0,0.25)) +
+  coord_flip() 
+
+rm(total_num)
+```
+
+Observation:
+
+1. Action game is the most popular game for the game makers, 20% of the games are action game, almost more than twice as many as the second one.
+2. 50% of the games made during 1970 to 2016 are Action, Sports, Shooter, Racing and Adventure games.
+
+### For players
+
+## Score Distribution
+
+```{r Score}
+data %>%
+  ggplot(mapping = aes(x = score)) +
+  geom_histogram(bins = 10,
+                 color = 'black')
+```
+
+```{r}
+data_c %>%
+  group_by(genre) %>%
+  summarise(avg_score = mean(score)) %>%
+  ggplot(mapping = aes(x = reorder(genre,avg_score),
+                       y = avg_score)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  theme(axis.text.y = element_text(size = 3))
+```
+
+### Top 20
+
+```{r}
+data_c %>%
+  group_by(genre) %>%
+  summarise(avg_score = mean(score)) %>%
+  arrange(desc(avg_score)) %>%
+  head(20) %>%
+  ggplot(mapping = aes(x = reorder(genre,avg_score),
+                       y = avg_score)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  geom_text(aes(label = sprintf('%.2f', avg_score)),
+            color = 'red',
+            vjust = .5, 
+            hjust = -.3) +
+  scale_y_continuous(limits = c(0,11))
+```
+
+Obervation:
+1. Compilation has the highest score among all the game genres (this may because the game makers only choose the popular games together to make the compilation)
+
+
+What about not popular games among players?
+
+```{r}
+data_c %>%
+  group_by(genre) %>%
+  summarise(avg_score = mean(score)) %>%
+  arrange(desc(avg_score)) %>%
+  tail(20) %>%
+  ggplot(mapping = aes(x = reorder(genre,-avg_score),
+                       y = avg_score)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  geom_text(aes(label = sprintf('%.2f', avg_score)),
+            color = 'red',
+            vjust = .5, 
+            hjust = -.3) +
+  scale_y_continuous(limits = c(0,11))
+```
+
+Observation:
+1. It is interesting that Hunting Action games have the lowest score among the players, because as far as I know, games like Monster Hunter should be popular and the feedbacks from the players are almost positive, so maybe there are some other reasons behind it. 
+
+### What Hunting Games do we have?
+```{r}
+data_c %>%
+  filter(genre == 'Hunting, Action')
+```
+
+So this dataset doesn't consider Monster Hunter as a Hunting Game, so what the bottom 5 games?
+
+```{r}
+data_c %>%
+  filter(genre %in% c('Hunting, Action', 'Sports, Fighting', 'Sports, Editor', 'Educational, Trivia', 'Adventure, Adult'))
+```
+
+# When is the best time to release a game?
+
+```{r}
+data_c$Date <- ymd(paste0(data_c$release_year, '-', sprintf('%02d', data_c$release_month), '-', sprintf('%02d', data_c$release_day)))
+```
+
+## Count
+
+### Year
+
+```{r}
+data_c %>%
+  mutate(year = year(Date)) %>%
+  group_by(year) %>%
+  summarise(count = n()) %>%
+  ggplot(mapping = aes(x = year,
+                       y = count)) +
+  geom_bar(stat = 'identity') +
+  scale_x_continuous(breaks = seq(1970, 2016, 2)) +
+  theme(axis.text.x = element_text(angle = 30))
+```
+
+### Month
+
+```{r}
+data_c %>%
+  mutate(month = month(Date, 
+                       label = T)) %>%
+  group_by(month) %>%
+  summarise(count = n()) %>%
+  ggplot(mapping = aes(x = month,
+                       y = count)) +
+  geom_bar(stat = 'identity') 
+```
+
+### Weekday
+
+```{r}
+data_c %>%
+  mutate(wday = wday(Date, 
+                     label = T)) %>%
+  group_by(wday) %>%
+  summarise(count = n()) %>%
+  ggplot(mapping = aes(x = wday,
+                       y = count)) +
+  geom_bar(stat = 'identity') 
+```
+
+Obervation:
+1. After 1996, the number of game released had increased very fast, and reached the highest in the year of 2008
+2. Game makers prefer release their games at the end of the year and during the workdays
+
+## Combine year and month
+
+```{r}
+data_c %>%
+  filter(release_year != 1970) %>%
+  mutate(month = month(Date, 
+                       label = T)) %>%
+  group_by(release_year,
+           month) %>%
+  summarise(count = n()) %>%
+  ggplot(mapping = aes(x = month,
+                       y = release_year,
+                       fill = count)) +
+  geom_tile() +
+  scale_fill_gradient(low = 'white',
+                      high = 'red') +
+  scale_y_continuous(breaks = seq(1995, 2016, 1))
+```
+
+## Score?
+
+```{r}
+data_c %>%
+  filter(release_year != 1970) %>%
+  mutate(month = month(Date, 
+                       label = T)) %>%
+  group_by(release_year,
+           month) %>%
+  summarise(avg_score = mean(score)) %>%
+  ggplot(mapping = aes(x = month,
+                       y = release_year,
+                       fill = avg_score)) +
+  geom_tile() +
+  scale_fill_gradient(low = 'white',
+                      high = 'red') +
+  scale_y_continuous(breaks = seq(1995, 2016, 1))
+```
+
+## Platfroms and Genres
+
+```{r}
+Top_5_platform <-  data_c %>%
+  mutate(platform = as.character(platform)) %>%
+  group_by(platform) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) %>%
+  head(5) %>%
+  select(platform)
+Top_20_genres <- data_c %>%
+  mutate(genre = as.character(genre)) %>%
+  group_by(genre) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count)) %>%
+  head(20) %>%
+  select(genre)
+
+
+data_c %>%
+  filter((platform %in% Top_5_platform$platform) & (genre %in% Top_20_genres$genre)) %>%
+  group_by(platform,
+           genre) %>%
+  summarise(avg_score = mean(score)) %>%
+  ggplot(mapping = aes(x = platform,
+                       y = genre,
+                       fill = avg_score)) +
+  geom_tile() +
+  scale_fill_gradient(low = 'green',
+                      high = 'red') +
+  geom_text(aes(label = sprintf('%.2f', avg_score)))
+```
+
+

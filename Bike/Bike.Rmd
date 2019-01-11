@@ -1,0 +1,61 @@
+---
+title: "Bike"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load packages
+library(ggplot2)
+library(dplyr)
+library(ggmap)
+library(mapproj)
+```
+
+
+```{r}
+data <- read.csv('/Users/chengyinliu/Desktop/los-angeles-metro-bike-share-trip-data/metro-bike-share-trip-data.csv')
+map <- map_data('county')
+```
+
+```{r}
+map_la <- map %>%
+  filter(subregion == 'los angeles')
+
+data_clean <- data %>%
+  filter(Starting.Station.Latitude >= 34 &
+           Starting.Station.Longitude <= -100 &
+           Starting.Station.Longitude >= -118.35) 
+  
+  
+ggplot(aes(x = Starting.Station.Longitude,
+           y = Starting.Station.Latitude)) +
+geom_polygon(data = map_la, 
+           aes(x = long,
+           y = lat,
+           group = group)) +
+geom_point()
+
+
+ggplot(map_la, aes(x = long,
+                   y = lat)) +
+  geom_polygon(fill = 'transparent',
+               color = 'black') +
+  geom_point(data = data_clean, aes(x = Starting.Station.Longitude,
+                                    y = Starting.Station.Latitude)) +
+  theme_void()
+
+```
+
+```{r}
+options(download.file.method = "curl")
+map_la_de <- ggmap::get_map(location = 'Los Angeles', 
+                            zoom = 10, 
+                            maptype = 'roadmap', 
+                            source = 'google')
+ggmap(map_la_de)
+```
+
