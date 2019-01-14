@@ -1,0 +1,34 @@
+---
+title: "LosAngelesParkingCitations"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r,message=FALSE}
+library(data.table)
+library(dplyr)
+```
+
+
+```{r}
+data <- fread('~/D/Projects/WebProjects/LosAngelesParkingCitations/Data/parking-citations.csv')
+```
+
+```{r}
+data_c <- data %>%
+  filter(Latitude != 99999)
+```
+
+```{r}
+data_c <- data_c %>%
+  filter(Longitude != 99999)
+```
+
+```{r}
+write.csv(data_c,
+          '~/D/Projects/WebProjects/LosAngelesParkingCitations/Data/parking-citations_clean.csv')
+```
+
