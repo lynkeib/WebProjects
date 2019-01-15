@@ -1,4 +1,3 @@
 .DS_Store
 .ipynb_checkpoints
-parking-citations.csv
-parking-citations_clean.csv
+*.csv
