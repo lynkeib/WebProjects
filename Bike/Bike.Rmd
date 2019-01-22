@@ -46,7 +46,7 @@ ggplot(map_la, aes(x = long,
                color = 'black') +
   geom_point(data = data_clean, aes(x = Starting.Station.Longitude,
                                     y = Starting.Station.Latitude)) +
-  theme_void()
+  theme_vid()
 
 ```
 
@@ -58,4 +58,6 @@ map_la_de <- ggmap::get_map(location = 'Los Angeles',
                             source = 'google')
 ggmap(map_la_de)
 ```
+
+???
 
