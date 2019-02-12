@@ -2,8 +2,8 @@ from pyspark.sql import SparkSession
 import json
 import pandas as pd
 
-review_path = "/Users/chengyinliu/D/2019_Spring/INF553_ Foundations and Applications of Data Mining/ASSIGNMENTS/WEEK_1/yelp_dataset/review.json"
-business_path = '/Users/chengyinliu/D/2019_Spring/INF553_ Foundations and Applications of Data Mining/ASSIGNMENTS/WEEK_1/yelp_dataset/business.json'
+review_path = "yelp_dataset/review.json"
+business_path = 'yelp_dataset/business.json'
 
 ss = SparkSession \
     .builder \

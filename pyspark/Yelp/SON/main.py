@@ -67,8 +67,4 @@ for key, value in frequent.items():
     frequent[key] = sorted([tuple(item) for item in value])
 print(frequent)
 
-# with open("candidates.json", "w") as file:
-#     json.dump(candidates, file, indent=1)
 
-# with open('frequent.json', 'w') as file:
-#     json.dump(frequent, file, indent=1)
