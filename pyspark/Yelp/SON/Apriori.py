@@ -12,8 +12,6 @@ def create_candidates(item_set, length):
                 return_list.append(temp)
     return return_list
 
-
-# print(create_candidates(A, A, 2))
 def frequent_items(items, data, support):
     '''
     :param items: list[set()]
@@ -35,3 +33,22 @@ def frequent_items(items, data, support):
             if set(key) not in return_:
                 return_.append(set(key))
     return return_
+
+def makedic(data):
+    '''
+    :param data: iterator
+    :return: list[tuple]
+    '''
+    return_key = []
+    return_value = []
+    for line in data:
+        for item in line[1]:
+            if item not in return_key:
+                return_key.append(item)
+                return_value.append(1)
+            else:
+                index = return_key.index(item)
+                return_value[index] += 1
+    return_list = list(zip(return_key, return_value))
+    return return_list
+

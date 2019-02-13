@@ -1,8 +1,9 @@
 from pyspark.sql import SparkSession
 import Apriori as A
 import json
+import time
 
-sample_path = "Data/small2.csv"
+sample_path = "task2_data.csv"
 
 ss = SparkSession \
     .builder \
@@ -12,6 +13,7 @@ ss = SparkSession \
 
 sc = ss.sparkContext
 
+start1 = time.time()
 smallRDD = sc.textFile(sample_path)
 header = smallRDD.first()
 
@@ -23,29 +25,24 @@ small1RDD = smallRDD.filter(lambda row: row != header) \
 
 candidates = {}
 frequent = {}
+
 num_partitions = small1RDD.getNumPartitions()
 print(num_partitions)
-support = 20
+support = 4
 
-candidates[1] = small1RDD.flatMap(lambda line: line[1]).distinct().collect()
+temp = small1RDD.mapPartitions(lambda data: A.makedic(data)).reduceByKey(lambda a, b: a + b).collect()
+temp_1 = {tup[0]: tup[1] for tup in temp}
+candidates[1] = list(temp_1.values())
+candidates[1] = [{item} for item in candidates[1]]
+frequent[1] = [{key} for key, value in temp_1.items() if value >= support]
+freq = sc.parallelize(frequent[1]).persist()
 
-
-candidates[1] = [set([y]) for y in candidates[1]]
-
-
-freq = small1RDD.mapPartitions(lambda data: A.frequent_items(candidates[1], data, support / num_partitions)) \
-    .map(lambda x: (tuple(x), 1)) \
-    .reduceByKey(lambda a, b: a + b) \
-    .filter(lambda a: a[1] >= num_partitions) \
-    .map(lambda a: set(a[0])) \
-    .cache()
-
-
-frequent[1] = freq.collect()
 k = 2
 
 while 1:
-    candidate_temp = A.create_candidates(frequent[k - 1], k)
+    print(k)
+    candidate_temp = A.create_candidates(freq.collect(), k)
+    freq.unpersist()
     freq = small1RDD.mapPartitions(lambda data: A.frequent_items(candidate_temp, data, support / num_partitions)) \
         .map(lambda x: (tuple(x), 1)) \
         .reduceByKey(lambda a, b: a + b) \
@@ -62,9 +59,14 @@ while 1:
 
 for key, value in candidates.items():
     candidates[key] = sorted([tuple(item) for item in value])
-print(candidates)
+# print(candidates)
+with open("candidates.json", "w") as file:
+    json.dump(candidates, file, indent=1)
 for key, value in frequent.items():
     frequent[key] = sorted([tuple(item) for item in value])
-print(frequent)
+# print(frequent)
+with open('frequent.json', 'w') as file:
+    json.dump(frequent, file, indent=1)
 
-
+end1 = time.time()
+print(end1 - start1)
