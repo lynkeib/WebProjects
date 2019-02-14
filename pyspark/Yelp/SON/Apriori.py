@@ -12,6 +12,7 @@ def create_candidates(item_set, length):
                 return_list.append(temp)
     return return_list
 
+# print(create_candidates(A, A, 2))
 def frequent_items(items, data, support):
     '''
     :param items: list[set()]
@@ -51,4 +52,3 @@ def makedic(data):
                 return_value[index] += 1
     return_list = list(zip(return_key, return_value))
     return return_list
-
