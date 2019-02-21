@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession
+import Apriori as A
 
 ss = SparkSession \
     .builder \
@@ -21,6 +22,9 @@ smallRDD = smallRDD.filter(lambda line: line != header) \
     .map(lambda line: (line.split(',')[0], line.split(',')[1])) \
     .combineByKey(createCombiner, mergeValue, mergeCombiner)
 
-smallRDD.foreach(print)
+# smallRDD.foreach(print)
 
+# print(smallRDD.map(lambda line: line[0]).distinct().collect())
+
+smallRDD.mapPartitions(lambda partition: A.Apriori(partition, 2)).collect()
 
