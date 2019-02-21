@@ -9,7 +9,7 @@ ss = SparkSession \
 
 sc = ss.sparkContext
 
-path = "/Users/chengyinliu/D/2019_Spring/INF553_ Foundations and Applications of Data Mining/ASSIGNMENTS/WEEK_2/SON/Data/small2.csv"
+path = "/Users/chengyinliu/D/2019_Spring/INF553_ Foundations and Applications of Data Mining/ASSIGNMENTS/WEEK_2/SON/Data/small1.csv"
 
 smallRDD = sc.textFile(path)
 header = smallRDD.first()
@@ -22,9 +22,24 @@ smallRDD = smallRDD.filter(lambda line: line != header) \
     .map(lambda line: (line.split(',')[0], line.split(',')[1])) \
     .combineByKey(createCombiner, mergeValue, mergeCombiner)
 
-# smallRDD.foreach(print)
+smallRDD.foreach(print)
 
-# print(smallRDD.map(lambda line: line[0]).distinct().collect())
+support = 5
+numOfPar = smallRDD.getNumPartitions()
 
-smallRDD.mapPartitions(lambda partition: A.Apriori(partition, 2)).collect()
+
+candidates = smallRDD.mapPartitions(lambda partition: A.Apriori(partition, support / numOfPar)) \
+    .reduceByKey(lambda a, b: a + b) \
+    .map(lambda line: (line[0], {item for item in line[1]})) \
+    .collect()
+
+sc.broadcast(candidates)
+
+frequent = smallRDD.flatMap(lambda line: A.global_frequent(line[1], candidates, support)) \
+    .reduceByKey(lambda exist1, exist2: {key: exist1.get(key, 0) + exist2.get(key, 0) for key in set(exist1) | set(exist2)}) \
+    .collect()
+
+A = {item[0]: [key for key, value in item[1].items() if value >= support] for item in frequent}
+print(A)
+
 

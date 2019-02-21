@@ -6,7 +6,8 @@ def create_candidates(candidates_list, length):
     res = []
     for item_1 in candidates_list:
         for item_2 in candidates_list:
-            temp = item_1 | item_2
+            temp = frozenset(item_1 | item_2)
+            # print(temp)
             if temp not in res and len(temp) == length:
                 res.append(temp)
     return res
@@ -31,7 +32,7 @@ def frequent_items(partition, candidates, support):
     for key, value in count.items():
         if value >= support:
             if set(key) not in res:
-                res.append(set(key))
+                res.append(frozenset(key))
     return res
 
 
@@ -41,33 +42,65 @@ def Apriori(partition, support):
     :param support: int
     :return: tuple(tuple(int, tuple))
     '''
-    res = []
-    candidate = {}
     frequent = {}
     cand_1 = {}
     temp_partition = list(partition)
-    for line in partition:
+    for line in temp_partition:
         for item in line[1]:
             if item not in cand_1:
                 cand_1[(item)] = 1
             else:
                 cand_1[(item)] += 1
-
-    candidate[1] = [{key} for key, value in cand_1.items()]
-    frequent[1] = [{key} for key, value in cand_1.items() if value > support]
-
+    frequent[1] = [frozenset([key]) for key, value in cand_1.items() if value >= support]
     k = 2
     while 1:
+        # print(k)
         temp_candidate = create_candidates(frequent[k - 1], k)
-        # print(temp_candidate)
+        # print('temp_candidate completed')
         temp_frequent = frequent_items(temp_partition, temp_candidate, support)
-        # print(temp_frequent)
+        # print('temp_frequent completed')
         if len(temp_frequent) == 0:
             break
         else:
-            candidate[k] = temp_candidate
             frequent[k] = temp_frequent
             k += 1
-    print(candidate)
-    print(frequent)
+    res = [(key, value) for key, value in frequent.items()]
+    # print(res)
+    return res
+
+
+# def find_global_frequent(set, line, support):
+#     length_set = set[0]
+#     items = list(set[1])
+#     counter = {}
+#     for item in items:
+#         if item.issubset(line):
+#             if tuple(item) not in counter:
+#                 counter[tuple(item)] = 1
+#             else:
+#                 counter[tuple(item)] += 1
+#     res = [key for key, value in counter.items() if value > support]
+#     return length_set, res
+
+
+def global_frequent(line, candidates, support):
+    res = []
+    # print(line)
+    # print(candidates)
+    for candidate in candidates:
+        # print(candidate)
+        length_set = candidate[0]
+        items = list(candidate[1])
+        # print(items)
+        counter = {}
+        for item in items:
+            if item.issubset(line):
+                if tuple(item) not in counter:
+                    counter[tuple(item)] = 1
+                else:
+                    counter[tuple(item)] += 1
+        # print(counter)
+        # res_local = [key for key, value in counter.items() if value > support]
+        res.append((length_set, counter))
+    # print(res)
     return res
