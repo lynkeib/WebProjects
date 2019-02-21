@@ -12,7 +12,6 @@ def create_candidates(candidates_list, length):
     print(res)
     return res
 
-
 def frequent_items(partition, candidates, support):
     '''
     :param partition: iterator
@@ -35,7 +34,6 @@ def frequent_items(partition, candidates, support):
                 res.append(frozenset(key))
     return res
 
-
 def Apriori(partition, support, threshold=0):
     '''
     :param partition: iterator
@@ -45,6 +43,7 @@ def Apriori(partition, support, threshold=0):
     frequent = {}
     cand_1 = {}
     temp_partition = list(partition)
+    print('temp_partition')
     for line in temp_partition:
         for item in line[1]:
             if item not in cand_1:
@@ -52,8 +51,10 @@ def Apriori(partition, support, threshold=0):
             else:
                 cand_1[(item)] += 1
     cand_1 = {key: value for key, value in cand_1.items() if value >= threshold}
+    print('cand_1')
     frequent[1] = [frozenset([key]) for key, value in cand_1.items() if value >= support]
     k = 2
+    print(k)
     while 1:
         temp_candidate = create_candidates(frequent[k - 1], k)
         temp_frequent = frequent_items(temp_partition, temp_candidate, support)

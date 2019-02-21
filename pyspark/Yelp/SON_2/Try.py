@@ -10,7 +10,7 @@ ss = SparkSession \
 sc = ss.sparkContext
 
 path = "/Users/chengyinliu/D/2019_Spring/INF553_ Foundations and Applications of Data Mining/ASSIGNMENTS/WEEK_2/SON/task2_data.csv"
-
+# path = "/Users/chengyinliu/D/2019_Spring/INF553_ Foundations and Applications of Data Mining/ASSIGNMENTS/WEEK_2/SON/Data/small1.csv"
 smallRDD = sc.textFile(path)
 header = smallRDD.first()
 
@@ -24,8 +24,8 @@ smallRDD = smallRDD.filter(lambda line: line != header) \
 
 # smallRDD.foreach(print)
 
-support = 7
-threshold = 10
+support = 50
+threshold = 70
 numOfPar = smallRDD.getNumPartitions()
 
 candidates = smallRDD.mapPartitions(lambda partition: A.Apriori(partition, support / numOfPar, threshold / numOfPar)) \
@@ -35,7 +35,7 @@ candidates = smallRDD.mapPartitions(lambda partition: A.Apriori(partition, suppo
 
 sc.broadcast(candidates)
 
-frequent = smallRDD.flatMap(lambda line: A.global_frequent(line[1], candidates, support)) \
+frequent = smallRDD.flatMap(lambda line: A.global_frequent(line[1], candidates)) \
     .reduceByKey(
     lambda exist1, exist2: {key: exist1.get(key, 0) + exist2.get(key, 0) for key in set(exist1) | set(exist2)}) \
     .collect()
