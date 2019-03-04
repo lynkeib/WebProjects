@@ -28,7 +28,7 @@ userRDD = userRDD.filter(lambda line: line != header) \
     .combineByKey(createCombiner, mergeValue, mergeCombiner) \
     .filter(lambda line: len(line[1]) >= threshold)
 
-userRDD.foreach(print)
+# userRDD.foreach(print)
 
 businessRDD = userRDD.flatMap(lambda line: A.convert(line)) \
     .groupByKey() \
@@ -62,4 +62,24 @@ for cand in candidates:
         break
     res.append((cand[0], temp_1))
 
-print(res)
+with open('Yelp.txt', 'w') as file:
+    print('candidates')
+    file.writelines("Candidates")
+    file.writelines('\n')
+    for key, can in candidates:
+        file.writelines(str(can))
+        file.writelines('\n')
+        file.writelines('\n')
+        print("Key", key)
+        print(can)
+        print()
+    file.writelines('\n')
+    file.writelines("Frequent:")
+    file.writelines('\n')
+    for key, can in res:
+        file.writelines(str(can))
+        file.writelines('\n')
+        file.writelines('\n')
+        print("Key", key)
+        print(can)
+        print()

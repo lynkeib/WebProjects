@@ -6,8 +6,8 @@ from functools import reduce
 
 def create_candidates(candidates_list, length):
     '''
-    :param candidates_list:
-    :param length:
+    :param candidates_list: list[list]
+    :param length: int
     :return:
     '''
     for comb in combinations(candidates_list, 2):
@@ -115,4 +115,4 @@ def Apriori(partition, support):
 #                 else:
 #                     counter[item] += 1
 #         res.append((length_set, counter))
-#     return res
+#     return resg
