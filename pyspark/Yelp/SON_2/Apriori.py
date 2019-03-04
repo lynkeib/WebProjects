@@ -115,4 +115,4 @@ def Apriori(partition, support):
 #                 else:
 #                     counter[item] += 1
 #         res.append((length_set, counter))
-#     return resg
+#     return res
