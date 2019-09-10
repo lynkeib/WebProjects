@@ -1,3 +1,5 @@
 .DS_Store
 .ipynb_checkpoints
 venv
+Practice
+__pycache__
