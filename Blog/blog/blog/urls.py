@@ -15,7 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+from home import views as home_views
+from django.conf.urls.static import static
+from . import settings
+import re
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+    url('admin/', admin.site.urls),
+    url(r'^articles/(.*?)$', home_views.article),
+    url(r'^reg$', home_views.reg),
+    url(r'^$', home_views.index),
+    url(r'^login$', home_views.login),
+    url(r'^logout$', home_views.logout),
+    url(r'^list$', home_views.alist),
+    url(r'^postarticles$', home_views.postarticles),
+    # url('login', home_views.login)
+    url(r'^test$', home_views.test)
+] + static(settings.STATIC_URL)
+
+# static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
