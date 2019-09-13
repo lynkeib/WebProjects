@@ -5,6 +5,7 @@ import markdown
 from comments.form import CommentForm
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
+from django.core.mail import EmailMessage
 
 
 # Create your views here.
@@ -292,5 +293,5 @@ def search(request):
                                           'a_list': a_list})
 
 
-def homepage(request):
-    return render(request, 'homepage.html')
+email = EmailMessage('title', 'body', to=['liucy9511@gmail.com'])
+email.send()

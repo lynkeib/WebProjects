@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'comments',
-    'haystack'
+    'haystack',
+    'contacts'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,10 @@ HAYSTACK_CONNECTIONS = {
 }
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'bconliu@gmail.com'
+EMAIL_HOST_PASSWORD = 'djangoblog'
+EMAIL_PORT = 587
