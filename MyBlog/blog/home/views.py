@@ -15,6 +15,11 @@ from django.db.models import Q
 #     return render(request, 'index.html', context={'a_list': a_list})
 
 # Try ListView
+
+def homepage(request):
+    return render(request, "homepage.html")
+
+
 class HomeView(ListView):
     model = Article
     template_name = 'index.html'
@@ -136,12 +141,12 @@ def index(request):
 
 
 def articles(request):
-    return render(request, 'articles.html')
+    return render(request, 'index.html')
 
 
 class ArticlesView(ListView):
     model = Article
-    template_name = 'articles.html'
+    template_name = 'index.html'
     context_object_name = 'a_list'
     paginate_by = 5
 
@@ -285,3 +290,7 @@ def search(request):
     a_list = Article.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
     return render(request, 'index.html', {'error_msg': error_msg,
                                           'a_list': a_list})
+
+
+def homepage(request):
+    return render(request, 'homepage.html')
