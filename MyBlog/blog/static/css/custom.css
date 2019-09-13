@@ -110,6 +110,13 @@ img {
     border-bottom: 1px solid #e7e7e7;
 }
 
+#site-header-mine {
+    /*background-color: #;*/
+    padding: 25px 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #FFF;
+}
+
 .copyrights {
     text-indent: -9999px;
     height: 0;
@@ -902,4 +909,31 @@ img {
 
 .current a {
     color: red;
+}
+
+.cl-effect-mine a {
+    padding: 10px 0;
+    color: #0972b4;
+    text-shadow: none;
+}
+
+.cl-effect-mine a::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 0 0 5px 0 !important;
+    max-width: 0;
+    border-bottom: 1px solid white;
+    color: white;
+    content: attr(data-hover);
+    white-space: nowrap;
+    -webkit-transition: max-width 0.5s;
+    -moz-transition: max-width 0.5s;
+    transition: max-width 0.5s;
+}
+
+.cl-effect-mine a:hover::before,
+.cl-effect-mine a:focus::before {
+    max-width: 100%;
 }
