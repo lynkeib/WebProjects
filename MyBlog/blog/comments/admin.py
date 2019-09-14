@@ -6,7 +6,7 @@ from .models import Comments
 
 
 class CommentsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'url', 'text', 'created_time', 'article')
+    list_display = ('name', 'email', 'url', 'text', 'created_time', 'article', 'username')
 
 
 admin.site.register(Comments, CommentsAdmin)

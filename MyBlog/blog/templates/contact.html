@@ -20,7 +20,10 @@
     <script src={% static "js/pace.min.js" %}></script>
     <script src={% static "js/modernizr.custom.js" %}></script>
 </head>
-
+<form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+    <input type="search" name="q" placeholder="Search" required>
+    <button type="submit"><span class="ion-ios-search-strong"></span></button>
+</form>
 <body id="page">
 <div class="container">
     <header id="site-header">
@@ -41,11 +44,11 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="cl-effect-11"><a href="{% url 'homepage' %}" data-hover="Home">Home</a></li>
-                            <li class="cl-effect-11"><a href="{% url 'index' %}" data-hover="Blog">Blog</a></li>
+                            <li class="cl-effect-11"><a href="{% url 'index' %}" data-hover="Blog">Blogs</a></li>
                             <li class="cl-effect-11"><a href="{% url 'about' %}" data-hover="About">About</a></li>
                             <li class="cl-effect-11"><a href="{% url 'contacts:contact' %}"
                                                         data-hover="Contact">Contact</a></li>
-                             {% if request.session.is_login %}
+                            {% if request.session.is_login %}
                                 <li class="cl-effect-11"><a href="{% url "user:login" %}"
                                                             data-hover="Signout">Signout</a></li>
                             {% else %}

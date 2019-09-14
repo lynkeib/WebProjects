@@ -13,3 +13,4 @@ class Comments(models.Model):
     text = models.TextField()
     created_time = models.TimeField(auto_now_add=True)
     article = models.ForeignKey('home.Article', on_delete=models.CASCADE, null=True, blank=True)
+    username = models.TextField(default="NONE")

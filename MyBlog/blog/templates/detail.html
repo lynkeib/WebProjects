@@ -19,8 +19,8 @@
             {{ article.body | safe }}
         </div>
     </article>
-
-    <section class="comment-area" id="comment-area">
+    {% if request.session.is_login %}
+        <section class="comment-area" id="comment-area">
         <hr>
         <h3>Comment!</h3>
 
@@ -55,14 +55,16 @@
             </div>    <!-- row -->
         </form>
 
+
+
         <div class="comment-list-panel">
             <h3> {{ article.comments_set.count }} Comments </h3>
             <ul class="comment-list list-unstyled">
                 {% for comment in comment_list %}
 
                     <li class="comment-item">
-                        <span class="nickname">{{ comment.name }}</span>
-                        <time class="submit-date">{{ comment.created_time }}</time>
+                        <span class="nickname">User: {{ comment.username }}</span>
+                        <time class="submit-date">at: {{ comment.created_time }}</time>
                         <div>
                             {{ comment.text }}
                         </div>
@@ -73,7 +75,16 @@
 
             </ul>
         </div>
-    </section>
+
+    {% else %}
+        <div class="container">
+            <hr>
+            <h1><span style="position: relative !important;left: 15%;">Please sign in first to see and leave the comments</span></h1>
+
+        </div>
+
+    {% endif %}
+</section>
 {% endblock main %}
 
 {% block toc %}

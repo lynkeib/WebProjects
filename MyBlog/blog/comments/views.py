@@ -12,6 +12,7 @@ def post(request, article_pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.article = article
+            comment.username = request.session.get("user_name")
             comment.save()
             return redirect(article)
         else:
@@ -21,5 +22,3 @@ def post(request, article_pk):
                        'comment_list': comment_list}
             return render(request, 'detail.html', context=context)
     return redirect(article)
-
-
