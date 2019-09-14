@@ -65,6 +65,15 @@
     margin: 10px 13px;
 }
 
+.u_email {
+    width: 25px;
+    height: 25px;
+    background: url(../img/login_ico.png);
+    background-position: -85px 0;
+    position: absolute;
+    margin: 10px 13px;
+}
+
 .us_uer {
     width: 25px;
     height: 25px;
@@ -133,7 +142,7 @@
     padding: 15px;
     /*margin-top: 20px;*/
     display: block;
-    width:100%;
+    width: 100%;
     margin: 10px 0
 }
 

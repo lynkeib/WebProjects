@@ -138,3 +138,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'bconliu@gmail.com'
 EMAIL_HOST_PASSWORD = 'ubbiamabyhiargbv'
 EMAIL_PORT = 587
+
+CONFIRM_DAYS = 10

@@ -6,5 +6,6 @@ app_name = 'user'
 urlpatterns = [
     re_path(r'^login.*?/$', views.login, name='login'),
     re_path(r"^signup.*?/$", views.signup, name='signup'),
-    re_path(r"^singout.*?/$", views.signout, name='signout')
+    re_path(r"^singout.*?/$", views.signout, name='signout'),
+    re_path(r"^confirmation.*?/$", views.user_confirm, name='confirmation')
 ]

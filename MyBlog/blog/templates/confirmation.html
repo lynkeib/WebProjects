@@ -10,6 +10,9 @@
         color: white
     }</style>
 
+    <style> div.signup {
+        text-align: center;
+    }</style>
 
     <link rel="stylesheet" href={% static "/css/bootstrap.min.css" %}>
     <link rel="stylesheet" href={% static "css/pace.css" %}>
@@ -17,7 +20,6 @@
     <link rel="stylesheet" href={% static "css/custom.css" %}>
     <link rel="stylesheet" href="/static/css/helpers.css">
     <link rel="stylesheet" href="/static/css/style_B.css">
-
     <!-- js -->
     <script src={% static "js/jquery-2.1.3.min.js" %}></script>
     <script src={% static "js/bootstrap.min.js" %}></script>
@@ -26,7 +28,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/demo.css"/>
-    <!--Necessary-->
+    <!--必要样式-->
     <link rel="stylesheet" type="text/css" href="/static/css/component.css"/>
     <!--[if IE]>
 
@@ -98,48 +100,16 @@
         <div id="large-header" class="large-header">
             <canvas id="demo-canvas"></canvas>
             <div class="logo_box">
-                <h3>Welcome</h3>
-                <form action="{% url "user:signup" %} " name="f" method="post">
-                    {% csrf_token %}
-                    <div class="input_outer">
-                        <span class="u_user"></span>
-                        <input name="logname" class="text" style="color: #FFFFFF !important" type="text"
-                               placeholder="Username">
-                    </div>
 
-                    <div class="input_outer">
-                        <span class="u_email"></span>
-                        <input name="email" class="text"
-                               style="color: #FFFFFF !important; position:absolute; z-index:100;" value=""
-                               type="email" placeholder="Email">
-                    </div>
+                {% if confirm %}
 
-                    <div class="input_outer">
-                        <span class="us_uer"></span>
-                        <input name="logpass" class="text"
-                               style="color: #FFFFFF !important; position:absolute; z-index:100;" value=""
-                               type="password" placeholder="Password">
-                    </div>
+                    <h3> {{ message }} </h3>
 
+                {% else %}
 
-                    <div class="input_outer">
-                        <span class="u_check"></span>
-                        <input name="logrepass" class="text"
-                               style="color: #FFFFFF !important; position:absolute; z-index:100;" value=""
-                               type="password" placeholder="Retype Password">
-                    </div>
+                    <h3>{{ message }}</h3>
 
-                    {% if message %}
-                        <div><span style="color:white">{{ message }}</span></div>
-                    {% else %}
-
-                    {% endif %}
-                    <div class="mb2">
-                        <button class='act-but submit' type="submit" style="color: #FFFFFF">
-                            Sign Up
-                        </button>
-                    </div>
-                </form>
+                {% endif %}
 
             </div>
         </div>
@@ -150,6 +120,8 @@
 <script src="/static/js/EasePack.min.js"></script>
 <script src="/static/js/rAF.js"></script>
 <script src="/static/js/demo-1.js"></script>
-
+{#<div style="text-align:center;">#}
+{#    <p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>#}
+{#</div>#}
 </body>
 </html>

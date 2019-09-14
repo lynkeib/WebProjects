@@ -581,7 +581,7 @@
 .probootstrap_cover_v3,
 .probootstrap_cover_v4 {
     position: relative;
-    height: 95vh;
+    height: 100vh;
 }
 
 @media (max-width: 767px) {
