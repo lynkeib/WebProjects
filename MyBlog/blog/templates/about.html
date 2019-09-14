@@ -2,43 +2,61 @@
 {% load staticfiles %}
 
 {% block articles %}
-<div class="content-body">
-    <div class="container">
-        <div class="row">
-            <main class="col-md-12">
-                <h1 class="page-title">About Me</h1>
-                <article class="post">
-                    <div class="entry-content clearfix">
-                        <figure class="img-responsive-center">
-                            <img class="img-responsive" alt="Developer Image" height="200" width="200"
-                                 src={% static "img/me.jpg" %}>
-                        </figure>
-                        <p>As he crossed toward the pharmacy at the corner he involuntarily turned his head because of
-                            a burst of light that had ricocheted from his temple, and saw, with that quick smile with
-                            which we greet a rainbow or a rose, a blindingly white parallelogram of sky being unloaded
-                            from the van—a dresser with mirrors across which, as across a cinema screen, passed a
-                            flawlessly clear reflection of boughs sliding and swaying not arboreally, but with a human
-                            vacillation, produced by the nature of those who were carrying this sky, these boughs,
-                            this gliding façade.</p>
-                        <p>On offering to help the blind man, the man who then stole his car, had not, at that precise
-                            moment, had any evil intention, quite the contrary, what he did was nothing more than obey
-                            those feelings of generosity and altruism which, as everyone knows, are the two best traits
-                            of human nature and to be found in much more hardened criminals than this one, a simple
-                            car-thief without any hope of advancing in his profession, exploited by the real owners of
-                            this enterprise, for it is they who take advantage of the needs of the poor.</p>
-                        <div class="height-40px"></div>
-                        <h2 class="title text-center">Social</h2>
-                        <ul class="social">
-                            <li class="facebook"><a href="#"><span class="ion-social-facebook"></span></a></li>
-                            <li class="twitter"><a href="#"><span class="ion-social-twitter"></span></a></li>
-                            <li class="google-plus"><a href="#"><span class="ion-social-googleplus"></span></a></li>
-                            <li class="tumblr"><a href="#"><span class="ion-social-tumblr"></span></a></li>
-                        </ul>
-                    </div>
-                </article>
-            </main>
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-12">
+                    <h1 class="page-title">About Me</h1>
+                    <article class="post">
+                        <div class="entry-content clearfix">
+                            <figure class="img-responsive-center">
+                                <img class="img-responsive" alt="Developer Image" height="200" width="200"
+                                     src={% static "img/me.jpg" %}>
+                            </figure>
+                            <p>As he crossed toward the pharmacy at the corner he involuntarily turned his head because
+                                of
+                                a burst of light that had ricocheted from his temple, and saw, with that quick smile
+                                with
+                                which we greet a rainbow or a rose, a blindingly white parallelogram of sky being
+                                unloaded
+                                from the van—a dresser with mirrors across which, as across a cinema screen, passed a
+                                flawlessly clear reflection of boughs sliding and swaying not arboreally, but with a
+                                human
+                                vacillation, produced by the nature of those who were carrying this sky, these boughs,
+                                this gliding façade.</p>
+                            <p>On offering to help the blind man, the man who then stole his car, had not, at that
+                                precise
+                                moment, had any evil intention, quite the contrary, what he did was nothing more than
+                                obey
+                                those feelings of generosity and altruism which, as everyone knows, are the two best
+                                traits
+                                of human nature and to be found in much more hardened criminals than this one, a simple
+                                car-thief without any hope of advancing in his profession, exploited by the real owners
+                                of
+                                this enterprise, for it is they who take advantage of the needs of the poor.</p>
+                            <div class="height-40px"></div>
+                            <h2 class="title text-center">Social</h2>
+                            <ul class="social-mine">
+                                <li class="facebook"><a href="#"><img alt="Developer Image"
+                                                                      style="height:100px; width:100px"
+                                                                      src="{% static "img/Facebook.png" %}"></a></li>
+                                <li class="twitter"><a href="https://github.com/lynkeib"><img alt="Developer Image"
+                                                                                              style="height:100px; width:100px"
+                                                                                              src="{% static "img/Github.png" %}"></a>
+                                </li>
+                                <li class="google-plus"><a href="#"><img alt="Developer Image"
+                                                                         style="height:100px; width:100px"
+                                                                         src="{% static "img/Instagram.png" %}"></a>
+                                </li>
+                                <li class="tumblr"><a href="https://www.linkedin.com/in/chengyinliu458"><img
+                                        alt="Developer Image" style="height:100px; width:100px"
+                                        src="{% static "img/Linkedin.png" %}"></a></li>
+                            </ul>
+                        </div>
+                    </article>
+                </main>
+            </div>
         </div>
     </div>
-</div>
-{% endblock  %}
+{% endblock %}
 

@@ -650,6 +650,18 @@ img {
     text-align: center;
 }
 
+.social-mine {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.social-mine li {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
 .social li {
     display: inline-block;
     margin-right: 10px;
@@ -657,7 +669,7 @@ img {
 }
 
 .social li a {
-    border: 1px solid #888;
+    /*border: 1px solid #888;*/
     font-size: 22px;
     color: #888;
     transition: all 0.3s ease-in;
