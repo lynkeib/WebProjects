@@ -17,7 +17,7 @@
     <link rel="stylesheet" href={% static "css/custom.css" %}>
     <link rel="stylesheet" href="/static/css/helpers.css">
     <link rel="stylesheet" href="/static/css/style_B.css">
-    
+
     <!-- js -->
     <script src={% static "js/jquery-2.1.3.min.js" %}></script>
     <script src={% static "js/bootstrap.min.js" %}></script>
@@ -71,9 +71,13 @@
                                                               data-hover="Contact"><span
                                         class="homepagetitle">Contact</span></a>
                                 </li>
-                                <li class="cl-effect-mine"><a href="{% url "user:login" %}"
-                                                              data-hover="Login">Login</a>
-                                </li>
+                                {% if request.session.is_login %}
+                                    <li class="cl-effect-mine"><a href="{% url "user:login" %}"
+                                                                  data-hover="Signout">Signout</a></li>
+                                {% else %}
+                                    <li class="cl-effect-mine"><a href="{% url "user:login" %}"
+                                                                  data-hover="Login">Login</a></li>
+                                {% endif %}
 
                             </ul>
 

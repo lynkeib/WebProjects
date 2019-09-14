@@ -25,3 +25,6 @@ def get_categories():
 @register.simple_tag
 def get_tags():
     return Tag.objects.annotate(num_article=Count('article')).filter(num_article__gt=0)
+
+def get_session():
+    return

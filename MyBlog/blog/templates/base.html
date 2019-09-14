@@ -13,7 +13,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href={% static "/css/bootstrap.min.css" %}>
-{#    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1//static/css/ionicons.min.css">#}
+    {#    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1//static/css/ionicons.min.css">#}
     <link rel="stylesheet" href="http://http://code.ionicframework.com/1.3.3/css/ionic.min.css">
     <link rel="stylesheet" href={% static "css/pace.css" %}>
 
@@ -27,10 +27,10 @@
 </head>
 <!-- Search -->
 {#<div id="container" class="navbar-left">#}
-    <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
-        <input type="search" name="q" placeholder="Search" required>
-        <button type="submit"><span class="ion-ios-search-strong"></span></button>
-    </form>
+<form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+    <input type="search" name="q" placeholder="Search" required>
+    <button type="submit"><span class="ion-ios-search-strong"></span></button>
+</form>
 {#</div>#}
 <body>
 <div class="container">
@@ -56,8 +56,16 @@
                             <li class="cl-effect-11"><a href="{% url "about" %}" data-hover="About">About</a></li>
                             <li class="cl-effect-11"><a href="{% url "contacts:contact" %}"
                                                         data-hover="Contact">Contact</a></li>
-                            <li class="cl-effect-11"><a href="{% url "user:login" %}"
-                                                        data-hover="Login">Login</a></li>
+
+                            {% if request.session.is_login %}
+                                <li class="cl-effect-11"><a href="{% url "user:login" %}"
+                                                            data-hover="Signout">Signout</a></li>
+                            {% else %}
+                                <li class="cl-effect-11"><a href="{% url "user:login" %}"
+                                                            data-hover="Login">Login</a></li>
+                            {% endif %}
+
+
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>

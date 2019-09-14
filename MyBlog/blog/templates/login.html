@@ -10,6 +10,9 @@
         color: white
     }</style>
 
+    <style> div.signup {
+        text-align: center;
+    }</style>
 
     <link rel="stylesheet" href={% static "/css/bootstrap.min.css" %}>
     <link rel="stylesheet" href={% static "css/pace.css" %}>
@@ -70,9 +73,13 @@
                                                               data-hover="Contact"><span
                                         class="homepagetitle">Contact</span></a>
                                 </li>
-                                <li class="cl-effect-mine"><a href="{% url "user:login" %}"
-                                                              data-hover="Login">Login</a>
-                                </li>
+                                {% if request.session.is_login %}
+                                    <li class="cl-effect-mine"><a href="{% url "user:login" %}"
+                                                                data-hover="Signout">Signout</a></li>
+                                {% else %}
+                                    <li class="cl-effect-mine"><a href="{% url "user:login" %}"
+                                                                data-hover="Login">Login</a></li>
+                                {% endif %}
 
                             </ul>
 
