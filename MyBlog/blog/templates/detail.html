@@ -56,7 +56,7 @@
         </form>
 
         <div class="comment-list-panel">
-            <h3> {{ article.comments_set.count }} Comments <span>
+            <h3> {{ article.comments_set.count }} Comments </h3>
             <ul class="comment-list list-unstyled">
                 {% for comment in comment_list %}
 
@@ -131,7 +131,7 @@
 
     <div class="widget widget-tag-cloud">
         <h3 class="widget-title">Tags Cloud</h3>
-{#        {% get_tags as tag_list %}#}
+
         <ul>
             {% for tag in article.tags.all %}
                 <li>

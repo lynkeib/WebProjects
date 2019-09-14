@@ -31,12 +31,13 @@ urlpatterns = [
                   re_path(r'^articles.html$', home_view.ArticlesView.as_view(), name="articles"),
                   re_path(r'^articles/(?P<pk>\d+)/$', home_view.ArticleDetailsView.as_view(), name='detail'),
                   re_path(r"^about.*?$", home_view.about, name='about'),
-                  re_path(r"^contact.*?$", home_view.contact, name='contact'),
+                  re_path(r"", include('contacts.urls')),
                   re_path(r"^archives/(?P<year>\d{4})/(?P<month>\d{1,2})/$", home_view.archives, name='archives'),
                   re_path(r"^category/(?P<pk>\d+)/$", home_view.CategoryView.as_view(), name='categories'),
                   re_path(r"^tag/(?P<pk>\d+)/$", home_view.TagView.as_view(), name='tag'),
                   re_path(r"", include('comments.urls')),
                   re_path(r"^all/rss/$", AllPostsRssFeed(), name='rss'),
                   # re_path(r"^search/$", home_view.search, name='search')
-                  re_path(r"^search/", include('haystack.urls'))
+                  re_path(r"^search/", include('haystack.urls')),
+                  re_path(r"", include('user.urls'))
               ] + static(settings.STATIC_URL)

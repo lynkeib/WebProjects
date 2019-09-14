@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'home',
     'comments',
     'haystack',
-    'contacts'
+    'contacts',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -135,5 +136,5 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'bconliu@gmail.com'
-EMAIL_HOST_PASSWORD = 'djangoblog'
+EMAIL_HOST_PASSWORD = 'ubbiamabyhiargbv'
 EMAIL_PORT = 587
