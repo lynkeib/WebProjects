@@ -26,7 +26,7 @@ from home.feeds import AllPostsRssFeed
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   re_path(r'^index.*?', home_view.HomeView.as_view(), name='index'),
-                  re_path(r'^$', home_view.HomeView.as_view(), name='home'),
+                  re_path(r'^$', home_view.homepage, name='home'),
                   re_path(r"^homepage/$", home_view.homepage, name='homepage'),
                   re_path(r'^articles.html$', home_view.ArticlesView.as_view(), name="articles"),
                   re_path(r'^articles/(?P<pk>\d+)/$', home_view.ArticleDetailsView.as_view(), name='detail'),
