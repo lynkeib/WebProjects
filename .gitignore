@@ -7,3 +7,4 @@ DjangoTest
 venv
 .env
 __MACOSX
+.idea

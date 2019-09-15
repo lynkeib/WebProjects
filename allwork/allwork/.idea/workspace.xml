@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61fba2a3-3c98-464d-b264-08afa50e19e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/allwork.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/allwork.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allwork/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/allwork/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="61fba2a3-3c98-464d-b264-08afa50e19e9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/allwork/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+            <state relative-caret-position="180">
+              <caret line="97" column="5" lean-forward="true" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
               <folding>
                 <element signature="e#308#317#0" expanded="true" />
               </folding>
@@ -48,7 +43,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-557" />
+    <option name="x" value="-515" />
     <option name="y" value="-1057" />
     <option name="width" value="1414" />
     <option name="height" value="1057" />
@@ -133,25 +128,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568510530365</updated>
-      <workItem from="1568510534979" duration="1667000" />
+      <workItem from="1568510534979" duration="1812000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1667000" />
+    <option name="totallyTimeSpent" value="1812000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-557" y="-1057" width="1414" height="1057" extended-state="0" />
+    <frame x="-515" y="-1057" width="1414" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32953367" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32953367" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -176,8 +171,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/allwork/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="118" column="23" lean-forward="true" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+        <state relative-caret-position="180">
+          <caret line="97" column="5" lean-forward="true" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
           <folding>
             <element signature="e#308#317#0" expanded="true" />
           </folding>
