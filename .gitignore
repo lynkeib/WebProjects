@@ -5,3 +5,5 @@ monkey
 Practice
 DjangoTest
 venv
+.env
+__MACOSX
