@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from . import settings
 from home.feeds import AllPostsRssFeed
 
+
 # from django.conf.urls import url
 
 urlpatterns = [
