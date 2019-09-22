@@ -1,49 +1,53 @@
 from pyspark import SparkContext
 from collections import namedtuple
 from utils import *
+import sys
+
+
+# train_path = "./Data/yelp_train.csv"
+# validation_path = "./Data/yelp_val.csv"
+# test_path = "./Data/test.csv"
+
+train_path = sys.argv[1]
+validation_path = sys.argv[2]
+case = sys.argv[3]
+
+sc = SparkContext("local[*]", "RS")
+
+trainRDD = sc.textFile(train_path)
+# trainRDD = sc.textFile(test_path)
+valRDD = sc.textFile(validation_path)
+
+header = trainRDD.first()
+user_business = trainRDD.filter(lambda x: x != header) \
+    .map(lambda line: line.split(",")) \
+    .map(lambda lst: (lst[0], [(lst[1], float(lst[2]))])) \
+    .reduceByKey(lambda a, b: a + b) \
+    .mapValues(dict)
+business_user = trainRDD.filter(lambda x: x != header) \
+    .map(lambda line: line.split(",")) \
+    .map(lambda lst: (lst[1], [(lst[0], float(lst[2]))])) \
+    .reduceByKey(lambda a, b: a + b) \
+    .mapValues(dict)
+
+# trainRDD.foreach(print)
+users_business_rating = dict(user_business.collect())
+business_user_rating = dict(business_user.collect())
 
 
 def main():
-    train_path = "./Data/yelp_train.csv"
-    validation_path = "./Data/yelp_val.csv"
-    test_path = "./Data/test.csv"
+    pass
 
-    sc = SparkContext("local[*]", "RS")
 
-    trainRDD = sc.textFile(train_path)
-    # trainRDD = sc.textFile(test_path)
-    valRDD = sc.textFile(validation_path)
-
-    header = trainRDD.first()
-    user_business = trainRDD.filter(lambda x: x != header) \
-        .map(lambda line: line.split(",")) \
-        .map(lambda lst: (lst[0], [(lst[1], float(lst[2]))])) \
-        .reduceByKey(lambda a, b: a + b) \
-        .mapValues(dict)
-    business_user = trainRDD.filter(lambda x: x != header) \
-        .map(lambda line: line.split(",")) \
-        .map(lambda lst: (lst[1], [(lst[0], float(lst[2]))])) \
-        .reduceByKey(lambda a, b: a + b) \
-        .mapValues(dict)
-
+# -------------------------------------- USER BASED START -------------------------------------- #
+def user_based_cf():
     header = valRDD.first()
     val_User_RDD = valRDD.filter(lambda x: x != header) \
         .map(lambda line: line.split(",")) \
         .map(lambda lst: (lst[0], [(lst[1], float(lst[2]))])) \
         .reduceByKey(lambda a, b: a + b) \
         .mapValues(dict)
-    val_Business_RDD = valRDD.filter(lambda x: x != header) \
-        .map(lambda line: line.split(",")) \
-        .map(lambda lst: (lst[1], [(lst[0], float(lst[2]))])) \
-        .reduceByKey(lambda a, b: a + b) \
-        .mapValues(dict)
-    # trainRDD.foreach(print)
-    users_business_rating = dict(user_business.collect())
-    business_user_rating = dict(business_user.collect())
     val_user = dict(val_User_RDD.collect())
-    val_business = dict(val_Business_RDD.collect())
-
-    # -------------------------------------- USER BASED START -------------------------------------- #
     user_average_rating = {user: float(sum(business_rating.values())) / len(business_rating.values()) for
                            user, business_rating in users_business_rating.items()}
     TOP_N = 10
@@ -58,16 +62,26 @@ def main():
                                                            user_average_rating)
             differences.append((val_user[user][business] - prediction) ** 2)
     print(sum(differences) / len(differences))
-    # -------------------------------------- USER BASED END -------------------------------------- #
 
-    # -------------------------------------- ITEM BASED START -------------------------------------- #
+# -------------------------------------- USER BASED END -------------------------------------- #
+
+# -------------------------------------- ITEM BASED START -------------------------------------- #
+def item_based_cf():
     ## Jaccard Similarity based LSH to find candidates
     b = 50
     r = 3
     h = b * r
+    val_Business_RDD = valRDD.filter(lambda x: x != header) \
+        .map(lambda line: line.split(",")) \
+        .map(lambda lst: (lst[1], [(lst[0], float(lst[2]))])) \
+        .reduceByKey(lambda a, b: a + b) \
+        .mapValues(dict)
+    val_business = dict(val_Business_RDD.collect())
     business_average_rating = {business: float(sum(user_rated.values())) / len(user_rated.values()) for
                                business, user_rated
                                in business_user_rating.items()}
+    user_average_rating = {user: float(sum(business_rating.values())) / len(business_rating.values()) for
+                           user, business_rating in users_business_rating.items()}
     user_order = {user: order for order, user in enumerate(users_business_rating.keys())}
     MinHashMatrix = buildMinHashMatrix(business_user_rating, user_order, h)
     candidates = findCandidates_LSH(business_user_rating, MinHashMatrix, b, r)
@@ -87,7 +101,10 @@ def main():
                                                            user_average_rating)
             differences.append((val_business[business][user] - prediction) ** 2)
     print(sum(differences) / len(differences))
-    # -------------------------------------- ITEM BASED END -------------------------------------- #
+
+
+# -------------------------------------- ITEM BASED END -------------------------------------- #
+
 
 if __name__ == "__main__":
     main()

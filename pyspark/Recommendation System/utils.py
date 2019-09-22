@@ -63,27 +63,22 @@ def Predict_User_Rating_On_a_Business(user, business, TOP_N, user_business_ratin
         return user_average_rating[user]
 
     # Step 2: calculate the Pearson Correlation Coefficient between them
-    # pearson_correlation = dict()
     sorted_users = []
     for other_user in users_rated_this_business:
         pearson_correlation_value = Calculate_Pearson_Similarity_User(user, other_user, user_business_rating)
-        # pearson_correlation[other_user] = Calculate_Pearson_Similarity(user, other_user, user_business_rating)
         sorted_users.append((pearson_correlation_value, other_user))
-    # print("pearson_correlation is")
-    # for key, value in pearson_correlation.items():
-    #     print('key', key, 'value', value)
 
     # Step 3: Select Top N Users (Neighborhood)
     sorted_users.sort(key=lambda pair: abs(pair[0]), reverse=True)
     Top_N_users = sorted_users[:TOP_N]
-    # print(Top_N_users)
-    # Step 3: Calculate Numerator and Denominator
+
+    # Step 4: Calculate Numerator and Denominator
     Numerator = sum(
         (user_business_rating[other_user][business] - user_average_rating[other_user]) * pearson_correlation_value
         for pearson_correlation_value, other_user in Top_N_users)
-    # print('Numerator is', Numerator)
+
     Denominator = sum(abs(pearson_correlation_value) for pearson_correlation_value, other_user in Top_N_users)
-    # print("Denominator is", Denominator)
+
     ## if Denominator is 0, then the best estimation is the average of this user
     if Denominator == 0:
         return user_average_rating[user]
@@ -205,7 +200,7 @@ def Calculate_Pearson_Similarity_Business(business1, business2, business_user_ra
     business1_rated_by_users = set(business_user_rating[business1].keys())
     business2_rated_by_users = set(business_user_rating[business2].keys())
     co_rated_users = business1_rated_by_users & business2_rated_by_users
-    ## if do not have co_rated_businesses, then the Similarity is 0 (should not happen)
+    ## if we do not have co_rated_businesses, then the Similarity is 0 (should not happen)
     if len(co_rated_users) == 0:
         return 0.0
 
@@ -260,19 +255,16 @@ def Predict_Business_Rating_by_a_User(business, user, candidates, TOP_N, user_bu
         pearson_correlation_value = Calculate_Pearson_Similarity_Business(business, other_business,
                                                                           business_user_rating, candidates)
         sorted_businesses.append((pearson_correlation_value, other_business))
-    # print("pearson_correlation is")
-    # for key, value in pearson_correlation.items():
-    #     print('key', key, 'value', value)
 
     # Step 3: Select Top N Users (Neighborhood)
     sorted_businesses.sort(key=lambda pair: abs(pair[0]), reverse=True)
     Top_N_businesses = sorted_businesses[:TOP_N]
-    # print(Top_N_users)
+
     # Step 3: Calculate Numerator and Denominator
-    Numerator = sum(business_user_rating[other_business][user] * pearson_correlation_value for pearson_correlation_value, other_business in Top_N_businesses)
-    # print('Numerator is', Numerator)
+    Numerator = sum(business_user_rating[other_business][user] * pearson_correlation_value for
+                    pearson_correlation_value, other_business in Top_N_businesses)
+
     Denominator = sum(abs(pearson_correlation_value) for pearson_correlation_value, other_business in Top_N_businesses)
-    # print("Denominator is", Denominator)
 
     ## if Denominator is 0, then the best estimation is the average of this user
     if Denominator == 0:
