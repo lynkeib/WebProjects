@@ -1,8 +1,7 @@
 from pyspark import SparkContext
-from collections import namedtuple
 from utils import *
 import sys
-
+import time
 
 # train_path = "./Data/yelp_train.csv"
 # validation_path = "./Data/yelp_val.csv"
@@ -10,10 +9,11 @@ import sys
 
 train_path = sys.argv[1]
 validation_path = sys.argv[2]
-case = sys.argv[3]
+case_id = int(sys.argv[3])
 
 sc = SparkContext("local[*]", "RS")
 
+sys.stdout.write('Loading Data\n')
 trainRDD = sc.textFile(train_path)
 # trainRDD = sc.textFile(test_path)
 valRDD = sc.textFile(validation_path)
@@ -36,11 +36,18 @@ business_user_rating = dict(business_user.collect())
 
 
 def main():
-    pass
+    if case_id == 1:
+        user_based_cf()
+    elif case_id == 2:
+        item_based_cf()
+    else:
+        pass
 
 
 # -------------------------------------- USER BASED START -------------------------------------- #
 def user_based_cf():
+    sys.stdout.write('Runing user based CF Recommendation System\n')
+    start = time.time()
     header = valRDD.first()
     val_User_RDD = valRDD.filter(lambda x: x != header) \
         .map(lambda line: line.split(",")) \
@@ -61,13 +68,18 @@ def user_based_cf():
                                                            business_user_rating,
                                                            user_average_rating)
             differences.append((val_user[user][business] - prediction) ** 2)
-    print(sum(differences) / len(differences))
+    end = time.time()
+    sys.stdout.write(f'RMSE is {sum(differences) / len(differences)}\n')
+    sys.stdout.write(f'using {round(end - start, 2)} seconds\n')
+
 
 # -------------------------------------- USER BASED END -------------------------------------- #
 
 # -------------------------------------- ITEM BASED START -------------------------------------- #
 def item_based_cf():
     ## Jaccard Similarity based LSH to find candidates
+    sys.stdout.write('Runing item based CF Recommendation System\n')
+    start = time.time()
     b = 50
     r = 3
     h = b * r
@@ -85,8 +97,6 @@ def item_based_cf():
     user_order = {user: order for order, user in enumerate(users_business_rating.keys())}
     MinHashMatrix = buildMinHashMatrix(business_user_rating, user_order, h)
     candidates = findCandidates_LSH(business_user_rating, MinHashMatrix, b, r)
-    for index, value in candidates.items():
-        print('index', index, "value", value)
     TOP_N = 5
     differences = []
     for business in val_business:
@@ -100,7 +110,9 @@ def item_based_cf():
                                                            business_average_rating,
                                                            user_average_rating)
             differences.append((val_business[business][user] - prediction) ** 2)
-    print(sum(differences) / len(differences))
+    end = time.time()
+    sys.stdout.write(f'RMSE is {sum(differences) / len(differences)}\n')
+    sys.stdout.write(f'using {round(end - start, 2)} seconds\n')
 
 
 # -------------------------------------- ITEM BASED END -------------------------------------- #
