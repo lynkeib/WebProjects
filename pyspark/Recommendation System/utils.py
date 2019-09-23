@@ -270,15 +270,25 @@ def Predict_Business_Rating_by_a_User(business, user, candidates, TOP_N, user_bu
     businesses_rated_by_this_user = set(user_business_rating[user].keys())
 
     # Step 2: calculate the Pearson Correlation Coefficient between them (only consider the business in candidates)
-    sorted_businesses = []
+    # sorted_businesses = []
+    # for other_business in businesses_rated_by_this_user:
+    #     pearson_correlation_value = Calculate_Pearson_Similarity_Business(business, other_business,
+    #                                                                       business_user_rating, candidates)
+    #     sorted_businesses.append((pearson_correlation_value, other_business))
+    heap = []
+    # heap structure: (abs(pearson_correlation_value), pearson_correlation_value, other_user)
     for other_business in businesses_rated_by_this_user:
-        pearson_correlation_value = Calculate_Pearson_Similarity_Business(business, other_business,
-                                                                          business_user_rating, candidates)
-        sorted_businesses.append((pearson_correlation_value, other_business))
+        pearson_correlation_value = Calculate_Pearson_Similarity_Business(business, other_business, business_user_rating, candidates)
+        if not heap or len(heap) < TOP_N:
+            heapq.heappush(heap, (abs(pearson_correlation_value), pearson_correlation_value, other_business))
+        else:
+            if abs(pearson_correlation_value) > heap[0][0]:
+                heapq.heappushpop(heap, (abs(pearson_correlation_value), pearson_correlation_value, other_business))
 
     # Step 3: Select Top N Users (Neighborhood)
-    sorted_businesses.sort(key=lambda pair: abs(pair[0]), reverse=True)
-    Top_N_businesses = sorted_businesses[:TOP_N]
+    # sorted_businesses.sort(key=lambda pair: abs(pair[0]), reverse=True)
+    # Top_N_businesses = sorted_businesses[:TOP_N]
+    Top_N_businesses = [(pearson_correlation_value, other_business) for absolute, pearson_correlation_value, other_business in heap]
 
     # Step 4: Calculate Numerator and Denominator
     Numerator = sum(business_user_rating[other_business][user] * pearson_correlation_value for
