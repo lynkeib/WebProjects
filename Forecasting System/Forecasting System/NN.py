@@ -36,8 +36,8 @@ class NN(object):
         # x_train = self.temp['2014-01-01 07:00':'2016-11-30 23:00'][station + '_Temp'].tolist()
 
         self.window_size = 337 + 40
-        self.batch_size = 10
-        self.shuffle_buffer_size = 1000
+        self.batch_size = 14 * 24
+        self.shuffle_buffer_size = 100
 
         # self.dataset = windowed_dataset(x_train, self.window_size, self.batch_size, self.shuffle_buffer_size)
 
@@ -50,6 +50,8 @@ class NN(object):
 
         self.model.compile(loss='mean_absolute_percentage_error',
                            optimizer=tf.keras.optimizers.SGD(lr=1e-6, momentum=0.9))
+        # self.model.compile(loss='mean_absolute_percentage_error',
+        #                    optimizer=tf.keras.optimizers.Adam(lr=1e-6))
         self.model.fit(self.dataset, epochs=100, verbose=0)
 
     def predict_model_select(self, date):
@@ -58,7 +60,7 @@ class NN(object):
         # except:
         #     raise RuntimeError("Date is not correct")
 
-        self.training_days = 7
+        self.training_days = 1
 
         self.datetime = pd.to_datetime(date) + datetime.timedelta(hours=7)
         self.test_start_date = self.datetime - datetime.timedelta(days=self.training_days + 1)
@@ -146,7 +148,7 @@ class NN(object):
 
 if __name__ == "__main__":
     path = '../Data/Hourly_Temp_Humi_Load-6.csv'
-    model = NN(path, "RIV")
+    model = NN(path, "Mean")
     model.predict_model_select('2018-03-04')
     # model.model_building()
     mape, rmse = model.model_selection_mape_rmse()
