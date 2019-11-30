@@ -9,8 +9,9 @@ import time
 
 class DR(object):
 
-    def __init__(self, path):
-        df = pd.read_csv(path, date_parser='Date')
+    def __init__(self, data_df):
+        # df = pd.read_csv(path, date_parser='Date')
+        df = data_df.copy()
         test = df[['Date', 'Hour', 'Weekday', 'Month', 'Load', 'Mean_Temp', 'Mean_Humi']]
 
         test.loc[:, 'Load_Log'] = np.log(df['Load'])

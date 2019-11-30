@@ -7,10 +7,11 @@ import datetime
 
 class FP(object):
 
-    def __init__(self, path, holiday_path, date):
-        self.df = pd.read_excel(path, sheet_name='SCE Load Only', date_parser='Date')
-        self.date = date
-        holidey = pd.read_csv(holiday_path)
+    def __init__(self, path_df, holiday_path_df):
+        # self.df = pd.read_excel(path, sheet_name='SCE Load Only', date_parser='Date')
+        self.df = path_df.copy()
+        # holidey = pd.read_csv(holiday_path)
+        holidey = holiday_path_df.copy()
         holidey = holidey.query('Holiday ==True')
         holidey.rename(columns={'Date': 'ds', 'Holiday': 'holiday'}, inplace=True)
         holidey = holidey.drop(['riv - low', 'Load'], axis=1)
@@ -86,11 +87,11 @@ class FP(object):
         # Now we can calculate MAPE and MAE and return the resulting dictionary of errors.
         return {'MAPE': error_mean('p'), 'MAE': error_mean('e'), 'RMSE': RMSE}
 
-    def predict_next_40hours(self):
+    def predict_next_40hours(self, date):
         # date_str = self.date + datetime.timedelta(hours=)
         prediction_period = self.prediction_period
         holidays = self.holidays
-        date_str = self.date
+        date_str = date
         dataframe = self.df
         dataframe = dataframe[['Date', 'load']].copy()
         dataframe = dataframe.rename(columns={'Date': 'ds', "load": "y"})
