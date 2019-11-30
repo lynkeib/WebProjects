@@ -1,4 +1,5 @@
 from Temperature_Prediction.models import NN, HW
+import time
 
 
 class TempPred(object):
@@ -29,7 +30,7 @@ class TempPred(object):
             RMSE_NN, MAPE_NN = self.model_NN.train_rmse, self.model_NN.train_mape
             RMSE_HW, MAPE_HW = self.model_HW.RMSE, self.model_HW.MAPE
             if RMSE_NN > RMSE_HW:
-                return self.model_HW.prediction
+                return self.model_HW.prediction.tolist()
             else:
                 return self.model_NN.forecast[0]
         else:
@@ -38,16 +39,18 @@ class TempPred(object):
             RMSE_NN, MAPE_NN = self.model_NN.train_rmse, self.model_NN.train_mape
             RMSE_HW, MAPE_HW = self.model_HW.RMSE, self.model_HW.MAPE
             if RMSE_NN > RMSE_HW:
-                return self.model_HW.prediction
+                return self.model_HW.prediction.tolist()
             else:
                 return self.model_NN.forecast[0]
 
 if __name__ == '__main__':
+    start = time.time()
     this = TempPred('../../Data/Hourly_Temp_Humi_Load-6.csv', '2018-04-02')
     pred = this.return_result("RIV")
+    end = time.time()
     print(f'HW_RMSE: {this.model_HW.RMSE}, HW_MAPE: {this.model_HW.MAPE}')
     print(f"NN_RMSE: {this.model_NN.train_rmse}, NN_MAPE: {this.model_NN.train_mape}")
-
+    print(f'time: {end - start}')
     print(pred)
 
 

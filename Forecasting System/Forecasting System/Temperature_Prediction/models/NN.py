@@ -48,8 +48,8 @@ class NN(object):
         # x_train = self.temp['2014-01-01 07:00':'2016-11-30 23:00'][station + '_Temp'].tolist()
 
         self.window_size = 337 + 40
-        self.batch_size = 14 * 24
-        self.shuffle_buffer_size = 100
+        self.batch_size = 30
+        self.shuffle_buffer_size = 30
 
         # self.dataset = windowed_dataset(x_train, self.window_size, self.batch_size, self.shuffle_buffer_size)
 
@@ -57,6 +57,7 @@ class NN(object):
         l0 = tf.keras.layers.Dense(100)
         l1 = tf.keras.layers.Dense(40)
         self.model = tf.keras.models.Sequential([l0, l1])
+        # self.model = tf.keras.models.Sequential([l1])
         # l0 = tf.keras.layers.Dense(40)
         # self.model = tf.keras.models.Sequential([l0])
 
@@ -64,7 +65,7 @@ class NN(object):
                            optimizer=tf.keras.optimizers.SGD(lr=1e-6, momentum=0.9))
         # self.model.compile(loss='mean_absolute_percentage_error',
         #                    optimizer=tf.keras.optimizers.Adam(lr=1e-6))
-        self.model.fit(self.dataset, epochs=100, verbose=0)
+        self.model.fit(self.dataset, epochs=20, verbose=0)
 
     def predict_model_select(self, station='Mean'):
         # try:
