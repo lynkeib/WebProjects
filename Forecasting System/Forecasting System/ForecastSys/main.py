@@ -1,5 +1,7 @@
 from ForecastSys.Models import DR, FP
 import pandas as pd
+import datetime
+import numpy as np
 
 
 class ForecastSys(object):
@@ -7,10 +9,22 @@ class ForecastSys(object):
     def __init__(self, full_temp_path, orig_temp_path, holiday_path):
         # self.date = date
         self.real = pd.read_csv(full_temp_path)
+        self.create_validation_df()
         self.orig_df = pd.read_excel(orig_temp_path, sheet_name='SCE Load Only', date_parser='Date')
         self.holiday = pd.read_csv(holiday_path)
         self.model_DR = DR.DR(self.real)
         self.model_FP = FP.FP(self.orig_df, self.holiday)
+
+    def create_validation_df(self):
+        self.validation_df = self.real.copy()
+        DateTime = pd.DataFrame(
+            self.validation_df.apply(lambda line: pd.to_datetime(line['Date']) + datetime.timedelta(hours=line['Hour']),
+                                     axis=1))
+        DateTime.columns = ['DateTime']
+
+        self.validation_df = pd.concat([DateTime, self.real], axis=1)
+        self.validation_df = self.validation_df[['DateTime', 'Load']]
+        self.validation_df.set_index('DateTime', inplace=True)
 
     def run_DR(self, date):
         self.model_DR.model_selection_mape_rmse(date)
@@ -23,6 +37,7 @@ class ForecastSys(object):
         pass
 
     def return_result(self, date):
+        self.date = date
         self.run_DR(date)
         self.run_FP(date)
         self.run_TM(date)
@@ -33,6 +48,23 @@ class ForecastSys(object):
     def combine_result(self):
         pass
 
+    def get_error(self):
+        def mape(y_true, y_pred):
+            y_true, y_pred = np.array(y_true), np.array(y_pred)
+            return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+
+        def rmse(y_true, y_pred):
+            y_true, y_pred = np.array(y_true), np.array(y_pred)
+            return np.sqrt(np.mean((y_true - y_pred) ** 2))
+
+        start = pd.to_datetime(self.date) + datetime.timedelta(hours=8)
+        end = pd.to_datetime(self.date) + datetime.timedelta(hours=48)
+        validation_list = self.validation_df[start:end]['Load'].tolist()
+        this_mape = mape(validation_list, self.result_DR)
+        this_rmse = rmse(validation_list, self.result_DR)
+        print(f'future mape: {this_mape}')
+        print(f'future rmse: {this_rmse}')
+
 
 if __name__ == '__main__':
     full_temp_path = '../../Data/Hourly_Temp_Humi_Load-6.csv'
@@ -41,5 +73,7 @@ if __name__ == '__main__':
     date = '2019-01-16'
     FS = ForecastSys(full_temp_path, orig_temp_path, holiday)
     FS.return_result(date)
+    FS.get_error()
     date = '2019-05-03'
     FS.return_result(date)
+    FS.get_error()
