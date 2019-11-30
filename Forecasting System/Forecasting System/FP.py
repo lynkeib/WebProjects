@@ -50,6 +50,7 @@ class FP(object):
         holidays = pd.concat((playoffs, superbowls, holidey), sort=True)
         # holidays.tail()
         self.holidays = holidays
+        self.prediction_period = 40
 
     def make_comparison_dataframe(self, historical, fcst):
         """
@@ -85,8 +86,9 @@ class FP(object):
         # Now we can calculate MAPE and MAE and return the resulting dictionary of errors.
         return {'MAPE': error_mean('p'), 'MAE': error_mean('e'), 'RMSE': RMSE}
 
-    def C_fun(self, prediction_period):
+    def predict_next_40hours(self):
         # date_str = self.date + datetime.timedelta(hours=)
+        prediction_period = self.prediction_period
         holidays = self.holidays
         date_str = self.date
         dataframe = self.df
@@ -150,9 +152,16 @@ class FP(object):
         forecast_holi = forecast_holi[forecast_holi['ds'] > this_date]
         #     forecast_holi = np.exp(forecast_holi['yhat'])
         res = np.exp(forecast_holi['yhat'])
+        # forecast_holi['aa'] = res
         return error_name, error_value, res
 
 
 if __name__ == '__main__':
-    path =
-    FP = FP()
+    path = '../Data/20140101-20190901 SCE & CAISO Actual Load  9 27 2019.xlsx'
+    holiday_path = '../Data/holiday.csv'
+
+    model_FP = FP(path, holiday_path, '2018-01-15')
+    error_name, error_values, res = model_FP.predict_next_40hours()
+    print(error_name)
+    print(error_values)
+    print(res)
