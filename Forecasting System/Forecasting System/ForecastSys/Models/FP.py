@@ -112,8 +112,8 @@ class FP(object):
         m_holi.fit(train_df[['ds', 'y']])
         future_holi = m_holi.make_future_dataframe(periods=prediction_size, freq='H')
         forecast_holi = m_holi.predict(future_holi)
-        m_holi.plot(forecast_holi)
-        m_holi.plot_components(forecast_holi)
+        # m_holi.plot(forecast_holi)
+        # m_holi.plot_components(forecast_holi)
         cmp_df = self.make_comparison_dataframe(df_c, forecast_holi)
         cmp_df['yhat'] = np.exp(cmp_df['yhat'])
         error_name = []

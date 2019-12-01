@@ -1,7 +1,8 @@
-from ForecastSys.Models import DR, FP
+from ForecastSys.Models import DR, FP, TM
 import pandas as pd
 import datetime
 import numpy as np
+from functools import reduce
 
 
 class ForecastSys(object):
@@ -14,6 +15,7 @@ class ForecastSys(object):
         self.holiday = pd.read_csv(holiday_path)
         self.model_DR = DR.DR(self.real)
         self.model_FP = FP.FP(self.orig_df, self.holiday)
+        self.model_TM = TM.TM(self.real)
 
     def create_validation_df(self):
         self.validation_df = self.real.copy()
@@ -58,22 +60,47 @@ class ForecastSys(object):
             return np.sqrt(np.mean((y_true - y_pred) ** 2))
 
         start = pd.to_datetime(self.date) + datetime.timedelta(hours=8)
-        end = pd.to_datetime(self.date) + datetime.timedelta(hours=48)
+        end = pd.to_datetime(self.date) + datetime.timedelta(hours=47)
         validation_list = self.validation_df[start:end]['Load'].tolist()
-        this_mape = mape(validation_list, self.result_DR)
-        this_rmse = rmse(validation_list, self.result_DR)
+        predicts = [self.result_DR, self.result_FP]
+        errors = [self.DR_MAPE, self.FP_MAPE]
+        res = self.ensemble(errors, predicts)
+        print(res)
+        # this_mape = mape(validation_list, self.result_DR)
+        # this_rmse = rmse(validation_list, self.result_DR)
+        this_mape = mape(validation_list, res)
+        this_rmse = rmse(validation_list, res)
+        print(start, end)
         print(f'future mape: {this_mape}')
         print(f'future rmse: {this_rmse}')
+
+    def ensemble(self, error_list, result_list):
+        weight = list(map(lambda a: 1.0 / a, error_list))
+        weight = [error / sum(weight) for error in weight]
+        result_list = [np.array(result) for result in result_list]
+        print(weight)
+        for index in range(len(result_list)):
+            result_list[index] = result_list[index] * weight[index]
+        res = sum(result_list)
+        return res
 
 
 if __name__ == '__main__':
     full_temp_path = '../../Data/Hourly_Temp_Humi_Load-6.csv'
     orig_temp_path = '../../Data/20140101-20190901 SCE & CAISO Actual Load  9 27 2019.xlsx'
     holiday = '../../Data/holiday.csv'
-    date = '2019-01-16'
     FS = ForecastSys(full_temp_path, orig_temp_path, holiday)
-    FS.return_result(date)
-    FS.get_error()
-    date = '2019-05-03'
-    FS.return_result(date)
-    FS.get_error()
+
+    datelist = list(map(str, pd.date_range(pd.to_datetime('2019-01-01'), periods=10).tolist()))
+
+    for date in datelist:
+        FS.return_result(date)
+        FS.get_error()
+
+    # date = '2019-01-16'
+    #
+    # FS.return_result(date)
+    # FS.get_error()
+    # # date = '2019-05-03'
+    # FS.return_result(date)
+    # FS.get_error()
