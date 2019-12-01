@@ -38,7 +38,7 @@ class TempPred(object):
             self.predict_next_40hours_HW()
             RMSE_NN, MAPE_NN = self.model_NN.train_rmse, self.model_NN.train_mape
             RMSE_HW, MAPE_HW = self.model_HW.RMSE, self.model_HW.MAPE
-            if RMSE_NN > RMSE_HW:
+            if MAPE_NN > MAPE_HW:
                 return self.model_HW.prediction.tolist()
             else:
                 return self.model_NN.forecast[0]

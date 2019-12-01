@@ -4,8 +4,9 @@ __author__ = 'Connor'
 things can be improved:
 1. if using LSTM, then we should use the lasted data to train our model and use that RMSE and MAPE as the model 
     selection criteria
-2. However, LSTM is a kind of a slow model to use
+2. However, LSTM is kind of a slow model to use
 3. Learning Rate can be further tuned 
+4. epoch can be increased
 '''
 
 # from helper import *
@@ -56,7 +57,7 @@ class NN(object):
 
     def model_building(self):
         l0 = tf.keras.layers.Dense(100)
-        # l0_5 = tf.keras.layers.LSTM(100)
+        # l0_5 = tf.keras.layers.Dense(70)
         l1 = tf.keras.layers.Dense(40)
         self.model = tf.keras.models.Sequential([l0, l1])
         # self.model = tf.keras.models.Sequential([l1])
@@ -67,7 +68,7 @@ class NN(object):
                            optimizer=tf.keras.optimizers.SGD(lr=1e-6, momentum=0.9))
         # self.model.compile(loss='mean_absolute_percentage_error',
         #                    optimizer=tf.keras.optimizers.Adam(lr=1e-6))
-        self.model.fit(self.dataset, epochs=20, verbose=0)
+        self.model.fit(self.dataset, epochs=30, verbose=0)
 
     def predict_model_select(self, station='Mean'):
         # try:

@@ -37,13 +37,12 @@ class ForecastSys(object):
 
     def run_TM(self, date):
         self.model_TM.predict_next_40hours(date)
-        pass
 
     def return_result(self, date):
         self.date = date
+        self.run_TM(date)
         self.run_DR(date)
         self.run_FP(date)
-        self.run_TM(date)
         self.result_FP, self.FP_MAPE, self.FP_RMSE = self.model_FP.forecast, self.model_FP.MAPE, self.model_FP.RMSE
         self.result_DR, self.DR_MAPE, self.DR_RMSE = self.model_DR.forecast, self.model_DR.train_mape, self.model_DR.train_rmse
         self.result_TM, self.TM_MAPE, self.TM_RMSE = self.model_TM.predict_next40, self.model_TM.mape, self.model_TM.rmse
@@ -95,16 +94,8 @@ if __name__ == '__main__':
     holiday = '../../Data/holiday.csv'
     FS = ForecastSys(full_temp_path, orig_temp_path, holiday)
 
-    datelist = list(map(str, pd.date_range(pd.to_datetime('2019-01-01'), periods=10).tolist()))
+    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-06-01'), periods=10).tolist()))
 
     for date in datelist:
         FS.return_result(date)
         FS.get_error()
-
-    # date = '2019-01-16'
-    #
-    # FS.return_result(date)
-    # FS.get_error()
-    # # date = '2019-05-03'
-    # FS.return_result(date)
-    # FS.get_error()
