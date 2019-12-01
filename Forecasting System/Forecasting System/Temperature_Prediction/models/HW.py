@@ -6,8 +6,9 @@ import numpy as np
 
 class HW(object):
 
-    def __init__(self, path, date):
-        self.data = pd.read_csv(path)
+    def __init__(self, path_df, date):
+        # self.data = pd.read_csv(path)
+        self.data = path_df.copy()
         self.date = date
 
     def predict_next_40hours(self):

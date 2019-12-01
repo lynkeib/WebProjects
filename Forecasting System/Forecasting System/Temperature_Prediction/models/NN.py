@@ -35,10 +35,11 @@ def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
 
 class NN(object):
 
-    def __init__(self, path, date):
+    def __init__(self, path_df, date):
         self.date = date
 
-        self.data = pd.read_csv(path)
+        # self.data = pd.read_csv(path)
+        self.data = path_df.copy()
         DateTime = pd.DataFrame(
             self.data.apply(lambda line: pd.to_datetime(line['Date']) + datetime.timedelta(hours=line['Hour']), axis=1))
         DateTime.columns = ['DateTime']
@@ -55,6 +56,7 @@ class NN(object):
 
     def model_building(self):
         l0 = tf.keras.layers.Dense(100)
+        # l0_5 = tf.keras.layers.LSTM(100)
         l1 = tf.keras.layers.Dense(40)
         self.model = tf.keras.models.Sequential([l0, l1])
         # self.model = tf.keras.models.Sequential([l1])

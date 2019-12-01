@@ -4,10 +4,10 @@ import time
 
 class TempPred(object):
 
-    def __init__(self, file_path, date):
+    def __init__(self, file_path_df, date):
         # model initialize
-        self.model_NN = NN.NN(file_path, date)
-        self.model_HW = HW.HW(file_path, date)
+        self.model_NN = NN.NN(file_path_df, date)
+        self.model_HW = HW.HW(file_path_df, date)
         self.HWrun = False
 
     def predict_next_40hours_NN(self, station='Mean'):
@@ -43,6 +43,7 @@ class TempPred(object):
             else:
                 return self.model_NN.forecast[0]
 
+
 if __name__ == '__main__':
     start = time.time()
     this = TempPred('../../Data/Hourly_Temp_Humi_Load-6.csv', '2018-04-02')
@@ -52,5 +53,3 @@ if __name__ == '__main__':
     print(f"NN_RMSE: {this.model_NN.train_rmse}, NN_MAPE: {this.model_NN.train_mape}")
     print(f'time: {end - start}')
     print(pred)
-
-

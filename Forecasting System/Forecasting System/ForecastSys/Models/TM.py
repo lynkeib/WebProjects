@@ -11,6 +11,7 @@ class TM(object):
 
     def __init__(self, data):
         self.df = data.copy()
+        self.create_dateframe()
 
     def create_dateframe(self):
         df = self.df[['Date', 'Hour', 'Load', 'Mean_Temp']]
@@ -41,7 +42,8 @@ class TM(object):
         self.y_test = self.df2[(self.df2['new_date'] > test_start_date) & (self.df2['new_date'] <= test_end_date)][
             'Load']
 
-        temp = TempPred('Hourly_Temp_Humi_Load-6.csv', self.date_for_test)
+        # temp = TempPred('Hourly_Temp_Humi_Load-6.csv', self.date_for_test)
+        temp = TempPred(self.df, self.date_for_test)
         pred = temp.return_result('Mean')
 
         x_test['Mean_Temp'] = pred
@@ -50,7 +52,7 @@ class TM(object):
         self.x_test2 = x_test.drop(columns=['Date', 'new_date'])
 
     def predict_next_40hours(self, date):
-        date = self.date
+        self.date = date
         self.predict_Temp_next_40hours()
 
         # def XGBLoadPred(self, data, date):
@@ -65,16 +67,24 @@ class TM(object):
         predict_GB = GB.predict(self.x_test2)
 
         # MAPE & RMSE
-        mape = np.mean(np.abs((predict_GB - self.y_test) / self.y_test)) * 100
-        rmse = np.sqrt(np.mean((self.y_test - predict_GB) ** 2))
+        self.mape = np.mean(np.abs((predict_GB - self.y_test) / self.y_test)) * 100
+        self.rmse = np.sqrt(np.mean((self.y_test - predict_GB) ** 2))
 
         # Predict Next 40 hours
-        temp = TempPred('Hourly_Temp_Humi_Load-6.csv', date)
+        temp = TempPred(self.df, date)
         pred = temp.return_result('Mean')
 
         x_next40 = self.df2[(self.df2['new_date'] > self.date_hour) & (self.df2['new_date'] <= self.prediction_end)]
         x_next40_new = x_next40.drop(columns=['Date', 'new_date', 'Load'])
 
-        predict_next40 = GB.predict(x_next40_new)
+        x_next40_new['Mean_Temp'] = pred
 
-        return mape, rmse, predict_next40
+        x_train_new = self.df2[(self.df2['new_date'] < self.date_hour)].drop(columns=['Date', 'new_date', 'Load'])
+        y_train_new = self.df2[(self.df2['new_date'] < self.date_hour)]['Load']
+        params = {'n_estimators': 300, 'max_depth': 6, 'min_samples_split': 20, 'learning_rate': .2,
+                  'loss': 'ls'}
+        GB_40 = GradientBoostingRegressor(**params)
+        GB_40.fit(x_train_new, y_train_new)
+        self.predict_next40 = GB_40.predict(x_next40_new).tolist()
+
+        return self.mape, self.rmse, self.predict_next40

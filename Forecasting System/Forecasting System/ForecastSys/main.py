@@ -36,6 +36,7 @@ class ForecastSys(object):
         self.model_FP.predict_next_40hours(date)
 
     def run_TM(self, date):
+        self.model_TM.predict_next_40hours(date)
         pass
 
     def return_result(self, date):
@@ -43,9 +44,9 @@ class ForecastSys(object):
         self.run_DR(date)
         self.run_FP(date)
         self.run_TM(date)
-        self.result_DR, self.DR_MAPE, self.DR_RMSE = self.model_DR.forecast, self.model_DR.train_mape, self.model_DR.train_rmse
         self.result_FP, self.FP_MAPE, self.FP_RMSE = self.model_FP.forecast, self.model_FP.MAPE, self.model_FP.RMSE
-        self.result_TM, self.TM_MAPE, self.TM_RMSE = 0, 0, 0
+        self.result_DR, self.DR_MAPE, self.DR_RMSE = self.model_DR.forecast, self.model_DR.train_mape, self.model_DR.train_rmse
+        self.result_TM, self.TM_MAPE, self.TM_RMSE = self.model_TM.predict_next40, self.model_TM.mape, self.model_TM.rmse
 
     def combine_result(self):
         pass
@@ -62,8 +63,11 @@ class ForecastSys(object):
         start = pd.to_datetime(self.date) + datetime.timedelta(hours=8)
         end = pd.to_datetime(self.date) + datetime.timedelta(hours=47)
         validation_list = self.validation_df[start:end]['Load'].tolist()
-        predicts = [self.result_DR, self.result_FP]
-        errors = [self.DR_MAPE, self.FP_MAPE]
+
+        # predicts = [self.result_DR, self.result_FP]
+        predicts = [self.result_FP, self.result_DR, self.result_TM]
+        # errors = [self.DR_MAPE, self.FP_MAPE]
+        errors = [self.FP_MAPE, self.DR_MAPE, self.TM_MAPE]
         res = self.ensemble(errors, predicts)
         print(res)
         # this_mape = mape(validation_list, self.result_DR)

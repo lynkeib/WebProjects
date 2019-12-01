@@ -42,6 +42,12 @@ class NN(object):
         # self.dataset = windowed_dataset(x_train, self.window_size, self.batch_size, self.shuffle_buffer_size)
 
     def model_building(self):
+        # config = tf.ConfigProto(device_count={"CPU": 4},  # limit to num_cpu_core CPU usage
+        #                         inter_op_parallelism_threads=1,
+        #                         intra_op_parallelism_threads=1,
+        #                         log_device_placement=True)
+        # with tf.Session(config=config) as sess:
+
         l0 = tf.keras.layers.Dense(100)
         l1 = tf.keras.layers.Dense(40)
         self.model = tf.keras.models.Sequential([l0, l1])
