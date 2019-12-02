@@ -30,6 +30,7 @@ class ForecastSys(object):
 
     def run_DR(self, date):
         print(f'-----------------------Running Dynamic Regression-----------------------')
+        print(f'Date is {date}')
         start = time.time()
         self.model_DR.model_selection_mape_rmse(date)
         self.model_DR.predict_next_40hours()
@@ -40,6 +41,7 @@ class ForecastSys(object):
 
     def run_FP(self, date):
         print(f'-----------------------Running Facebook Prophet-----------------------')
+        print(f'Date is {date}')
         start = time.time()
         self.model_FP.predict_next_40hours(date)
         end = time.time()
@@ -49,6 +51,7 @@ class ForecastSys(object):
 
     def run_TM(self, date):
         print(f'-----------------------Running Time Series and Machine Learning-----------------------')
+        print(f'Date is {date}')
         start = time.time()
         self.model_TM.predict_next_40hours(date)
         end = time.time()
@@ -96,10 +99,16 @@ class ForecastSys(object):
         print(f'future rmse: {this_rmse}')
 
     def ensemble(self, error_list, result_list):
-        weight = list(map(lambda a: 1.0 / a, error_list))
+        # check result list length
+        for index in range(len(result_list)):
+            if len(result_list[index]) != 40:
+                result_list[index] = np.array([0 for _ in range(40)])
+                error_list[index] = 0
+        weight = list(map(lambda a: 1.0 / a if a else 0, error_list))
         weight = [error / sum(weight) for error in weight]
         result_list = [np.array(result) for result in result_list]
         print(f'weight: {weight}')
+
         for index in range(len(result_list)):
             result_list[index] = result_list[index] * weight[index]
         res = sum(result_list)
@@ -112,7 +121,7 @@ if __name__ == '__main__':
     holiday = '../../Data/holiday.csv'
     FS = ForecastSys(full_temp_path, orig_temp_path, holiday)
 
-    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-06-05'), periods=10).tolist()))
+    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-06-07'), periods=10).tolist()))
 
     for date in datelist:
         print('####################################################################################################')
