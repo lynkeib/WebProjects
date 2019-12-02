@@ -54,7 +54,7 @@ class DR(object):
         return ml
 
     def model_selection_mape_rmse(self, date):
-        def mean_absolute_percentage_error(y_true, y_pred):
+        def mape(y_true, y_pred):
             y_true, y_pred = np.array(y_true), np.array(y_pred)
             return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
 
@@ -74,12 +74,12 @@ class DR(object):
         this_date = self.test_start_date
         for counter in range(self.training_days):
             self.train_end_date = this_date
-            print('days', counter)
-            print('now', this_date)
+            # print('days', counter)
+            # print('now', this_date)
 
-            print('train time', '2014-01-01 07:00', str(self.train_end_date))
+            # print('train time', '2014-01-01 07:00', str(self.train_end_date))
             Y_start, Y_end = this_date + datetime.timedelta(hours=1), this_date + datetime.timedelta(hours=40)
-            print('predict', Y_start, Y_end)
+            # print('predict', Y_start, Y_end)
 
             start = time.time()
 
@@ -97,12 +97,13 @@ class DR(object):
             # print('mape', mean_absolute_percentage_error(test['Load'], np.exp(p[0])))
             # t = np.exp(p[0])
 
-            print('rmse', rmse(test['Load'], np.exp(p[0])))
+            # print('rmse', rmse(test['Load'], np.exp(p[0])))
+            # print('mape', mape(test['Load'], np.exp(p[0])))
 
             end = time.time()
-            print('using', end - start)
+            # print('using', end - start)
             this_date = this_date + datetime.timedelta(hours=24)
-            print()
+            # print()
 
         self.result_mape = []
         self.result_rmse = []
@@ -112,7 +113,7 @@ class DR(object):
 
         for index in range(len(forecast)):
             self.result_mape.append(
-                mean_absolute_percentage_error(np.array(x_test[index]), np.array(forecast[index])))
+                mape(np.array(x_test[index]), np.array(forecast[index])))
             self.result_rmse.append(rmse(np.array(x_test[index]), np.array(forecast[index])))
 
         self.train_mape = np.mean(self.result_mape)

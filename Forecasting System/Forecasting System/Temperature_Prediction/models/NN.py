@@ -81,7 +81,7 @@ class NN(object):
         self.training_days = 1
 
         self.datetime = pd.to_datetime(date) + datetime.timedelta(hours=7)
-        self.test_start_date = self.datetime - datetime.timedelta(days=self.training_days + 1)
+        self.test_start_date = self.datetime - datetime.timedelta(days=self.training_days)
         self.train_end_date = self.test_start_date - datetime.timedelta(hours=8)
         self.test_end_date = self.datetime - datetime.timedelta(hours=8)
 
@@ -102,7 +102,7 @@ class NN(object):
         forecast = []
         x_test = []
         for counter in range(self.training_days):
-            print('days', counter)
+            print('days', counter + 1)
             start = time.time()
             self.train_end_date = this_date - datetime.timedelta(hours=8)
             x_train = self.temp['2014-01-01 07:00':str(self.train_end_date)][self.station + '_Temp'].tolist()

@@ -2,7 +2,7 @@ from ForecastSys.Models import DR, FP, TM
 import pandas as pd
 import datetime
 import numpy as np
-from functools import reduce
+import time
 
 
 class ForecastSys(object):
@@ -29,14 +29,32 @@ class ForecastSys(object):
         self.validation_df.set_index('DateTime', inplace=True)
 
     def run_DR(self, date):
+        print(f'-----------------------Running Dynamic Regression-----------------------')
+        start = time.time()
         self.model_DR.model_selection_mape_rmse(date)
         self.model_DR.predict_next_40hours()
+        end = time.time()
+        print(f'-----------------------Dynamic Regression Complete-----------------------')
+        print(f'Status report: using {end - start} seconds')
+        print('************************************************************************************')
 
     def run_FP(self, date):
+        print(f'-----------------------Running Facebook Prophet-----------------------')
+        start = time.time()
         self.model_FP.predict_next_40hours(date)
+        end = time.time()
+        print(f'-----------------------Facebook Prophet Complete-----------------------')
+        print(f'Status report: using {end - start} seconds')
+        print('************************************************************************************')
 
     def run_TM(self, date):
+        print(f'-----------------------Running Time Series and Machine Learning-----------------------')
+        start = time.time()
         self.model_TM.predict_next_40hours(date)
+        end = time.time()
+        print(f'-----------------------Time Series and Machine Learning Complete-----------------------')
+        print(f'Status report: using {end - start} seconds')
+        print('************************************************************************************')
 
     def return_result(self, date):
         self.date = date
@@ -68,12 +86,12 @@ class ForecastSys(object):
         # errors = [self.DR_MAPE, self.FP_MAPE]
         errors = [self.FP_MAPE, self.DR_MAPE, self.TM_MAPE]
         res = self.ensemble(errors, predicts)
-        print(res)
+        print(f'predict result: {res}')
         # this_mape = mape(validation_list, self.result_DR)
         # this_rmse = rmse(validation_list, self.result_DR)
         this_mape = mape(validation_list, res)
         this_rmse = rmse(validation_list, res)
-        print(start, end)
+        print(f'satrt time: {start}, end time: {end}')
         print(f'future mape: {this_mape}')
         print(f'future rmse: {this_rmse}')
 
@@ -81,7 +99,7 @@ class ForecastSys(object):
         weight = list(map(lambda a: 1.0 / a, error_list))
         weight = [error / sum(weight) for error in weight]
         result_list = [np.array(result) for result in result_list]
-        print(weight)
+        print(f'weight: {weight}')
         for index in range(len(result_list)):
             result_list[index] = result_list[index] * weight[index]
         res = sum(result_list)
@@ -94,8 +112,15 @@ if __name__ == '__main__':
     holiday = '../../Data/holiday.csv'
     FS = ForecastSys(full_temp_path, orig_temp_path, holiday)
 
-    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-06-01'), periods=10).tolist()))
+    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-06-05'), periods=10).tolist()))
 
     for date in datelist:
+        print('####################################################################################################')
+        print(f'Making prediction for {date}')
+        start = time.time()
         FS.return_result(date)
         FS.get_error()
+        end = time.time()
+        print(f'End of making prediction for {date}')
+        print(f'using {end - start} seconds')
+        print('####################################################################################################')
