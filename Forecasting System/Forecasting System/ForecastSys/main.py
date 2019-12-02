@@ -64,12 +64,30 @@ class ForecastSys(object):
         self.run_TM(date)
         self.run_DR(date)
         self.run_FP(date)
+
         self.result_FP, self.FP_MAPE, self.FP_RMSE = self.model_FP.forecast, self.model_FP.MAPE, self.model_FP.RMSE
         self.result_DR, self.DR_MAPE, self.DR_RMSE = self.model_DR.forecast, self.model_DR.train_mape, self.model_DR.train_rmse
         self.result_TM, self.TM_MAPE, self.TM_RMSE = self.model_TM.predict_next40, self.model_TM.mape, self.model_TM.rmse
+        print(f'Results Summary of date {date}')
+        print(f'Result length of FP is {len(self.result_FP)}, {"Valid" if len(self.result_FP) == 40 else "Invalid"}')
+        print(f'Result length of DR is {len(self.result_DR)}, {"Valid" if len(self.result_DR) == 40 else "Invalid"}')
+        print(f'Result length of TM is {len(self.result_TM)}, {"Valid" if len(self.result_TM) == 40 else "Invalid"}')
 
-    def combine_result(self):
-        pass
+    def ensemble(self, error_list, result_list):
+        # check result list length
+        for index in range(len(result_list)):
+            if len(result_list[index]) != 40:
+                result_list[index] = np.array([0 for _ in range(40)])
+                error_list[index] = 0
+        weight = list(map(lambda a: 1.0 / a if a else 0, error_list))
+        weight = [error / sum(weight) for error in weight]
+        result_list = [np.array(result) for result in result_list]
+        print(f'weight: {weight}')
+
+        for index in range(len(result_list)):
+            result_list[index] = result_list[index] * weight[index]
+        res = sum(result_list)
+        return res
 
     def get_error(self):
         def mape(y_true, y_pred):
@@ -98,21 +116,25 @@ class ForecastSys(object):
         print(f'future mape: {this_mape}')
         print(f'future rmse: {this_rmse}')
 
-    def ensemble(self, error_list, result_list):
-        # check result list length
-        for index in range(len(result_list)):
-            if len(result_list[index]) != 40:
-                result_list[index] = np.array([0 for _ in range(40)])
-                error_list[index] = 0
-        weight = list(map(lambda a: 1.0 / a if a else 0, error_list))
-        weight = [error / sum(weight) for error in weight]
-        result_list = [np.array(result) for result in result_list]
-        print(f'weight: {weight}')
 
-        for index in range(len(result_list)):
-            result_list[index] = result_list[index] * weight[index]
-        res = sum(result_list)
-        return res
+def main():
+    full_temp_path = '../../Data/Hourly_Temp_Humi_Load-6.csv'
+    orig_temp_path = '../../Data/20140101-20190901 SCE & CAISO Actual Load  9 27 2019.xlsx'
+    holiday = '../../Data/holiday.csv'
+    FS = ForecastSys(full_temp_path, orig_temp_path, holiday)
+
+    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-12-07'), periods=10).tolist()))
+
+    for date in datelist:
+        print('####################################################################################################')
+        print(f'Making prediction for {date}')
+        start = time.time()
+        FS.return_result(date)
+        FS.get_error()
+        end = time.time()
+        print(f'End of making prediction for {date}')
+        print(f'using {end - start} seconds')
+        print('####################################################################################################')
 
 
 if __name__ == '__main__':
@@ -121,7 +143,7 @@ if __name__ == '__main__':
     holiday = '../../Data/holiday.csv'
     FS = ForecastSys(full_temp_path, orig_temp_path, holiday)
 
-    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-06-07'), periods=10).tolist()))
+    datelist = list(map(str, pd.date_range(pd.to_datetime('2017-12-07'), periods=10).tolist()))
 
     for date in datelist:
         print('####################################################################################################')
