@@ -1,50 +1,97 @@
+import pandas as pd
 import numpy as np
+import holidays
+import statsmodels.formula.api as sm
+import time
+from Helper import helper
+import datetime
 
 
 class DR(object):
 
     def __init__(self, dataframe):
         df = dataframe.copy()
-        test = df[
-            ['Date', 'Hour', 'Weekday', 'Month', 'Load', 'Mean_Temp', 'Mean_Humi', 'RIV_Temp', 'RIV_Humi', 'LAX_Temp',
-             'LAX_Humi', 'USC_Temp', 'USC_Humi', 'WJF_Temp', 'WJF_Humi', 'TRM_Temp', 'TRM_Humi']]
+        self.lm_data = helper.DR_Temp_data_cleaning(df)
 
-        test.loc[:, 'RIV_Temp_Log'] = np.log(df['RIV_Temp'])
+    def set_date(self, date):
+        self.date = date
 
-        test.loc[:, 'Load_Log'] = np.log(df['Load'])
-        test['Load_Lag_48'] = test['Load_Log'].shift(48, axis=0)
-        # test['Temp_Lag_48'] = test['Mean_Temp'].shift(48, axis=0)
-        test['Humi_Lag_48'] = test['Mean_Humi'].shift(48, axis=0)
-        test['RIV_Temp_Log_Lag_48'] = test['RIV_Temp_Log'].shift(48, axis=0)
+    def model_building(self, training_data, station):
+        ml = sm.ols(formula=station + "_Temp_Log~Load_Lag_48+Humi_Lag_48+I(Load_Lag_48**2)+I(Humi_Lag_48**2)+\
+                                           Hour+Weekday+Month+Holiday+ RIV_Temp_Log_Lag_48+I(RIV_Temp_Log_Lag_48**2)+\
+                                               Month:Load_Lag_48+Month:Humi_Lag_48+\
+                                               Hour:Load_Lag_48+Hour:Humi_Lag_48+\
+                                               Holiday:Load_Lag_48+Holiday:Humi_Lag_48", data=training_data).fit()
+        return ml
 
-        # test['RIV_Temp_Lag_48']= test['RIV_Temp'].shift(48, axis=0)
+    def model_selection_mape_rmse(self, station):
+        training_days = 30
 
-        cal = USFederalHolidayCalendar()
+        date_time = pd.to_datetime(self.date) + datetime.timedelta(hours=7)
+        test_start_date = date_time - datetime.timedelta(days=training_days + 1)
+        train_end_date = test_start_date - datetime.timedelta(hours=8)
+        test_end_date = date_time - datetime.timedelta(hours=8)
 
-        holidays = cal.holidays(start='2014-01-01', end=str(datetime.datetime.now()), return_name=True)
+        forecast = []
+        x_test = []
+        this_date = test_start_date
+        for counter in range(training_days):
+            train_end_date = this_date
+            print(train_end_date)
+            Y_start, Y_end = this_date + datetime.timedelta(hours=1), this_date + datetime.timedelta(hours=40)
 
-        holidays = pd.DataFrame(holidays)
+            start = time.time()
 
-        holidays = holidays.reset_index()
-        holidays = holidays.rename(columns={'index': "Date", 0: 'Holiday'})
-        holidays['Date'] = pd.to_datetime(holidays['Date'])
+            x_train = self.lm_data['2014-01-03 01:00':str(train_end_date)]
 
-        test['Date'] = pd.to_datetime(test['Date'])
-        lm_data = test.loc[49:len(test), ].merge(holidays, how='left', on='Date')
-        lm_data['Holiday'] = lm_data['Holiday'].fillna("Not Holiday")
+            ml = self.model_building(x_train, station)
+            test = self.lm_data[str(Y_start):str(Y_end)]
+            p = ml.predict(test)
+            p = pd.DataFrame(p)
+            forecast.append(np.array(np.exp(p[0])))
+            x_test.append(np.array(test[station + '_Temp']))
 
-        lm_data[["Hour", "Weekday", "Month", "Holiday"]] = lm_data[["Hour", "Weekday", "Month", "Holiday"]].astype(
-            'category')
+            end = time.time()
+            this_date = this_date + datetime.timedelta(hours=24)
 
-        DateTime = pd.DataFrame(
-            lm_data.apply(lambda line: pd.to_datetime(line['Date']) + datetime.timedelta(hours=line['Hour']), axis=1))
-        DateTime.columns = ['DateTime']
+        result_mape = []
+        result_rmse = []
+        for index in range(len(forecast)):
+            result_mape.append(helper.mape(np.array(x_test[index]), np.array(forecast[index])))
+            result_rmse.append(helper.rmse(np.array(x_test[index]), np.array(forecast[index])))
 
-        self.lm_data = pd.concat([DateTime, lm_data], axis=1)
-        self.lm_data.set_index('DateTime', inplace=True)
+        self.mape = np.mean(result_mape)
+        self.rmse = np.mean(result_rmse)
 
-    def model_building(self, date, station):
-        pass
+        return self.mape, self.rmse
 
-    def predict_next_40hours_temp(self):
-        pass
+    def predict_next_40hours_temp(self, station):
+        today = pd.to_datetime(self.date) + datetime.timedelta(hours=7)
+
+        train_end_date = today - datetime.timedelta(hours=1)
+
+        x_train = self.lm_data['2014-01-03 01:00':str(train_end_date)]
+
+        # print('building the latest model')
+        ml = self.model_building(x_train, station)
+        # print('building process complete')
+
+        Y_start, Y_end = today + datetime.timedelta(hours=1), today + datetime.timedelta(hours=40)
+        X = self.lm_data[str(Y_start):str(Y_end)]
+        p = ml.predict(X)
+        p = pd.DataFrame(p)
+        p = np.exp(p[0])
+        self.forecast = p.tolist()
+        return p
+
+if __name__ == '__main__':
+    path = '../../Data/Hourly_Temp_Humi_Load-6.csv'
+    df = pd.read_csv(path)
+    model_DR = DR(df)
+    model_DR.set_date('2018-09-01')
+    station = 'TRM'
+    model_DR.model_selection_mape_rmse(station)
+    print(f'MAPE: {model_DR.mape}, RMSE: {model_DR.rmse}')
+    model_DR.predict_next_40hours_temp(station)
+    print(model_DR.forecast)
+
