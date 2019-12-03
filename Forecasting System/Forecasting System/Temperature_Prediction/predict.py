@@ -1,4 +1,4 @@
-from Temperature_Prediction.models import NN, HW
+from Temperature_Prediction.models import NN, HW, DR
 import time
 
 
@@ -8,6 +8,7 @@ class TempPred(object):
         # model initialize
         self.model_NN = NN.NN(file_path_df, date)
         self.model_HW = HW.HW(file_path_df, date)
+        self.model_DR = DR.DR(file_path_df, date)
         self.HWrun = False
 
     def predict_next_40hours_NN(self, station='Mean'):
@@ -23,6 +24,9 @@ class TempPred(object):
     def predict_next_40hours_HW(self):
         self.HWrun = True
         self.model_HW.predict_next_40hours()
+
+    def predict_next_40hours_DR(self, station='Mean'):
+        self.model_DR.predict_next_40hours()
 
     def return_result(self, station='Mean'):
         if self.HWrun:
