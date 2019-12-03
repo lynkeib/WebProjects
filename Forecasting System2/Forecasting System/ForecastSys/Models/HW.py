@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from sklearn.ensemble import GradientBoostingRegressor
 import datetime
-from Temperature_Prediction.predict import *
+from ForecastSys.Models.Temperature_Prediction.DR import *
 
 
 class HW(object):
@@ -22,6 +22,7 @@ class HW(object):
         Month_Dummies = pd.get_dummies(df['Month'])
         df2 = pd.concat([df.drop(columns=['Weekday', 'Month']), Weekday_Dummies, Month_Dummies], axis=1)
         self.data = df2
+
 
     def predict_next_40hours(self):
         # import data file
@@ -41,8 +42,10 @@ class HW(object):
         y_test = df2[(df2['new_date'] > test_start_date) & (df2['new_date'] <= test_end_date)]['Load']
 
         stations = ['RIV', 'LAX', 'USC', 'WJF', 'TRM']
+        temp = DR(self.data, date_for_test)
         for station in stations:
-            temp = TempPred('Hourly_Temp_Humi_Load-6.csv', date_for_test)
+            temp.model_building()
+            # temp = TempPred('Hourly_Temp_Humi_Load-6.csv', date_for_test)
             pred = temp.return_result(station)
             x_test[station + '_Temp'] = pred
 
