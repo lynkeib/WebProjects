@@ -12,6 +12,7 @@ class DR(object):
     def __init__(self, dataframe):
         df = dataframe.copy()
         self.lm_data = helper.DR_Temp_data_cleaning(df)
+        self.name = 'DR'
 
     def set_date(self, date):
         self.date = date
@@ -37,7 +38,7 @@ class DR(object):
         this_date = test_start_date
         for counter in range(training_days):
             train_end_date = this_date
-            print(train_end_date)
+            # print(train_end_date)
             Y_start, Y_end = this_date + datetime.timedelta(hours=1), this_date + datetime.timedelta(hours=40)
 
             start = time.time()
@@ -82,7 +83,7 @@ class DR(object):
         p = pd.DataFrame(p)
         p = np.exp(p[0])
         self.forecast = p.tolist()
-        return p
+        return self.forecast
 
 if __name__ == '__main__':
     path = '../../Data/Hourly_Temp_Humi_Load-6.csv'

@@ -11,6 +11,7 @@ class HW(object):
     def __init__(self, dataframe):
         df = dataframe.copy()
         self.data = helper.HW_Temp_data_cleaning(df)
+        self.name = 'HW'
 
     def set_date(self, date):
         self.date = date

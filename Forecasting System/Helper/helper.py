@@ -67,3 +67,42 @@ def HW_Temp_data_cleaning(dataframe):
         [DateTime, dataframe.iloc[:, 2], dataframe.loc[:, dataframe.columns.str.contains("Temp")]], axis=1)
     temp.set_index('DateTime', inplace=True)
     return temp
+
+
+def TM_Temp_data_cleaning(dataframe):
+    df = dataframe[
+        ['Date', 'Hour', 'Load', 'RIV_Temp', 'LAX_Temp', 'USC_Temp', 'WJF_Temp', 'TRM_Temp', 'Weekday', 'Month']]
+    df['Date'] = pd.to_datetime(df['Date'])
+    df['new_date'] = df.apply(lambda a: a['Date'] + datetime.timedelta(hours=int(a['Hour'])), axis=1)
+
+    Weekday_Dummies = pd.get_dummies(df['Weekday'])
+    Month_Dummies = pd.get_dummies(df['Month'])
+    df2 = pd.concat([df.drop(columns=['Weekday', 'Month']), Weekday_Dummies, Month_Dummies], axis=1)
+    return df2
+
+
+def TM_split_train_test(dataframe, date, TempPred):
+    df2 = dataframe.copy()
+
+    date_hour = pd.to_datetime(date) + datetime.timedelta(hours=7)
+    test_start_date = date_hour - datetime.timedelta(days=2)
+    train_end_date = test_start_date - datetime.timedelta(hours=8)
+    test_end_date = date_hour - datetime.timedelta(hours=8)
+    date_for_test = pd.to_datetime(date) - datetime.timedelta(days=1)
+    # prediction_end = date_hour + datetime.timedelta(hours=40)
+
+    x_train = df2[df2['new_date'] <= train_end_date].drop(columns='Load')
+    x_test = df2[(df2['new_date'] > test_start_date) & (df2['new_date'] <= test_end_date)].drop(columns='Load')
+    y_train = df2[df2['new_date'] <= train_end_date]['Load']
+    y_test = df2[(df2['new_date'] > test_start_date) & (df2['new_date'] <= test_end_date)]['Load']
+
+    x_train2 = x_train.drop(columns=['Date', 'new_date'])
+    x_test2 = x_test.drop(columns=['Date', 'new_date'])
+    stations = ['RIV', 'LAX', 'USC', 'WJF', 'TRM']
+    for station in stations:
+        TempPred.model_building(date_for_test, station)
+        TempPred.ensemble_models()
+        pred = TempPred.predict_next_40hours_temp(station)
+        x_test[station + '_Temp'] = pred
+
+    return x_train2, y_train, x_test2, y_test

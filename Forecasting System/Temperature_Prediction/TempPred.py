@@ -1,5 +1,6 @@
 from Temperature_Prediction.Models.DR import DR
 from Temperature_Prediction.Models.HW import HW
+import pandas as pd
 
 
 class TempPred(object):
@@ -20,8 +21,22 @@ class TempPred(object):
 
     def ensemble_models(self):
         index = self.MAPE.index(min(self.MAPE))
+        # print(self.MAPE)
+        # print(index)
         self.model = self.models[index]
+        # print(self.model.name)
 
     def predict_next_40hours_temp(self, station):
-        prediction = self.model.predict_next_40hours_temp(station)
-        return prediction
+        self.forecast = self.model.predict_next_40hours_temp(station)
+        return self.forecast
+
+
+if __name__ == '__main__':
+    path = '../Data/Hourly_Temp_Humi_Load-6.csv'
+    df = pd.read_csv(path)
+    TP = TempPred(df)
+    station = 'USC'
+    TP.model_building('2018-09-01', station)
+    TP.ensemble_models()
+    TP.predict_next_40hours_temp(station)
+    print(TP.forecast)
