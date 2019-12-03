@@ -154,3 +154,14 @@ def DR_data_cleaning(dataframe):
     lm_data = pd.concat([DateTime, lm_data], axis=1)
     lm_data.set_index('DateTime', inplace=True)
     return lm_data
+
+
+def validation_dataframe_cleaning(dataframe):
+    validation_df = dataframe.copy()
+    DateTime = pd.DataFrame(
+        validation_df.apply(lambda line: pd.to_datetime(line['Date']) + datetime.timedelta(hours=line['Hour']), axis=1))
+    DateTime.columns = ['DateTime']
+    validation_df = pd.concat([DateTime, dataframe], axis=1)
+    validation_df = validation_df[['DateTime', 'Load']]
+    validation_df.set_index('DateTime', inplace=True)
+    return validation_df

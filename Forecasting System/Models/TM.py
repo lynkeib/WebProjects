@@ -13,6 +13,7 @@ class TM(object):
         df = dataframe.copy()
         self.data = helper.TM_Temp_data_cleaning(df)
         self.TempPred = TempPred(dataframe)
+        self.name = 'Time Series and Machine Learning'
 
     def set_date(self, date):
         self.date = date
@@ -39,7 +40,7 @@ class TM(object):
         # return GB
         pass
 
-    def predict_next_40_hours(self):
+    def predict_next_40hours(self):
         date = self.date
         df2 = self.data.copy()
 
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     model_TM = TM(df)
     model_TM.set_date('2018-07-15')
     model_TM.model_selection_mape_rmse()
-    model_TM.predict_next_40_hours()
+    model_TM.predict_next_40hours()
 
     end = time.time()
     print(model_TM.forecast)

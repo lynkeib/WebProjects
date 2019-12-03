@@ -29,7 +29,7 @@ class NN(object):
     def __init__(self, dataframe):
         df = dataframe.copy()
         self.data = helper.NN_Temp_data_cleaning(df)
-
+        self.name = 'Neural Network'
         self.window_size = 337 + 40
         self.batch_size = 30
         self.shuffle_buffer_size = 30

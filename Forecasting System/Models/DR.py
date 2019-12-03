@@ -14,6 +14,7 @@ class DR(object):
     def __init__(self, dataframe):
         df = dataframe.copy()
         self.lm_data = helper.DR_data_cleaning(df)
+        self.name = 'Dynamic Regression'
 
     def set_date(self, date):
         self.date = date
