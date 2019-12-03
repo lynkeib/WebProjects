@@ -4,6 +4,7 @@ from Temperature_Prediction.TempPred import TempPred
 import pandas as pd
 import datetime
 from sklearn.ensemble import GradientBoostingRegressor
+import time
 
 
 class TM(object):
@@ -61,11 +62,13 @@ class TM(object):
             self.TempPred.model_building(date_for_test, station)
             self.TempPred.ensemble_models()
             pred = self.TempPred.predict_next_40hours_temp(station)
+            # print(f'station {station}')
+            # print(f'predict: {pred}')
             x_test[station + '_Temp'] = pred
 
         x_train2 = x_train.drop(columns=['Date', 'new_date'])
         x_test2 = x_test.drop(columns=['Date', 'new_date'])
-
+        # print(x_test2.head())
         # Model Building & Prediction#
         params = {'n_estimators': 300, 'max_depth': 6, 'min_samples_split': 20, 'learning_rate': .2,
                   'loss': 'ls'}
@@ -86,6 +89,7 @@ class TM(object):
             self.TempPred.model_building(date, station)
             self.TempPred.ensemble_models()
             pred = self.TempPred.predict_next_40hours_temp(station)
+
             x_next40_new[station + '_Temp'] = pred
 
         x_train_new = df2[(df2['new_date'] < date_hour)].drop(columns=['Date', 'new_date', 'Load'])
@@ -100,11 +104,16 @@ class TM(object):
 
 
 if __name__ == '__main__':
+    start = time.time()
     path = '../Data/Hourly_Temp_Humi_Load-6.csv'
     df = pd.read_csv(path)
+
     model_TM = TM(df)
-    model_TM.set_date('2018-09-01')
+    model_TM.set_date('2018-07-15')
     model_TM.model_selection_mape_rmse()
     model_TM.predict_next_40_hours()
+
+    end = time.time()
     print(model_TM.forecast)
     print(f'mape: {model_TM.mape}, rmse: {model_TM.rmse}')
+    print(f'using {end - start}')

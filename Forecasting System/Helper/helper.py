@@ -106,3 +106,51 @@ def TM_split_train_test(dataframe, date, TempPred):
         x_test[station + '_Temp'] = pred
 
     return x_train2, y_train, x_test2, y_test
+
+
+def NN_Temp_data_cleaning(dataframe):
+    data = dataframe.copy()
+    DateTime = pd.DataFrame(
+        data.apply(lambda line: pd.to_datetime(line['Date']) + datetime.timedelta(hours=line['Hour']), axis=1))
+    DateTime.columns = ['DateTime']
+    temp = pd.concat(
+        [DateTime, data.iloc[:, 2]], axis=1)
+    temp.set_index('DateTime', inplace=True)
+    return temp
+
+
+def DR_data_cleaning(dataframe):
+    df = dataframe.copy()
+    test = df[['Date', 'Hour', 'Weekday', 'Month', 'Load', 'Mean_Temp', 'Mean_Humi']]
+
+    test.loc[:, 'Load_Log'] = np.log(df['Load'])
+
+    test['Load_Lag_48'] = test['Load_Log'].shift(48, axis=0)
+    test['Temp_Lag_48'] = test['Mean_Temp'].shift(48, axis=0)
+    test['Humi_Lag_48'] = test['Mean_Humi'].shift(48, axis=0)
+
+    cal = USFederalHolidayCalendar()
+
+    holidays = cal.holidays(start='2014-01-01', end=str(datetime.datetime.now()), return_name=True)
+
+    holidays = pd.DataFrame(holidays)
+
+    holidays = holidays.reset_index()
+    holidays = holidays.rename(columns={'index': "Date", 0: 'Holiday'})
+    holidays['Date'] = pd.to_datetime(holidays['Date'])
+    holidays.head(2)
+
+    test['Date'] = pd.to_datetime(test['Date'])
+    lm_data = test.loc[49:len(test), ].merge(holidays, how='left', on='Date')
+    lm_data['Holiday'] = lm_data['Holiday'].fillna("Not Holiday")
+
+    lm_data[["Hour", "Weekday", "Month", "Holiday"]] = lm_data[["Hour", "Weekday", "Month", "Holiday"]].astype(
+        'category')
+
+    DateTime = pd.DataFrame(
+        lm_data.apply(lambda line: pd.to_datetime(line['Date']) + datetime.timedelta(hours=line['Hour']), axis=1))
+    DateTime.columns = ['DateTime']
+
+    lm_data = pd.concat([DateTime, lm_data], axis=1)
+    lm_data.set_index('DateTime', inplace=True)
+    return lm_data

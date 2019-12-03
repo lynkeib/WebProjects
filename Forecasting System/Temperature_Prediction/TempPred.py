@@ -22,6 +22,7 @@ class TempPred(object):
     def ensemble_models(self):
         index = self.MAPE.index(min(self.MAPE))
         # print(self.MAPE)
+        # print(self.MAPE)
         # print(index)
         self.model = self.models[index]
         # print(self.model.name)

@@ -43,6 +43,7 @@ class HW(object):
         model2 = self.model_building(train2, station)
         y_predict = model2.forecast(40)
         self.forecast = y_predict.to_list()
+        return self.forecast
 
 
 if __name__ == '__main__':
