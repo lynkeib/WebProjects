@@ -70,7 +70,7 @@ class NN(object):
                            optimizer=tf.keras.optimizers.SGD(lr=1e-6, momentum=0.9))
         # self.model.compile(loss='mean_absolute_percentage_error',
         #                    optimizer=tf.keras.optimizers.Adam(lr=1e-6))
-        self.model.fit(self.dataset, epochs=30, verbose=0)
+        self.model.fit(self.dataset, epochs=300, verbose=0)
 
     def predict_model_select(self):
         # try:
@@ -83,7 +83,7 @@ class NN(object):
         self.training_days = 1
 
         self.datetime = pd.to_datetime(date) + datetime.timedelta(hours=7)
-        self.test_start_date = self.datetime - datetime.timedelta(days=self.training_days-1)
+        self.test_start_date = self.datetime - datetime.timedelta(days=self.training_days + 1)
         self.train_end_date = self.test_start_date - datetime.timedelta(hours=8)
         self.test_end_date = self.datetime - datetime.timedelta(hours=8)
 
