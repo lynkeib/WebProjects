@@ -62,15 +62,16 @@ class NN(object):
         # l0_5 = tf.keras.layers.Dense(70)
         l1 = tf.keras.layers.Dense(40)
         self.model = tf.keras.models.Sequential([l0, l1])
+        # self.model = tf.keras.models.Sequential([l0, l0_5, l1])
         # self.model = tf.keras.models.Sequential([l1])
         # l0 = tf.keras.layers.Dense(40)
         # self.model = tf.keras.models.Sequential([l0])
 
         self.model.compile(loss='mean_absolute_percentage_error',
-                           optimizer=tf.keras.optimizers.SGD(lr=1e-6, momentum=0.9))
+                           optimizer=tf.keras.optimizers.SGD(lr=1e-5, momentum=0.9))
         # self.model.compile(loss='mean_absolute_percentage_error',
         #                    optimizer=tf.keras.optimizers.Adam(lr=1e-6))
-        self.model.fit(self.dataset, epochs=300, verbose=0)
+        self.model.fit(self.dataset, epochs=30, verbose=0)
 
     def predict_model_select(self):
         # try:
