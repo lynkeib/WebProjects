@@ -1,6 +1,6 @@
 class HW(object):
 
-    def __init__(self):
+    def __init__(self, dataframe):
         pass
 
     def model_building(self, date, station):
