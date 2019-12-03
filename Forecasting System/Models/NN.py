@@ -118,7 +118,7 @@ class NN(object):
         self.model.fit(self.dataset, epochs=30, verbose=0)
 
     def predict_next_40hours(self):
-        today = self.datetime
+        today = self.date
 
         self.train_end_date = self.datetime - datetime.timedelta(hours=8)
 

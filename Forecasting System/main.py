@@ -26,6 +26,10 @@ class LoadPred(object):
         for model in self.models:
             print(f'-----------------------Running {model.name}-----------------------')
             print(f'Date is {date}')
+            if model.name == 'Neural Network':
+                self.MAPE.append(float('inf'))
+                self.RMSE.append(float('inf'))
+                continue
             start = time.time()
             model.set_date(date)
             model.model_selection_mape_rmse()
@@ -75,4 +79,5 @@ if __name__ == '__main__':
     LP.model_building(date)
     LP.ensemble_models()
     LP.return_result()
+    LP.get_error()
     print()
