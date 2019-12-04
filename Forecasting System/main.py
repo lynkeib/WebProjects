@@ -5,6 +5,7 @@ import pandas as pd
 import datetime
 import time
 import numpy as np
+import json
 
 
 class LoadPred(object):
@@ -58,11 +59,11 @@ class LoadPred(object):
         predict = self.forecast
         res = predict
         print(f'predict result: \n {predict}')
-        this_mape = helper.mape(validation_list, res)
-        this_rmse = helper.rmse(validation_list, res)
+        self.this_mape = helper.mape(validation_list, res)
+        self.this_rmse = helper.rmse(validation_list, res)
         print(f'satrt time: {start}, end time: {end}')
-        print(f'future mape: {this_mape}')
-        print(f'future rmse: {this_rmse}')
+        print(f'future mape: {self.this_mape}')
+        print(f'future rmse: {self.this_rmse}')
 
     def peakhour(self):
         start = pd.to_datetime(self.date) + datetime.timedelta(hours=8)
@@ -74,33 +75,48 @@ class LoadPred(object):
         validation_peak_index = validation_list.index(max(validation_list))
         predict_peak_index = predict.index(max(predict))
         if validation_peak_index == predict_peak_index:
+            self.peak_detected = 1
             return 1
         else:
+            self.peak_detected = 0
             return 0
 
 
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    path = 'Data/Hourly_Temp_Humi_Load-6.csv'
-    df = pd.read_csv(path)
-    LP = LoadPred(df)
-    start = time.time()
-
-    datelist = list(map(str, pd.date_range(pd.to_datetime('2019-03-07'), periods=10).tolist()))
-
+def main(data, date, length):
+    LP = LoadPred(data)
+    results_dict = dict()
+    datelist = list(map(str, pd.date_range(pd.to_datetime(date), periods=length).tolist()))
     for date in datelist:
         print('####################################################################################################')
         print(f'Making prediction for {date}')
+
+        results_dict[date] = dict()
+        results_dict[date]['error'] = dict()
+
         start = time.time()
+
         LP.model_building(date)
         LP.create_validation_df()
         LP.ensemble_models()
         LP.return_result()
         LP.get_error()
-        print(f'peak hour: {LP.peakhour()}')
+        LP.peakhour()
+
+        results_dict[date]['prediction'] = LP.forecast
+        results_dict[date]['error']['MAPE'] = LP.this_mape
+        results_dict[date]['error']['RMSE'] = LP.this_rmse
+        results_dict[date]['peak_detected'] = LP.peak_detected
+
+        print(f'peak hour: {LP.peak_detected}')
         end = time.time()
         print(f'used {end - start}')
         print('####################################################################################################')
+    with open('predicted_results.json', 'w') as f:
+        json.dump(results_dict, f)
+    print('Results file generated')
+
+
+if __name__ == '__main__':
+    path = 'Data/Hourly_Temp_Humi_Load-6.csv'
+    df = pd.read_csv(path)
+    main(df, '2018-10-29', 3)
