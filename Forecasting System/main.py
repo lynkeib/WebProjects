@@ -23,12 +23,14 @@ class LoadPred(object):
         self.date = date
         self.MAPE = []
         self.RMSE = []
+        exclude_mode = [self.NN.name, self.TM.name]
         for model in self.models:
             print(f'-----------------------Running {model.name}-----------------------')
             print(f'Date is {date}')
-            if model.name == 'Neural Network':
+            if model.name in exclude_mode:
                 self.MAPE.append(float('inf'))
                 self.RMSE.append(float('inf'))
+                print(f'-----------------------{model.name} Complete-----------------------')
                 continue
             start = time.time()
             model.set_date(date)
@@ -53,31 +55,52 @@ class LoadPred(object):
         start = pd.to_datetime(self.date) + datetime.timedelta(hours=8)
         end = pd.to_datetime(self.date) + datetime.timedelta(hours=47)
         validation_list = self.validation_df[start:end]['Load'].tolist()
-
-        # predicts = [self.result_DR, self.result_FP]
-        # predicts = [self.result_FP, self.result_DR, self.result_TM]
         predict = self.forecast
-        # errors = [self.DR_MAPE, self.FP_MAPE]
-        # errors = [self.FP_MAPE, self.DR_MAPE, self.TM_MAPE]
-        # res = self.ensemble(errors, predicts)
         res = predict
-        print(f'predict result: /n {predict}')
-        # this_mape = mape(validation_list, self.result_DR)
-        # this_rmse = rmse(validation_list, self.result_DR)
+        print(f'predict result: \n {predict}')
         this_mape = helper.mape(validation_list, res)
         this_rmse = helper.rmse(validation_list, res)
         print(f'satrt time: {start}, end time: {end}')
         print(f'future mape: {this_mape}')
         print(f'future rmse: {this_rmse}')
 
+    def peakhour(self):
+        start = pd.to_datetime(self.date) + datetime.timedelta(hours=8)
+        end = pd.to_datetime(self.date) + datetime.timedelta(hours=47)
+        validation_list = self.validation_df[start:end]['Load'].tolist()
+        predict = self.forecast
+        validation_list = validation_list[-24:]
+        predict = predict[-24:]
+        validation_peak_index = validation_list.index(max(validation_list))
+        predict_peak_index = predict.index(max(predict))
+        if validation_peak_index == predict_peak_index:
+            return 1
+        else:
+            return 0
+
+
+def main():
+    pass
+
 
 if __name__ == '__main__':
     path = 'Data/Hourly_Temp_Humi_Load-6.csv'
     df = pd.read_csv(path)
     LP = LoadPred(df)
-    date = '2018-07-15'
-    LP.model_building(date)
-    LP.ensemble_models()
-    LP.return_result()
-    LP.get_error()
-    print()
+    start = time.time()
+
+    datelist = list(map(str, pd.date_range(pd.to_datetime('2019-03-07'), periods=10).tolist()))
+
+    for date in datelist:
+        print('####################################################################################################')
+        print(f'Making prediction for {date}')
+        start = time.time()
+        LP.model_building(date)
+        LP.create_validation_df()
+        LP.ensemble_models()
+        LP.return_result()
+        LP.get_error()
+        print(f'peak hour: {LP.peakhour()}')
+        end = time.time()
+        print(f'used {end - start}')
+        print('####################################################################################################')
