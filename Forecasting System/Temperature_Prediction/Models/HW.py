@@ -16,7 +16,7 @@ class HW(object):
     def set_date(self, date):
         self.date = date
 
-    def model_building(self, training_data, station):
+    def model_building(self, training_data, station=None):
         model = ExponentialSmoothing(training_data, seasonal='add', seasonal_periods=24 * 365)
         model_fit = model.fit()
         return model_fit
@@ -31,7 +31,7 @@ class HW(object):
         test = self.data[station + '_Temp'].loc[test_start:test_end]
         model = self.model_building(train, station)
         yhat = model.forecast(40)
-        yhat.index = test.index
+        # yhat.index = test.index
         # self.mape = abs((yhat - test) / test).mean()
         # self.rmse = np.sqrt(((yhat - test) ** 2).mean())
         self.mape = helper.mape(test, yhat)

@@ -24,8 +24,8 @@ class LoadPred(object):
         self.date = date
         self.MAPE = []
         self.RMSE = []
-        # exclude_model = [self.NN.name]
-        exclude_model = [self.NN.name, self.TM.name]
+        exclude_model = [self.NN.name]
+        # exclude_model = [self.NN.name, self.TM.name]
         for model in self.models:
             print(f'-----------------------Running {model.name}-----------------------')
             print(f'Date is {date}')
@@ -111,6 +111,7 @@ def main(data, date, length):
         print(f'peak hour: {LP.peak_detected}')
         end = time.time()
         print(f'used {end - start}')
+        results_dict[date]['time'] = end - start
         print('####################################################################################################')
     with open('predicted_results.json', 'w') as f:
         json.dump(results_dict, f)
@@ -120,4 +121,4 @@ def main(data, date, length):
 if __name__ == '__main__':
     path = 'Data/Hourly_Temp_Humi_Load-6.csv'
     df = pd.read_csv(path)
-    main(df, '2018-10-29', 3)
+    main(df, '2018-11-05', 1)

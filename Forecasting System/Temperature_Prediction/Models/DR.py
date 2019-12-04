@@ -78,6 +78,7 @@ class DR(object):
         # print('building process complete')
 
         Y_start, Y_end = today + datetime.timedelta(hours=1), today + datetime.timedelta(hours=40)
+        # print(f'Y_start {Y_start}, Y_end: {Y_end}')
         X = self.lm_data[str(Y_start):str(Y_end)]
         p = ml.predict(X)
         p = pd.DataFrame(p)

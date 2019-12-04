@@ -13,7 +13,12 @@ class TempPred(object):
     def model_building(self, date, station):
         self.MAPE = []
         self.RMSE = []
+        excelue_model = [self.HW.name]
         for model in self.models:
+            if model.name in excelue_model:
+                self.MAPE.append(float('inf'))
+                self.RMSE.append(float('inf'))
+                continue
             model.set_date(date)
             model.model_selection_mape_rmse(station)
             self.MAPE.append(model.mape)
