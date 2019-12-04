@@ -24,11 +24,12 @@ class LoadPred(object):
         self.date = date
         self.MAPE = []
         self.RMSE = []
-        exclude_mode = [self.NN.name, self.TM.name]
+        # exclude_model = [self.NN.name]
+        exclude_model = [self.NN.name, self.TM.name]
         for model in self.models:
             print(f'-----------------------Running {model.name}-----------------------')
             print(f'Date is {date}')
-            if model.name in exclude_mode:
+            if model.name in exclude_model:
                 self.MAPE.append(float('inf'))
                 self.RMSE.append(float('inf'))
                 print(f'-----------------------{model.name} Complete-----------------------')

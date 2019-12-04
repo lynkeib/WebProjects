@@ -99,9 +99,9 @@ class TM(object):
         GB_40 = GradientBoostingRegressor(**params)
         GB_40.fit(x_train_new, y_train_new)
         predict_next40 = GB_40.predict(x_next40_new)
-        self.forecast = predict_next40
+        self.forecast = list(predict_next40)
 
-        return predict_next40
+        return self.forecast
 
 
 if __name__ == '__main__':
