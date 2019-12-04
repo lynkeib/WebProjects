@@ -83,17 +83,18 @@ class DR(object):
         p = ml.predict(X)
         p = pd.DataFrame(p)
         p = np.exp(p[0])
+        # print('with time stamp: ', p)
         self.forecast = p.tolist()
         return self.forecast
+
 
 if __name__ == '__main__':
     path = '../../Data/Hourly_Temp_Humi_Load-6.csv'
     df = pd.read_csv(path)
     model_DR = DR(df)
-    model_DR.set_date('2018-09-01')
+    model_DR.set_date('2018-11-04')
     station = 'TRM'
     model_DR.model_selection_mape_rmse(station)
     print(f'MAPE: {model_DR.mape}, RMSE: {model_DR.rmse}')
     model_DR.predict_next_40hours_temp(station)
     print(model_DR.forecast)
-

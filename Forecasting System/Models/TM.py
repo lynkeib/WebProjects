@@ -49,8 +49,8 @@ class TM(object):
             pred = self.TempPred.predict_next_40hours_temp(station)
             # print(f'station {station}')
             # print(f'predict: {pred}')
-            print(pred)
-            print(len(pred))
+            # print(pred)
+            # print(len(pred))
             x_test[station + '_Temp'] = pred
 
 
