@@ -121,4 +121,4 @@ def main(data, date, length):
 if __name__ == '__main__':
     path = 'Data/Hourly_Temp_Humi_Load-7.csv'
     df = pd.read_csv(path)
-    main(df, '2018-11-05', 10)
+    main(df, '2017-10-01', 2)
