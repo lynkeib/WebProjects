@@ -60,8 +60,9 @@ class LoadPred(object):
         predict = self.forecast
         res = predict
         print(f'predict result: \n {predict}')
-        self.this_mape = helper.mape(validation_list, res)
-        self.this_rmse = helper.rmse(validation_list, res)
+        # only the last 24 hours
+        self.this_mape = helper.mape(validation_list[-24:], res[-24:])
+        self.this_rmse = helper.rmse(validation_list[-24:], res[-24:])
         print(f'satrt time: {start}, end time: {end}')
         print(f'future mape: {self.this_mape}')
         print(f'future rmse: {self.this_rmse}')
@@ -113,7 +114,7 @@ def main(data, date, length):
         print(f'used {end - start}')
         results_dict[date]['time'] = end - start
         print('####################################################################################################')
-    with open('predicted_results_201905.json', 'w') as f:
+    with open('predicted_results_201906.json', 'w') as f:
         json.dump(results_dict, f)
     print('Results file generated')
 
@@ -121,4 +122,4 @@ def main(data, date, length):
 if __name__ == '__main__':
     path = 'Data/Hourly_Temp_Humi_Load-7.csv'
     df = pd.read_csv(path)
-    main(df, '2019-05-01', 31)
+    main(df, '2019-06-01', 30)
