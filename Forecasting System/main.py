@@ -114,7 +114,7 @@ def main(data, date, length):
         print(f'used {end - start}')
         results_dict[date]['time'] = end - start
         print('####################################################################################################')
-    with open('predicted_results_201906.json', 'w') as f:
+    with open('predicted_results/predicted_results_201906.json', 'w') as f:
         json.dump(results_dict, f)
     print('Results file generated')
 
