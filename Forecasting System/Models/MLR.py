@@ -9,12 +9,12 @@ import statsmodels.formula.api as sm
 import time
 
 
-class DR(object):
+class MLR(object):
 
     def __init__(self, dataframe):
         df = dataframe.copy()
         self.lm_data = helper.DR_data_cleaning(df)
-        self.name = 'Dynamic Regression'
+        self.name = 'Multiple Linear Regression'
 
     def set_date(self, date):
         self.date = date
@@ -93,11 +93,11 @@ if __name__ == '__main__':
     path = '../Data/Hourly_Temp_Humi_Load-6.csv'
     df = pd.read_csv(path)
 
-    model_DR = DR(df)
-    model_DR.set_date('2018-07-15')
-    model_DR.model_selection_mape_rmse()
-    model_DR.predict_next_40hours()
+    model_MLR = MLR(df)
+    model_MLR.set_date('2018-07-15')
+    model_MLR.model_selection_mape_rmse()
+    model_MLR.predict_next_40hours()
 
-    print(f'mape: {model_DR.mape}, rmse: {model_DR.rmse}')
+    print(f'mape: {model_MLR.mape}, rmse: {model_MLR.rmse}')
 
-    print(model_DR.forecast)
+    print(model_MLR.forecast)

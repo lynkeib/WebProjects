@@ -1,4 +1,4 @@
-from Models import NN, DR, TM
+from Models import NN, MLR, TM
 from Helper import helper
 
 import pandas as pd
@@ -13,9 +13,9 @@ class LoadPred(object):
     def __init__(self, dataframe):
         self.data = dataframe.copy()
         self.NN = NN.NN(self.data)
-        self.DR = DR.DR(self.data)
+        self.MLR = MLR.MLR(self.data)
         self.TM = TM.TM(self.data)
-        self.models = [self.NN, self.DR, self.TM]
+        self.models = [self.NN, self.MLR, self.TM]
 
     def create_validation_df(self):
         self.validation_df = helper.validation_dataframe_cleaning(self.data)
