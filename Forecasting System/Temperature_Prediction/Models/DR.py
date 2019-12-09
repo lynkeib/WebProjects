@@ -19,7 +19,7 @@ class DR(object):
 
     def model_building(self, training_data, station):
         ml = sm.ols(formula=station + "_Temp_Log~Load_Lag_48+Humi_Lag_48+I(Load_Lag_48**2)+I(Humi_Lag_48**2)+\
-                                           Hour+Weekday+Month+Holiday+ RIV_Temp_Log_Lag_48+I(RIV_Temp_Log_Lag_48**2)+\
+                                           Hour+Weekday+Month+Holiday+" + station + "_Temp_Log_Lag_48+I(" + station + "_Temp_Log_Lag_48**2)+\
                                                Month:Load_Lag_48+Month:Humi_Lag_48+\
                                                Hour:Load_Lag_48+Hour:Humi_Lag_48+\
                                                Holiday:Load_Lag_48+Holiday:Humi_Lag_48", data=training_data).fit()
