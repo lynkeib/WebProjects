@@ -167,3 +167,50 @@ def validation_dataframe_cleaning(dataframe):
     validation_df = validation_df[['DateTime', 'Load']]
     validation_df.set_index('DateTime', inplace=True)
     return validation_df
+
+
+def yt(lag, data_yt):
+    this_dataframe = data_yt.shift(periods=lag)
+    # Trend
+    this_dataframe['Trend'] = range(this_dataframe.shape[0])
+    # Month of the year
+    this_dataframe['Month'] = this_dataframe['DateTime'].dt.month
+    # Day of the week
+    this_dataframe['Week'] = this_dataframe['DateTime'].dt.dayofweek
+    # Hour of the day
+    this_dataframe['Hour'] = this_dataframe['DateTime'].dt.hour
+    # I(Week, Hour)
+    this_dataframe['Week_Hour'] = this_dataframe['Week'] * this_dataframe['Hour']
+    this_dataframe.drop(['DateTime', 'Temperature'], inplace=True, axis=1)
+    return this_dataframe
+
+
+def fofT(column, lag, data_fofT):
+    this_dataframe = data_fofT.shift(periods=lag)
+    # Temperatrue
+    this_dataframe['Lag_' + str(lag) + '_' + str(column)] = this_dataframe[column]
+    # Temperatrue ** 2
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_2'] = this_dataframe[column] ** 2
+    # Temperatrue ** 3
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_3'] = this_dataframe[column] ** 3
+    # I(T, Month)
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_Month'] = this_dataframe[column] * this_dataframe['Month']
+    # I(T_2, Month)
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_2_Month'] = this_dataframe['Lag_' + str(lag) + '_' + str(
+        column) + '_2'] * this_dataframe['Month']
+    # I(T_3, Month)
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_3_Month'] = this_dataframe['Lag_' + str(lag) + '_' + str(
+        column) + '_3'] * this_dataframe['Month']
+    # I(T, Hour)
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_Hour'] = this_dataframe[column] * this_dataframe['Hour']
+    # I(T_2, Hour)
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_2_Hour'] = this_dataframe['Lag_' + str(lag) + '_' + str(
+        column) + '_2'] * this_dataframe['Hour']
+    # I(T_3, Hour)
+    this_dataframe['Lag_' + str(lag) + '_' + str(column) + '_3_Hour'] = this_dataframe['Lag_' + str(lag) + '_' + str(
+        column) + '_3'] * this_dataframe['Hour']
+    try:
+        this_dataframe.drop(['DateTime', 'Month', 'Hour', column], inplace=True, axis=1)
+    except:
+        pass
+    return this_dataframe
