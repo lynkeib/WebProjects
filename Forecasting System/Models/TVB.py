@@ -38,9 +38,9 @@ data.rename(columns={'Mean_Temp': "Temperature"}, inplace=True)
 
 all_begin = pd.to_datetime('2014-01-03 01:00:00')
 
-this_date = pd.to_datetime('2017-01-01 07:00:00')
+this_date = pd.to_datetime('2017-04-01 07:00:00')
 
-end_of_running = pd.to_datetime('2017-03-31 07:00:00')
+end_of_running = pd.to_datetime('2017-12-31 07:00:00')
 
 results = dict()
 
@@ -52,6 +52,7 @@ while this_date <= end_of_running:
     this_data.set_index('DateTime', inplace=True)
 
     date = this_date - datetime.timedelta(hours=7)
+    date = str(date)
 
     results[date] = dict()
     results[date]['error'] = dict()
@@ -117,5 +118,5 @@ while this_date <= end_of_running:
     this_date = this_date + datetime.timedelta(days=1)
     print(f'Used: {end - start}')
 
-with open('predicted_results_TVB_2017Q3.json', 'w') as f:
+with open('predicted_results_TVB_20170203.json', 'w') as f:
     json.dump(results, f)
