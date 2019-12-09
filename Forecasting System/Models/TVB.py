@@ -5,8 +5,9 @@ import time
 import statsmodels.formula.api as sm
 import numpy as np
 from sklearn.linear_model import LinearRegression
+import json
 
-data = pd.read_csv('Data/Hourly_Temp_Humi_Load-7.csv')
+data = pd.read_csv('../Data/Hourly_Temp_Humi_Load-7.csv')
 
 lm_data = helper.DR_Temp_data_cleaning(data)
 
@@ -23,7 +24,7 @@ for date in pd.date_range('2017-01-01', '2019-08-30', freq='D'):
                                                Holiday:Load_Lag_48+Holiday:Humi_Lag_48", data=training_data).fit()
 
     Y_start = this_date + datetime.timedelta(hours=1)
-    Y_end = this_date + datetime.timedelta(hours=41)
+    Y_end = this_date + datetime.timedelta(hours=40)
     next_ = lm_data[Y_start:Y_end]
     pred = ml.predict(next_)
     temp[this_date] = np.exp(pred)
@@ -59,7 +60,7 @@ while this_date <= end_of_running:
     start_this_date = this_date + datetime.timedelta(hours=1)
 
     this_data = this_data[:end_this_date]
-    this_data.loc[start_this_date:end_this_date, 'Temperature'] = temp[this_date][:40]
+    this_data.loc[start_this_date:end_this_date, 'Temperature'] = temp[this_date]
     # print(this_data.loc[start_this_date:end_this_date, 'Temperature'].shape)
     this_data.reset_index(inplace=True)
 
@@ -108,10 +109,13 @@ while this_date <= end_of_running:
     end = time.time()
 
     results[date]['prediction'] = prediction
-    results[date]['error']['MAPE'] = mape(y_true[-24:], prediction[-24:])
-    results[date]['error']['RMSE'] = rmse(y_true[-24:], prediction[-24:])
+    results[date]['error']['MAPE'] = helper.mape(y_true[-24:], prediction[-24:])
+    results[date]['error']['RMSE'] = helper.rmse(y_true[-24:], prediction[-24:])
     results[date]['peak_detected'] = peak_detected
     results[date]['time'] = end - start
 
     this_date = this_date + datetime.timedelta(days=1)
     print(f'Used: {end - start}')
+
+with open('predicted_results_TVB_2017Q3.json', 'w') as f:
+    json.dump(results, f)
