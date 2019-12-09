@@ -28,6 +28,7 @@ def DR_Temp_data_cleaning(dataframe):
     test.loc[:, 'USC_Temp_Log'] = np.log(dataframe['USC_Temp'])
     test.loc[:, 'WJF_Temp_Log'] = np.log(dataframe['WJF_Temp'])
     test.loc[:, 'TRM_Temp_Log'] = np.log(dataframe['TRM_Temp'])
+    test.loc[:, 'Mean_Temp_Log'] = np.log(dataframe['TRM_Temp'])
 
     test.loc[:, 'Load_Log'] = np.log(dataframe['Load'])
     test['Load_Lag_48'] = test['Load_Log'].shift(48, axis=0)
@@ -38,6 +39,7 @@ def DR_Temp_data_cleaning(dataframe):
     test['USC_Temp_Log_Lag_48'] = test['USC_Temp_Log'].shift(48, axis=0)
     test['WJF_Temp_Log_Lag_48'] = test['WJF_Temp_Log'].shift(48, axis=0)
     test['TRM_Temp_Log_Lag_48'] = test['TRM_Temp_Log'].shift(48, axis=0)
+    test['Mean_Temp_Log_Lag_48'] = test['Mean_Temp_Log'].shift(48, axis=0)
 
     cal = USFederalHolidayCalendar()
     holidays = cal.holidays(start='2014-01-01', end=str(datetime.datetime.now()), return_name=True)
