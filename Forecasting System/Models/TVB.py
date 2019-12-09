@@ -38,9 +38,9 @@ data.rename(columns={'Mean_Temp': "Temperature"}, inplace=True)
 
 all_begin = pd.to_datetime('2014-01-03 01:00:00')
 
-this_date = pd.to_datetime('2017-04-01 07:00:00')
+this_date = pd.to_datetime('2017-02-01 07:00:00')
 
-end_of_running = pd.to_datetime('2017-12-31 07:00:00')
+end_of_running = pd.to_datetime('2017-03-31 07:00:00')
 
 results = dict()
 
