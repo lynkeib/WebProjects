@@ -19,7 +19,7 @@ class TVB(object):
     def model_selection_mape_rmse(self):
         pass
 
-    def model_building(self):
+    def model_building(self, training_data):
         pass
 
     def predict_next_40hours(self):
