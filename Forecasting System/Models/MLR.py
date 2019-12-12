@@ -1,103 +1,154 @@
 from Helper import helper
+from Temperature_Prediction.TempPred import TempPred
 
 import pandas as pd
-import numpy as np
-import holidays
-from pandas.tseries.holiday import USFederalHolidayCalendar
 import datetime
-import statsmodels.formula.api as sm
 import time
+import statsmodels.formula.api as sm
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import json
 
 
 class MLR(object):
 
     def __init__(self, dataframe):
-        df = dataframe.copy()
-        self.lm_data = helper.DR_data_cleaning(df)
-        self.name = 'Multiple Linear Regression'
+        pass
 
     def set_date(self, date):
-        self.date = date
+        pass
 
     def model_selection_mape_rmse(self):
-        date = self.date
-        self.training_days = 30
-
-        self.datetime = pd.to_datetime(date) + datetime.timedelta(hours=7)
-        self.test_start_date = self.datetime - datetime.timedelta(days=self.training_days + 1)
-        self.train_end_date = self.test_start_date - datetime.timedelta(hours=8)
-        self.test_end_date = self.datetime - datetime.timedelta(hours=8)
-
-        forecast = []
-        x_test = []
-        this_date = self.test_start_date
-        for counter in range(self.training_days):
-            self.train_end_date = this_date
-            Y_start, Y_end = this_date + datetime.timedelta(hours=1), this_date + datetime.timedelta(hours=40)
-
-            start = time.time()
-
-            x_train = self.lm_data['2014-01-03 01:00':str(self.train_end_date)]
-
-            ml = self.model_building(x_train)
-            test = self.lm_data[str(Y_start):str(Y_end)]
-            p = ml.predict(test)
-            p = pd.DataFrame(p)
-            forecast.append(np.array(np.exp(p[0])))
-            x_test.append(np.array(test['Load']))
-
-            end = time.time()
-            this_date = this_date + datetime.timedelta(hours=24)
-
-        self.result_mape = []
-        self.result_rmse = []
-
-        for index in range(len(forecast)):
-            self.result_mape.append(helper.mape(np.array(x_test[index]), np.array(forecast[index])))
-            self.result_rmse.append(helper.rmse(np.array(x_test[index]), np.array(forecast[index])))
-
-        self.mape = np.mean(self.result_mape)
-        self.rmse = np.mean(self.result_rmse)
-
-        return self.mape, self.rmse
+        pass
 
     def model_building(self, training_data):
-        ml = sm.ols(formula="Load_Log~Temp_Lag_48+Humi_Lag_48+I(Temp_Lag_48**2)+I(Humi_Lag_48**2)+\
-                                   Hour+Weekday+Month+Holiday+\
-                                       Month:Temp_Lag_48+Month:Humi_Lag_48+\
-                                       Hour:Temp_Lag_48+Hour:Humi_Lag_48+\
-                                       Holiday:Temp_Lag_48+Holiday:Humi_Lag_48", data=training_data).fit()
-        return ml
+        pass
 
     def predict_next_40hours(self):
-        today = self.datetime
-
-        self.train_end_date = self.datetime - datetime.timedelta(hours=1)
-
-        x_train = self.lm_data['2014-01-03 01:00':str(self.train_end_date)]
-
-        print('building the latest model')
-        ml = self.model_building(x_train)
-        print('building process complete')
-
-        Y_start, Y_end = today + datetime.timedelta(hours=1), today + datetime.timedelta(hours=40)
-        X = self.lm_data[str(Y_start):str(Y_end)]
-        p = ml.predict(X)
-        p = pd.DataFrame(p)
-        p = np.exp(p[0])
-        self.forecast = p.tolist()
-        return self.forecast
+        pass
 
 
-if __name__ == '__main__':
-    path = '../Data/Hourly_Temp_Humi_Load-6.csv'
-    df = pd.read_csv(path)
+if __name__ == "__main__":
 
-    model_MLR = MLR(df)
-    model_MLR.set_date('2018-07-15')
-    model_MLR.model_selection_mape_rmse()
-    model_MLR.predict_next_40hours()
+    data = pd.read_csv('../Data/Hourly_Temp_Humi_Load-7.csv')
 
-    print(f'mape: {model_MLR.mape}, rmse: {model_MLR.rmse}')
+    lm_data = helper.DR_Temp_data_cleaning(data)
 
-    print(model_MLR.forecast)
+    temp = dict()
+
+    TempPred = TempPred(data)
+    station = 'Mean'
+
+    for date in pd.date_range('2017-01-01', '2019-08-30', freq='D'):
+        start = time.time()
+        this_date = date + datetime.timedelta(hours=7)
+
+        TempPred.model_building(date, station)
+        TempPred.ensemble_models()
+        pred = TempPred.predict_next_40hours_temp(station)
+        # training_data = lm_data[:this_date]
+        #
+        # ml = sm.ols(formula=station + "_Temp_Log~Load_Lag_48+Humi_Lag_48+I(Load_Lag_48**2)+I(Humi_Lag_48**2)+\
+        #                                        Hour+Weekday+Month+Holiday+" + station + "_Temp_Log_Lag_48+I(" + station + "_Temp_Log_Lag_48**2)+\
+        #                                            Month:Load_Lag_48+Month:Humi_Lag_48+\
+        #                                            Hour:Load_Lag_48+Hour:Humi_Lag_48+\
+        #                                            Holiday:Load_Lag_48+Holiday:Humi_Lag_48", data=training_data).fit()
+        #
+        # Y_start = this_date + datetime.timedelta(hours=1)
+        # Y_end = this_date + datetime.timedelta(hours=40)
+        # next_ = lm_data[Y_start:Y_end]
+        # pred = ml.predict(next_)
+        # temp[this_date] = np.exp(pred)
+        temp[this_date] = pred
+        end = time.time()
+    #     print(end - start)
+    #     print(np.exp(pred))
+
+    data = lm_data.reset_index()
+    data = data[['Load', 'DateTime', 'Mean_Temp']][:]
+    data.rename(columns={'Mean_Temp': "Temperature"}, inplace=True)
+
+    all_begin = pd.to_datetime('2014-01-03 01:00:00')
+
+    this_date = pd.to_datetime('2017-01-01 07:00:00')
+
+    end_of_running = pd.to_datetime('2019-08-30 07:00:00')
+
+    results = dict()
+
+    while this_date <= end_of_running:
+        print(f'date is {this_date}')
+        start = time.time()
+
+        this_data = data.copy()
+        this_data.set_index('DateTime', inplace=True)
+
+        date = this_date - datetime.timedelta(hours=7)
+        date = str(date)
+
+        results[date] = dict()
+        results[date]['error'] = dict()
+
+        end_this_date = this_date + datetime.timedelta(hours=40)
+        start_this_date = this_date + datetime.timedelta(hours=1)
+
+        this_data = this_data[:end_this_date]
+        this_data.loc[start_this_date:end_this_date, 'Temperature'] = temp[this_date]
+        # print(this_data.loc[start_this_date:end_this_date, 'Temperature'].shape)
+        this_data.reset_index(inplace=True)
+
+        data_fofT = this_data.copy()
+        data_fofT.drop(['Load'], inplace=True, axis=1)
+        data_fofT['Month'] = data_fofT['DateTime'].dt.month
+        data_fofT['Hour'] = data_fofT['DateTime'].dt.hour
+
+        data_yt = this_data[['Load', 'Temperature', 'DateTime']][:]
+
+        data_rolling = data_fofT.copy()
+        data_rolling.head()
+
+        data_rolling['Temperature_Rolling_last_24hour'] = data_rolling['Temperature'].shift(1).rolling(window=24).mean()
+        data_rolling.drop('Temperature', inplace=True, axis=1)
+
+        base_data = helper.yt(0, data_yt)
+        X_build_model = base_data[:]
+
+        for h in range(73):
+            lag_h = helper.fofT('Temperature', h, data_fofT)
+            X_build_model = pd.concat([X_build_model, lag_h], axis=1)
+
+        for day in range(1, 8):
+            lag_day = helper.fofT('Temperature_Rolling_last_24hour', (day - 1) * 24, data_rolling)
+            X_build_model = pd.concat([X_build_model, lag_day], axis=1)
+
+        X_build_model['DateTime'] = pd.date_range(all_begin, end_this_date, freq='H')
+        X_build_model.set_index('DateTime', inplace=True)
+        X_build_model.dropna(inplace=True)
+        X_train, y_train = X_build_model[:this_date].drop(['Load'], axis=1), X_build_model[:this_date]['Load']
+        X_predict, y_true = X_build_model[start_this_date:end_this_date].drop(['Load'], axis=1), \
+                            X_build_model[start_this_date:end_this_date]['Load']
+        model_capture_rencency = LinearRegression()
+        model_capture_rencency.fit(X_train, y_train)
+
+        y_true = y_true.tolist()
+        prediction = model_capture_rencency.predict(X_predict).tolist()
+
+        peak_detected = 0
+        if y_true[:-24].index(max(y_true[:-24])) == prediction[:-24].index(max(prediction[:-24])):
+            peak_detected = 1
+        else:
+            peak_detected = 0
+
+        end = time.time()
+
+        results[date]['prediction'] = prediction
+        results[date]['error']['MAPE'] = helper.mape(y_true[-24:], prediction[-24:])
+        results[date]['error']['RMSE'] = helper.rmse(y_true[-24:], prediction[-24:])
+        results[date]['peak_detected'] = peak_detected
+        results[date]['time'] = end - start
+
+        this_date = this_date + datetime.timedelta(days=1)
+        print(f'Used: {end - start}')
+
+    with open('predicted_results_TVB_20170203.json', 'w') as f:
+        json.dump(results, f)
