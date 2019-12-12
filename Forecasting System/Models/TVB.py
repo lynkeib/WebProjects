@@ -1,5 +1,7 @@
-import pandas as pd
 from Helper import helper
+from Temperature_Prediction.TempPred import TempPred
+
+import pandas as pd
 import datetime
 import time
 import statsmodels.formula.api as sm
@@ -33,22 +35,31 @@ if __name__ == "__main__":
     lm_data = helper.DR_Temp_data_cleaning(data)
 
     temp = dict()
+
+    TempPred = TempPred(data)
+    station = 'Mean'
+
     for date in pd.date_range('2017-01-01', '2019-08-30', freq='D'):
         start = time.time()
         this_date = date + datetime.timedelta(hours=7)
-        training_data = lm_data[:this_date]
-        station = 'Mean'
-        ml = sm.ols(formula=station + "_Temp_Log~Load_Lag_48+Humi_Lag_48+I(Load_Lag_48**2)+I(Humi_Lag_48**2)+\
-                                               Hour+Weekday+Month+Holiday+" + station + "_Temp_Log_Lag_48+I(" + station + "_Temp_Log_Lag_48**2)+\
-                                                   Month:Load_Lag_48+Month:Humi_Lag_48+\
-                                                   Hour:Load_Lag_48+Hour:Humi_Lag_48+\
-                                                   Holiday:Load_Lag_48+Holiday:Humi_Lag_48", data=training_data).fit()
 
-        Y_start = this_date + datetime.timedelta(hours=1)
-        Y_end = this_date + datetime.timedelta(hours=40)
-        next_ = lm_data[Y_start:Y_end]
-        pred = ml.predict(next_)
-        temp[this_date] = np.exp(pred)
+        TempPred.model_building(date, station)
+        TempPred.ensemble_models()
+        pred = TempPred.predict_next_40hours_temp(station)
+        # training_data = lm_data[:this_date]
+        #
+        # ml = sm.ols(formula=station + "_Temp_Log~Load_Lag_48+Humi_Lag_48+I(Load_Lag_48**2)+I(Humi_Lag_48**2)+\
+        #                                        Hour+Weekday+Month+Holiday+" + station + "_Temp_Log_Lag_48+I(" + station + "_Temp_Log_Lag_48**2)+\
+        #                                            Month:Load_Lag_48+Month:Humi_Lag_48+\
+        #                                            Hour:Load_Lag_48+Hour:Humi_Lag_48+\
+        #                                            Holiday:Load_Lag_48+Holiday:Humi_Lag_48", data=training_data).fit()
+        #
+        # Y_start = this_date + datetime.timedelta(hours=1)
+        # Y_end = this_date + datetime.timedelta(hours=40)
+        # next_ = lm_data[Y_start:Y_end]
+        # pred = ml.predict(next_)
+        # temp[this_date] = np.exp(pred)
+        temp[this_date] = pred
         end = time.time()
     #     print(end - start)
     #     print(np.exp(pred))
