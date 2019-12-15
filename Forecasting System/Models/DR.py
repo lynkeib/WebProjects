@@ -90,7 +90,7 @@ class DR(object):
 
 
 if __name__ == '__main__':
-    path = '../Data/Hourly_Temp_Humi_Load-6.csv'
+    path = '../Data/Hourly_Temp_Humi_Load-7.csv'
     df = pd.read_csv(path)
 
     model_DR = DR(df)
