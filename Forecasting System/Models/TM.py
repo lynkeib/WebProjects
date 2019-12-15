@@ -115,7 +115,7 @@ class TM(object):
 
 if __name__ == '__main__':
     start = time.time()
-    path = '../Data/Hourly_Temp_Humi_Load-6.csv'
+    path = '../Data/Hourly_Temp_Humi_Load-7.csv'
     df = pd.read_csv(path)
 
     model_TM = TM(df)
