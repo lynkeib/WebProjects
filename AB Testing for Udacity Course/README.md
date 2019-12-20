@@ -37,11 +37,17 @@ Here is the overall view of user path:
 
 Base on the flow chart above, it is clear that we should use the following **invariant variables** and **evaluation metrics**. 
 
-### 1.3 Invariant Variables
+### 1.2.1 Invariant Variables
 
-+ **Number of cookies**: this metric should not be affected by the experiment we run, since the experiment will be running between Free trail stage and Enrollment stage, therefore we should keep the variables before the enrollment satge the same for controal and experiment group.
++ **Number of cookies**: this metric should not be affected by the experiment we run, since the experiment will be running between Free trail stage and Enrollment stage, therefore we should keep the variables before the enrollment satge as the same as possible for controal and experiment group.
 + **Number of clicks**: this metric also should not be affected by the experiment, the reason is the same.
 + **Click-through-probability**: this metric also should not be affected by the experiment, the reason is the same.
+
+### 1.2.2 Evaluation metrics
+
++ **Gross conversion**
++ **Retention**
++ **Net conversion**
 
 # References
 
