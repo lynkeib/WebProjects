@@ -33,6 +33,7 @@ You should also decide now what results you will be looking for in order to laun
 
 Here is the overall view of user path:
 
+<img src="img/User FLow.jpeg"></img>
 
 
 ### 1.3 Invariant Variables
