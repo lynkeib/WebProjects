@@ -120,7 +120,7 @@ For Net conversion: Pageview needed = 27413 / (3200 / 40000) * 2 = 685325
 In summary:
 
 |Metrics|Sample Size|Pageview Needed|
-|---|---|---|
+|---|---:|---:|
 |Gross conversion|25,835|645,875|
 |Retention|39,115|4,741,212|
 |Net conversion|27,413|685,325|
