@@ -65,7 +65,7 @@ By having the goals above, our Evaluation metrics should:
 Baseline values are as follows:
 
 |Description|Number|
-|---|---|
+|---|---:|
 |Unique cookies to view course overview page per day|    40000|
 |Unique cookies to click "Start free trial" per day| 3200|
 |Enrollments per day|    660|
