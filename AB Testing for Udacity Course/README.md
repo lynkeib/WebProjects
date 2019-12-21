@@ -47,7 +47,25 @@ Base on the flow chart above, it is clear that we should use the following **inv
 
 + **Gross conversion**: this metric can be affected since the students in the experiment group will be asked about how much time they can devote in this course, if the answer is less than 5 hours, they will be suggested learning from free material rather than starting this free trail, as a result, the enrollment page will not be shown and the nominator of this metric will be affected.
 + **Retention**: this metric can also be affected because of the same reason mentioned above, to be specific, both the numerator and denominator should have difference between control group and experiment gtoup. 
-+ **Net conversion**: this metric can also be affected because of the same reason mentioned above, to be specific, the numerator will be afftected in the experiment group. 
++ **Net conversion**: this metric can also be affected because of the same reason mentioned above, to be specific, the numerator will be afftected in the experiment group.  
+
+To summarize, the goals of this experiment are:
+
+1. Number of the payments should not decrease.
+2. Number of students who do not have enough time should decrease.
+
+By having the goals above, our Evaluation metrics should:
+
+1. Gross conversion: decrease
+2. Retention: increase
+3. Net conversion: remain the same or increase
+
+### 1.2.3 Standard Deviation of Evaluation metrics
+
+1. Gross conversion (binorm std)
+
+
+
 
 # References
 
