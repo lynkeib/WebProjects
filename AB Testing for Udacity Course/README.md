@@ -164,7 +164,7 @@ Standard Error of cookies = Sqrt(0.5 * (1 - 0.5) / (345,543 + 344,660)) = 0.0006
 
 Margin of Standard Error = Standard Error of cookies * 1.96 = 0.00117953. 
 
-Therefore, the Confidence Interval is [0.4988, 0.5011], since p hat (345,543 / (345,543 + 344,660) = 0.5005) is in this interval, we can say number of cookies passes the Sanity Check.  
+Therefore, the Confidence Interval is [0.4988, 0.5011], since p hat (345,543 / (345,543 + 344,660) = 0.5005) is in this interval, we can say Number of cookies passes the Sanity Check.  
 
 **Number of clicks**
 
@@ -174,10 +174,17 @@ Standard Error of clicks = Sqrt(0.5 * (1 - 0.5) / (28,378 + 28,325)) = 0.0021
 
 Margin of Standard Error = 0.0021 * 1.96 = 0.004116  
 
-Therefore, the Confidence Interval is [0.4959, 0.5041], since p hat (28,378 / (28,378 + 28,325) = 0.5005) is in this interval, we can say number of clicks passes the Sanity Check.  
+Therefore, the Confidence Interval is [0.4959, 0.5041], since p hat (28,378 / (28,378 + 28,325) = 0.5005) is in this interval, we can say Number of clicks passes the Sanity Check.  
 
+**Click-through-probability** 
 
+p_pool = (28,378 + 28,325) / (345,543 + 344,660) = 0.0822  
 
+Standard Error of Click-through-probability = Sqrt(0.0822 * (1 - 0.0822) * (1 / 345,543 + 1 / 344,660)) = 0.000661229  
+
+Margin of Standard Error = 0.0013  
+
+Therefore, the Confidence Interval is [-0.0013, 0.0013], since d hat (0.082182441 - 0.082125814 = 5.66271E-05) is in this interval, we can say Click-through-probability passes the Sanity Check.  
 
 ## 3.2 Check for Practical and Statistical Significance
 
