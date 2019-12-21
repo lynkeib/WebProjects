@@ -45,7 +45,7 @@ Base on the flow chart above, it is clear that we should use the following **inv
 
 ### 1.2.2 Evaluation metrics
 
-+ **Gross conversion**
++ **Gross conversion**: this metric can be afftected since the students in the experiment group will be asked about how much time they can devote in this course, if the answer is less than 5 hours, they will be suggested learning from free material rather than starting this free trail, as a result, the enrollment page will not be shown and the nominator of this metric will be affected.
 + **Retention**
 + **Net conversion**
 
