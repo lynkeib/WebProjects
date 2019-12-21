@@ -188,7 +188,46 @@ Therefore, the Confidence Interval is [-0.0013, 0.0013], since d hat (0.08218244
 
 ## 3.2 Check for Practical and Statistical Significance
 
+Next, for your evaluation metrics, calculate a confidence interval for the difference between the experiment and control groups, and check whether each metric is statistically and/or practically significance. A metric is statistically significant if the confidence interval does not include 0 (that is, you can be confident there was a change), and it is practically significant if the confidence interval does not include the practical significance boundary (that is, you can be confident there is a change that matters to the business.)  
+
+||Clicks|Enrollments|Payments|
+|---|---:|---:|---:|
+|Control Group|17,293|3,785|2,033|
+|Experiment Group|17,260|3,423|1,945|
+
+**Gross conversion**
+
+p_pool = Sqrt((3,785 + 3,423) / (17,293 + 17,260)) = 0.2086  
+
+Standard Error of Gross conversion = Sqrt(0.2086 * (1 - 0.2086) * (1 / 17,293 + 1 / 17,260)) = 0.0044  
+
+Margin of Standard Error = 0.0086  
+
+Difference = 3,423 / 17,260 - 3,785 / 17,293 = -0.0206  
+
+Therefore, the Confidence Interval is [-0.0292, -0.012], since 0 is not in this interval and -0.1 is not in this interval, we can say that the change of Gross conversion is Statistical significance and Practical significance
+
+**Net conversion**
+
+p_pool = Sqrt((2,033 + 1,945) / (17,293 + 17,260)) = 0.1151  
+
+Standard Error of Net conversion = Sqrt(0.1151 * (1 - 0.1151) * (1 / 17,293 + 1 / 17,260)) = 0.0034  
+
+Margin of Standard Error = 0.0067  
+
+Difference = 1,945 / 17,260 - 2,033 / 17,293 = -0.0049  
+
+Therefore, the Confidence Interval is [-0.0116, 0.0018], since 0 is in this interval and -0.1 is in this interval, we can say that the change of Gross conversion is not Statistical significance and not Practical significance. 
+
+
 ## 3.3 Run Sign Tests
+
+||Positive Change|Count|
+|---|---:|---:|
+|Gross conversion|4|23|
+|Net conversion|10|23|
+
+As shown in this [calculator](https://www.graphpad.com/quickcalcs/binomial1.cfm), the p value for Gross conversion is 0.0026, and the p value for Net conversion is 0.6776, meaning Gross conversion passes the sign test while Net conversion does not pass the sign test.
 
 ## 3.4 Make a Recommendation
 
@@ -197,5 +236,8 @@ Therefore, the Confidence Interval is [-0.0013, 0.0013], since d hat (0.08218244
 
 + [Project Instruction](https://docs.google.com/document/u/1/d/1aCquhIqsUApgsxQ8-SQBAigFDcfWVVohLEXcV6jWbdI/pub?embedded=True)
 + [Baseline Values](https://docs.google.com/spreadsheets/d/1MYNUtC47Pg8hdoCjOXaHqF-thheGpUshrFA21BAJnNc/edit#gid=0)
++ [A/B Testing Tools](https://www.evanmiller.org/ab-testing/sample-size.html)
++ [Experiment Data](https://docs.google.com/spreadsheets/d/1Mu5u9GrybDdska-ljPXyBjTpdZIUev_6i7t4LRDfXM8/edit#gid=0)
++ [Sign Test](https://www.graphpad.com/quickcalcs/binomial1.cfm)
 
 
