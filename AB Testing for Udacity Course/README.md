@@ -2,7 +2,7 @@
 
 At the time of this experiment, Udacity courses currently have two options on the course overview page: "start free trial", and "access course materials". If the student clicks "start free trial", they will be asked to enter their credit card information, and then they will be enrolled in a free trial for the paid version of the course. After 14 days, they will automatically be charged unless they cancel first. If the student clicks "access course materials", they will be able to view the videos and take the quizzes for free, but they will not receive coaching support or a verified certificate, and they will not submit their final project for feedback.  
 
-In the experiment, Udacity tested a change where if the student clicked "start free trial", they were asked how much time they had available to devote to the course. If the student indicated 5 or more hours per week, they would be taken through the checkout process as usual. If they indicated fewer than 5 hours per week, a message would appear indicating that Udacity courses usually require a greater time commitment for successful completion, and suggesting that the student might like to access the course materials for free. At this point, the student would have the option to continue enrolling in the free trial, or access the course materials for free instead. This [screenshot](https://drive.google.com/file/d/0ByAfiG8HpNUMakVrS0s4cGN2TjQ/view) shows what the experiment looks like. Some [baseline](https://docs.google.com/spreadsheets/d/1MYNUtC47Pg8hdoCjOXaHqF-thheGpUshrFA21BAJnNc/edit#gid=0) values was provided in this spreedsheet.
+In the experiment, Udacity tested a change where if the student clicked "start free trial", they were asked how much time they had available to devote to the course. If the student indicated 5 or more hours per week, they would be taken through the checkout process as usual. If they indicated fewer than 5 hours per week, a message would appear indicating that Udacity courses usually require a greater time commitment for successful completion, and suggesting that the student might like to access the course materials for free. At this point, the student would have the option to continue enrolling in the free trial, or access the course materials for free instead. This [screenshot](https://drive.google.com/file/d/0ByAfiG8HpNUMakVrS0s4cGN2TjQ/view) shows what the experiment looks like. Some [baseline](https://docs.google.com/spreadsheets/d/1MYNUtC47Pg8hdoCjOXaHqF-thheGpUshrFA21BAJnNc/edit#gid=0) values were provided in this spreadsheet.
 
 <img src="img/ScreenShot.jpeg"></img>
 
@@ -39,15 +39,15 @@ Base on the flow chart above, it is clear that we should use the following **inv
 
 ### 1.2.1 Invariant Variables
 
-+ **Number of cookies**: this metric should not be affected by the experiment we run, since the experiment will be running between Free trail stage and Enrollment stage, therefore we should keep the variables before the enrollment satge as the same as possible for controal and experiment group.
++ **Number of cookies**: this metric should not be affected by the experiment we run, since the experiment will be running between Free trial stage and Enrollment stage, therefore we should keep the variables before the enrollment stage as the same as possible for control and experiment group.
 + **Number of clicks**: this metric also should not be affected by the experiment, the reason is the same.
 + **Click-through-probability**: this metric also should not be affected by the experiment, the reason is the same.
 
 ### 1.2.2 Evaluation metrics
 
-+ **Gross conversion**: this metric can be affected since the students in the experiment group will be asked about how much time they can devote in this course, if the answer is less than 5 hours, they will be suggested learning from free material rather than starting this free trail, as a result, the enrollment page will not be shown and the nominator of this metric will be affected.
-+ **Retention**: this metric can also be affected because of the same reason mentioned above, to be specific, both the numerator and denominator should have difference between control group and experiment gtoup. 
-+ **Net conversion**: this metric can also be affected because of the same reason mentioned above, to be specific, the numerator will be afftected in the experiment group.  
++ **Gross conversion**: this metric can be affected since the students in the experiment group will be asked about how much time they can devote in this course, if the answer is less than 5 hours, they will be suggested learning from free material rather than starting this free trial, as a result, the enrollment page will not be shown and the nominator of this metric will be affected.
++ **Retention**: this metric can also be affected because of the same reason mentioned above, to be specific, both the numerator and denominator should have difference between the control group and experiment group. 
++ **Net conversion**: this metric can also be affected because of the same reason mentioned above, to be specific, the numerator will be affected in the experiment group.  
 
 To summarize, the goals of this experiment are:
 
@@ -74,7 +74,7 @@ Baseline values are as follows:
 |Probability of payment, given enroll|   0.53|
 |Probability of payment, given click| 0.1093125|
 
-For each metric you selected as an evaluation metric, make an analyitcs estimate of its standard deviation, given a sample size of 5000 cookies visiting the course overview page
+For each metric you selected as an evaluation metric, make an analytics estimate of its standard deviation, given a sample size of 5000 cookies visiting the course overview page
 
 1. Gross conversion (binorm std)
 
@@ -97,7 +97,7 @@ Std of Net conversion = Sqrt(0.1093125 * (1 - 0.1093125) / 400) = 0.0156
 
 Using the analytic estimates of variance, how many pageviews total (across both groups) would you need to collect to adequately power the experiment? Use an alpha of 0.05 and a beta of 0.2. Make sure you have enough power for each metric.  
 
-Here is an online calculator for sampel size: [A/B Testing Tools](https://www.evanmiller.org/ab-testing/sample-size.html) 
+Here is an online calculator for sample size: [A/B Testing Tools](https://www.evanmiller.org/ab-testing/sample-size.html) 
 
 1. Gross conversion
 
@@ -111,7 +111,7 @@ Here is an online calculator for sampel size: [A/B Testing Tools](https://www.ev
 
 <img src="img/Sample Size_Net conversion.jpeg"></img>
 
-Since the sample size here is not the number of pageview, so we need to calculate the needed pageviews for each metric
+Since the sample size here is not the number of pageviews, so we need to calculate the needed pageviews for each metric
 
 For Gross conversion: Pageview needed = 25835 / (3200 / 40000) * 2 = 645875  
 For Retention: Pageview needed = 39115 / (660 / 40000) * 2 = 4741212  
@@ -127,7 +127,7 @@ In summary:
 
 Therefore, the number of pageviews is 4,741,212. But in terms of practical view, if this experiment needs 4,741,212 pageviews, which means 4,741,212 / 40,000 = 119 days, it is too long for doing an experiment, therefore after this step, we will not use Retention as one of our Evaluation metrics.
 
-So the total pageviews wo are going to need is 685,325. 
+So the total pageviews we are going to need are 685,325. 
 
 ## 2.2 Choosing Duration vs. Exposure
 
@@ -145,7 +145,7 @@ The meaning of each column is:
 + Pageviews: Number of unique cookies to view the course overview page that day.
 + Clicks: Number of unique cookies to click the course overview page that day.
 + Enrollments: Number of user-ids to enroll in the free trial that day.
-+ Payments: Number of user-ids who who enrolled on that day to remain enrolled for 14 days and thus make a payment. (Note that the date for this column is the start date, that is, the date of enrollment, rather than the date of the payment. The payment happened 14 days later. Because of this, the enrollments and payments are tracked for 14 fewer days than the other columns.)
++ Payments: Number of user-ids who enrolled on that day to remain enrolled for 14 days and thus make a payment. (Note that the date for this column is the start date, that is, the date of enrollment, rather than the date of the payment. The payment happened 14 days later. Because of this, the enrollments and payments are tracked for 14 fewer days than the other columns.)
 
 ## 3.1 Sanity Checks
 
@@ -158,7 +158,7 @@ Start by checking whether your invariant metrics are equivalent between the two 
 
 **Number of cookies**
 
-Our assumption here is when we were doing the experiment, the probability for a specific cookie signed to control group or experiment group is the same, which is 50%, so here p = 0.5. 
+Our assumption here is when we were doing the experiment, the probability for a specific cookie signed to the control group or experiment group is the same, which is 50%, so here p = 0.5. 
 
 Standard Error of cookies = Sqrt(0.5 * (1 - 0.5) / (345,543 + 344,660)) = 0.0006018  
 
@@ -188,7 +188,7 @@ Therefore, the Confidence Interval is [-0.0013, 0.0013], since d hat (0.08218244
 
 ## 3.2 Check for Practical and Statistical Significance
 
-Next, for your evaluation metrics, calculate a confidence interval for the difference between the experiment and control groups, and check whether each metric is statistically and/or practically significance. A metric is statistically significant if the confidence interval does not include 0 (that is, you can be confident there was a change), and it is practically significant if the confidence interval does not include the practical significance boundary (that is, you can be confident there is a change that matters to the business.)  
+Next, for your evaluation metrics, calculate a confidence interval for the difference between the experiment and control groups, and check whether each metric is statistically and/or practical significance. A metric is statistically significant if the confidence interval does not include 0 (that is, you can be confident there was a change), and it is practically significant if the confidence interval does not include the practical significance boundary (that is, you can be confident there is a change that matters to the business.)  
 
 ||Clicks|Enrollments|Payments|
 |---|---:|---:|---:|
@@ -227,10 +227,11 @@ Therefore, the Confidence Interval is [-0.0116, 0.0018], since 0 is in this inte
 |Gross conversion|4|23|
 |Net conversion|10|23|
 
-As shown in this [calculator](https://www.graphpad.com/quickcalcs/binomial1.cfm), the p value for Gross conversion is 0.0026, and the p value for Net conversion is 0.6776, meaning Gross conversion passes the sign test while Net conversion does not pass the sign test.
+As shown in this [calculator](https://www.graphpad.com/quickcalcs/binomial1.cfm), the p-value for Gross conversion is 0.0026, and the p-value for Net conversion is 0.6776, meaning Gross conversion passes the sign test while Net conversion does not pass the sign test.
 
 ## 3.4 Make a Recommendation
 
+As the analysis, I do not recommend launch this feature since the negative effect is larger than the positive effect, although the gross conversion rate decreases significantly, the net conversion does not show a significant positive change, which may cause a huge financial loss in the future. 
 
 # References
 
