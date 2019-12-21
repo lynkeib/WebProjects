@@ -91,6 +91,16 @@ Std of Retension = Sqrt(0.53 * (1-0.53) / 82.5) = 0.0549
  
 Std of Net conversion = Sqrt(0.1093125 * (1 - 0.1093125) / 400) = 0.0156
 
+# 2. Size
+
+Using the analytic estimates of variance, how many pageviews total (across both groups) would you need to collect to adequately power the experiment? Use an alpha of 0.05 and a beta of 0.2. Make sure you have enough power for each metric.  
+
+Here is an online calculator for sampel size: [A/B Testing Tools](https://www.evanmiller.org/ab-testing/sample-size.html) 
+
+1. Gross conversion
+
+<img src="img/Sample Size_Gross conversion.jpeg"></img>
+
 
 # References
 
