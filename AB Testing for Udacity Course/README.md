@@ -62,9 +62,34 @@ By having the goals above, our Evaluation metrics should:
 
 ### 1.2.3 Standard Deviation of Evaluation metrics
 
+Baseline values are as follows:
+
+|Description|Number|
+|---|---|
+|Unique cookies to view course overview page per day|    40000|
+|Unique cookies to click "Start free trial" per day| 3200|
+|Enrollments per day|    660|
+|Click-through-probability on "Start free trial"|    0.08|
+|Probability of enrolling, given click|  0.20625|
+|Probability of payment, given enroll|   0.53|
+|Probability of payment, given click| 0.1093125|
+
+For each metric you selected as an evaluation metric, make an analyitcs estimate of its standard deviation, given a sample size of 5000 cookies visiting the course overview page
+
 1. Gross conversion (binorm std)
 
+Number of unique cookies clicking the "Start free trail" button = 5000 * 0.08 = 400
 
+Std of Gross conversion = Sqrt(0.20625 * (1 - 0.20625) / 400) = 0.0202
+
+2. Retention
+Number of unique cookies complete the check out = 400 * 0.20625 = 82.5  
+
+Std of Retension = Sqrt(0.53 * (1-0.53) / 82.5) = 0.0549
+
+3. Net conversion 
+ 
+Std of Net conversion = Sqrt(0.1093125 * (1 - 0.1093125) / 400) = 0.0156
 
 
 # References
