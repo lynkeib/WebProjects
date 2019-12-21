@@ -93,6 +93,8 @@ Std of Net conversion = Sqrt(0.1093125 * (1 - 0.1093125) / 400) = 0.0156
 
 # 2. Size
 
+## 2.1 Choosing Number of Samples given Power
+
 Using the analytic estimates of variance, how many pageviews total (across both groups) would you need to collect to adequately power the experiment? Use an alpha of 0.05 and a beta of 0.2. Make sure you have enough power for each metric.  
 
 Here is an online calculator for sampel size: [A/B Testing Tools](https://www.evanmiller.org/ab-testing/sample-size.html) 
@@ -108,6 +110,44 @@ Here is an online calculator for sampel size: [A/B Testing Tools](https://www.ev
 3. Net conversion
 
 <img src="img/Sample Size_Net conversion.jpeg"></img>
+
+Since the sample size here is not the number of pageview, so we need to calculate the needed pageviews for each metric
+
+For Gross conversion: Pageview needed = 25835 / (3200 / 40000) * 2 = 645875  
+For Retention: Pageview needed = 39115 / (660 / 40000) * 2 = 4741212  
+For Net conversion: Pageview needed = 27413 / (3200 / 40000) * 2 = 685325
+
+In summary:
+
+|Metrics|Sample Size|Pageview Needed|
+|---|---|---|
+|Gross conversion|25,835|645,875|
+|Retention|39,115|4,741,212|
+|Net conversion|27,413|685,325|
+
+Therefore, the number of pageviews is 4,741,212. But in terms of practical view, if this experiment needs 4,741,212 pageviews, which means 4,741,212 / 40,000 = 119 days, it is too long for doing an experiment, therefore after this step, we will not use Retention as one of our Evaluation metrics.
+
+So the total pageviews wo are going to need is 685,325. 
+
+## 2.2 Choosing Duration vs. Exposure
+
+What percentage of Udacity's traffic would you divert to this experiment (assuming there were no other experiments you wanted to run simultaneously)? Is the change risky enough that you wouldn't want to run on all traffic?  
+
+Given the percentage you chose, how long would the experiment take to run, using the analytic estimates of variance? If the answer is longer than a few weeks, then this is unreasonably long, and you should reconsider an earlier decision.  
+
+I would use 80% of the total traffic in this experiment and it will take 22 days to complete this experiment. 
+
+# 3. Analysis
+
+The data for you to analyze is [here](https://docs.google.com/spreadsheets/d/1Mu5u9GrybDdska-ljPXyBjTpdZIUev_6i7t4LRDfXM8/edit#gid=0). This data contains the raw information needed to compute the above metrics, broken down day by day. Note that there are two sheets within the spreadsheet - one for the experiment group, and one for the control group.  
+
+The meaning of each column is:
++ Pageviews: Number of unique cookies to view the course overview page that day.
++ Clicks: Number of unique cookies to click the course overview page that day.
++ Enrollments: Number of user-ids to enroll in the free trial that day.
++ Payments: Number of user-ids who who enrolled on that day to remain enrolled for 14 days and thus make a payment. (Note that the date for this column is the start date, that is, the date of enrollment, rather than the date of the payment. The payment happened 14 days later. Because of this, the enrollments and payments are tracked for 14 fewer days than the other columns.)
+
+## 3.1 Sanity Checks
 
 
 
