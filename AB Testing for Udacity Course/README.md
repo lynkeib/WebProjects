@@ -101,6 +101,15 @@ Here is an online calculator for sampel size: [A/B Testing Tools](https://www.ev
 
 <img src="img/Sample Size_Gross conversion.jpeg"></img>
 
+2. Retention
+
+<img src="img/Sample Size_Retention.jpeg"></img>
+
+3. Net conversion
+
+<img src="img/Sample Size_Net conversion.jpeg"></img>
+
+
 
 # References
 
