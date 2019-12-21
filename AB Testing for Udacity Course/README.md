@@ -157,6 +157,7 @@ Start by checking whether your invariant metrics are equivalent between the two 
 |Experiment Group|28,325|344,660|
 
 **Number of cookies**
+
 Our assumption here is when we were doing the experiment, the probability for a specific cookie signed to control group or experiment group is the same, which is 50%, so here p = 0.5. 
 
 Standard Error of cookies = Sqrt(0.5 * (1 - 0.5) / (345,543 + 344,660)) = 0.0006018  
@@ -166,6 +167,7 @@ Margin of Standard Error = Standard Error of cookies * 1.96 = 0.00117953.
 Therefore, the Confidence Interval is [0.4988, 0.5011], since p hat (345,543 / (345,543 + 344,660) = 0.5005) is in this interval, we can say number of cookies passes the Sanity Check.  
 
 **Number of clicks**
+
 Here we have the same assumption, p = 0.5  
 
 Standard Error of clicks = Sqrt(0.5 * (1 - 0.5) / (28,378 + 28,325)) = 0.0021  
