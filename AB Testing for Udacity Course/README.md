@@ -239,6 +239,6 @@ As the analysis, I do not recommend launch this feature since the negative effec
 + [Baseline Values](https://docs.google.com/spreadsheets/d/1MYNUtC47Pg8hdoCjOXaHqF-thheGpUshrFA21BAJnNc/edit#gid=0)
 + [A/B Testing Tools](https://www.evanmiller.org/ab-testing/sample-size.html)
 + [Experiment Data](https://docs.google.com/spreadsheets/d/1Mu5u9GrybDdska-ljPXyBjTpdZIUev_6i7t4LRDfXM8/edit#gid=0)
-+ [Sign Test](https://www.graphpad.com/quickcalcs/binomial1.cfm)
++ [Sign Test](https://www.graphpad.com/quickcalcs/binomial1.cfm) 
 
 
