@@ -1,0 +1,13 @@
+name: ShinyApp
+title: ShinyApp
+username:
+account: lynkenyp
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1619058
+bundleId: 2691490
+url: https://lynkenyp.shinyapps.io/ShinyApp/
+when: 1577335315.07091
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: TimeSeriesVisulization.R
