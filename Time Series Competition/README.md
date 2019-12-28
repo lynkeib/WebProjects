@@ -6,7 +6,7 @@ This is a forecasting competition held between University of North Carolina (UNC
 
 We were only given DateTime, Temperature and Loads Data, the whole data is in this folder and the sample screenshot is as following: 
 
-<img src="img/Data Sample"></img>
+<img src="img/Data Sample.jpeg"></img>
 
 # Results
 
