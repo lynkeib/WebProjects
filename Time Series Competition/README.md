@@ -1,0 +1,3 @@
+# Inroduction
+
+This is a competition between UNC and USC Your task is to build various models and figure out which model  offers the best predictive power. You can use any AI, CI, ML, statistical and heuristic methods to select the variables among the ones listed in the paper mentioned above.  Grading will be mainly based on average MAPE of training and holdout period:0.5*(MAPE of training period 2008-2011) + 0.5*(MAPE of holdout period 2012).If two submissions have MAPE values within 0.05%, the ranking will be based on the size of model defined by number of nonzero parameters. Smaller models will be ranked higher.
