@@ -12,3 +12,5 @@ We were only given DateTime, Temperature and Loads Data, the whole data is in th
 
 We were using nick name for our submission and NULL is me.
 
+<img src="img/Ranking.jpeg"></img>
+
