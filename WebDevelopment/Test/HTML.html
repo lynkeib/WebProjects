@@ -6,23 +6,73 @@
 <body>
 	<h1>Register</h1>
 	<form>
-		<label for="First Name">First Name: </label>
-		<input type="text" name="First Name" placeholder="John">
-		<label for="Last Name">Last Name: </label>
-		<input type="text" name="Last Name" placeholder="Smith">
-		<br>
-		<label for="Male">Male </label>
-		<input type="radio" name="Gender" value="Male" id="Male">
-		<label for="Male">Female </label>
-		<input type="radio" name="Gender" value="Female" id="Female">
-		<label for="Male">Other </label>
-		<input type="radio" name="Gender" value="Other" id="Other">
-		<br>
-		<label for="email">Email: </label>
-		<input type="email" name="email" placeholder="your email">
-		<label for="password">Password: </label>
-		<input type="password" name="password" placeholder="your password">
-		<br>
+		<div>
+			<label for="First Name">First Name: </label>
+			<input type="text" name="First Name" placeholder="John" required="">
+			<label for="Last Name">Last Name: </label>
+			<input type="text" name="Last Name" placeholder="Smith" required="">
+		</div>
+		<div>
+			<label for="Male">Male </label>
+			<input type="radio" name="Gender" value="Male" id="Male">
+			<label for="Male">Female </label>
+			<input type="radio" name="Gender" value="Female" id="Female">
+			<label for="Male">Other </label>
+			<input type="radio" name="Gender" value="Other" id="Other">
+		</div>
+		<div>
+			<label for="email">Email: </label>
+			<input type="email" name="email" placeholder="your email" required="">
+			<label for="password">Password: </label>
+			<input type="password" name="password" placeholder="your password" minlength="8" required="">
+		</div>
+		<div>
+			Birthday
+			<select>
+			    <option selected disabled="">Month</option>
+			    <option value='1'>Janaury</option>
+			    <option value='2'>February</option>
+			    <option value='3'>March</option>
+			    <option value='4'>April</option>
+			    <option value='5'>May</option>
+			    <option value='6'>June</option>
+			    <option value='7'>July</option>
+			    <option value='8'>August</option>
+			    <option value='9'>September</option>
+			    <option value='10'>October</option>
+			    <option value='11'>November</option>
+			    <option value='12'>December</option>
+			</select>
+			<select>
+			    <option selected disabled="">Day</option>
+			    <option value='1'>1</option>
+			    <option value='2'>2</option>
+			    <option value='3'>3</option>
+			    <option value='4'>4</option>
+			    <option value='5'>5</option>
+			    <option value='6'>6</option>
+			    <option value='7'>7</option>
+			    <option value='8'>8</option>
+			    <option value='9'>9</option>
+			    <option value='10'>10</option>
+			    <option value='11'>11</option>
+			    <option value='12'>12</option>
+			</select>
+			<select>
+			    <option selected disabled="">Year</option>
+			    <option value='1995'>1995</option>
+			    <option value='1996'>1996</option>
+			    <option value='1997'>1997</option>
+			    <option value='1998'>1998</option>
+			    <option value='1999'>1999</option>
+	
+			</select>
+		</div>
+		<div>
+			<label for="term">I agree to the terms and conditions: </label>
+			<input type="checkbox" name="term" required="">
+		</div>
+		<button>Submit</button>
 	</form>
 </body>
 </html>
