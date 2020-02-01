@@ -22,3 +22,18 @@ body {
 #mainnav .nav-link:hover {
     color:#ea1c2c;
 }
+
+div span {
+    color:red;
+}
+
+div h2 {
+    font-weight:200;
+    font-size:4rem;
+}
+
+@media (max-width: 1200px){
+    div h2 {
+        font-size: 3rem
+    }
+}
