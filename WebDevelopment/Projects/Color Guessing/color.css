@@ -23,3 +23,8 @@ h1 {
 #colordisplay {
     text-transform: uppercase;
 }
+
+#message {
+    color:white;
+    text-align: center;
+}
