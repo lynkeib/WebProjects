@@ -22,7 +22,7 @@ function winner(){
 };
 
 playerone_button.addEventListener("click", function(){
-    if(playerone_score + playertwo_score == playingto.textContent){
+    if(playerone_score + playertwo_score >= playingto.textContent){
         return;
     }
     playerone_score++;
@@ -32,7 +32,7 @@ playerone_button.addEventListener("click", function(){
 });
 
 playertwo_button.addEventListener("click", function(){
-    if(playerone_score + playertwo_score == playingto.textContent){
+    if(playerone_score + playertwo_score >= playingto.textContent){
         return;
     }
     playertwo_score++;
