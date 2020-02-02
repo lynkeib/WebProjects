@@ -7,11 +7,11 @@ var playingto = document.querySelectorAll("#playingto")[0];
 var reset = document.querySelectorAll("#reset")[0];
 
 input.addEventListener("input", function(){
-    playingto.textContent = Number(input.value);
+    playingto.textContent = Number(this.value);
 });
 
 function winner(){
-    if(playerone_score + playertwo_score == playingto.textContent){
+    if(playerone_score + playertwo_score >= playingto.textContent){
         if(playerone_score > playertwo_score){
             document.querySelectorAll("#playerone")[0].classList.add("winer");
         }
