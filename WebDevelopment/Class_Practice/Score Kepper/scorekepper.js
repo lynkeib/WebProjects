@@ -10,13 +10,7 @@ input.addEventListener("input", function(){
     playingto.textContent = Number(input.value);
 });
 
-playerone_button.addEventListener("click", function(){
-    if(playerone_score + playertwo_score == playingto.textContent){
-        return;
-    }
-    playerone_score++;
-    document.querySelectorAll("#playerone")[0].textContent = playerone_score;
-    console.log(playerone_score + playertwo_score, playingto);
+function winner(){
     if(playerone_score + playertwo_score == playingto.textContent){
         if(playerone_score > playertwo_score){
             document.querySelectorAll("#playerone")[0].classList.add("winer");
@@ -25,6 +19,16 @@ playerone_button.addEventListener("click", function(){
             document.querySelectorAll("#playertwo")[0].classList.add("winer")
         };
     };
+};
+
+playerone_button.addEventListener("click", function(){
+    if(playerone_score + playertwo_score == playingto.textContent){
+        return;
+    }
+    playerone_score++;
+    document.querySelectorAll("#playerone")[0].textContent = playerone_score;
+    // console.log(playerone_score + playertwo_score, playingto);
+    winner();
 });
 
 playertwo_button.addEventListener("click", function(){
@@ -33,15 +37,8 @@ playertwo_button.addEventListener("click", function(){
     }
     playertwo_score++;
     document.querySelectorAll("#playertwo")[0].textContent = playertwo_score;
-    console.log(playerone_score + playertwo_score, playingto);
-    if(playerone_score + playertwo_score == playingto.textContent){
-        if(playerone_score > playertwo_score){
-            document.querySelectorAll("#playerone")[0].classList.add("winer");
-        }
-        else if(playerone_score < playertwo_score) {
-            document.querySelectorAll("#playertwo")[0].classList.add("winer")
-        };
-    };
+    // console.log(playerone_score + playertwo_score, playingto);
+    winner();
 });
 
 reset.addEventListener("click", function(){
