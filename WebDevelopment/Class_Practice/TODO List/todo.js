@@ -15,6 +15,6 @@ while(command !== "quit"){
         console.log(todo);
     }
     else {
-        continue;
+        break;
     }
 };
