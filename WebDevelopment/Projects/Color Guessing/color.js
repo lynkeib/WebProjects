@@ -47,6 +47,7 @@ function success(){
 
 var resetButton = document.querySelector("#resetButton");
 resetButton.addEventListener("click", function(){
+    message.textContent = "";
     colors = colorGen(colorNum);
     pickedColor = colors[Math.floor(Math.random() * colors.length)];
     colordisplay.textContent = pickedColor;
@@ -71,36 +72,29 @@ resetButton.addEventListener("click", function(){
     document.querySelector("h1").style.backgroundColor = null;
 })
 
-var easy = document.querySelector("#easy");
-var hard = document.querySelector("#hard");
+var mode = document.querySelectorAll(".mode");
 
-easy.addEventListener("click", function(){
-    document.querySelector('h1').style.backgroundColor = "steelblue";
-    this.classList.add("selected");
-    hard.classList.remove("selected");
-    colorNum = 3;
+for(var i=0; i < mode.length; i++){
+    mode[i].addEventListener("click", function(){
+        mode[0].classList.remove("selected");
+        mode[1].classList.remove("selected");
+        this.classList.add("selected");
+        this.textContent=="Easy" ? colorNum = 3: colorNum = 6;
+        reset();
+    })
+}
+
+function reset(){
+    resetButton.textContent = "New Color";
     colors = colorGen(colorNum);
     pickedColor = colors[Math.floor(Math.random() * colors.length)];
     colordisplay.textContent = pickedColor;
     for(var i=0; i < squares.length; i++){
         if(colors[i]){
+            squares[i].style.display = 'block';
             squares[i].style.backgroundColor = colors[i];
         }else{
             squares[i].style.display = 'none';
         }
-    }
-})
-
-hard.addEventListener("click", function(){
-    document.querySelector('h1').style.backgroundColor = "steelblue";
-    this.classList.add("selected");
-    easy.classList.remove("selected");
-    colorNum = 6;
-    colors = colorGen(colorNum);
-    pickedColor = colors[Math.floor(Math.random() * colors.length)];
-    colordisplay.textContent = pickedColor;
-    for(var i=0; i < squares.length; i++){
-        squares[i].style.backgroundColor = colors[i];
-        squares[i].style.display = 'block';
-    }
-})
+    };
+}
