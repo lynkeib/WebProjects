@@ -7,3 +7,4 @@ Useful websites:
 + [CodePen](https://codepen.io): Styles gallery
 + [Unsplash](https://unsplash.com): High-resolution photos collection
 + [Font Awesome](https://fontawesome.com): Icon gallery
++ [jQuery](https://jquery.com): A JavaScript library
