@@ -10,5 +10,11 @@
 // Events
 // .click(), add click listern
 // ,Keypress(), will be tragged if the user press a key, or press a certain key (input for the function should be "event")
-// .on(), can replace all the events methods, .on("click", function(){})
+// .on(), can replace all the events methods, .on("click", function(){})， 
+    // However, this is a important difference between on("click") and "click", on will add this lister to all the elements in the future, while "click" only add this listener for the current elements
 // this in jQuery is $(this)
+
+
+// Efftecs
+// .fadeout(), .fadein(), .fadeToggle()
+// .slideDown(), .slideUp(), slideToggle()
