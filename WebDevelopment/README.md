@@ -8,3 +8,4 @@ Useful websites:
 + [Unsplash](https://unsplash.com): High-resolution photos collection
 + [Font Awesome](https://fontawesome.com): Icon gallery
 + [jQuery](https://jquery.com): A JavaScript library, API Doc contains all the methods
++ [UIgradients](https://uigradients.com/#Twitch): A website provides beautiful gradient colors;
