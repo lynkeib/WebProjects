@@ -1,18 +1,33 @@
 ﻿<Properties StartupConfiguration="{A19EF172-521C-4B1C-87A4-171E8E6810E1}|Default">
   <MonoDevelop.Ide.ItemProperties.HelloWorld FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="HelloWorld/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="HelloWorld/Console.cs">
     <Files>
-      <File FileName="HelloWorld/Program.cs" Line="1" Column="1" />
+      <File FileName="HelloWorld/Program.cs" Line="8" Column="40" />
+      <File FileName="HelloWorld/Console.cs" Line="11" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="HelloWorld" expanded="True">
             <Node name="HelloWorld" expanded="True">
-              <Node name="Program.cs" selected="True" />
+              <Node name="Console.cs" selected="True" />
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="HelloWorld" expanded="True" selected="True">
+            <Node name="HelloWorld" expanded="True">
+              <Node name="HelloWorld" expanded="True">
+                <Node name="HelloWorld.Program" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
