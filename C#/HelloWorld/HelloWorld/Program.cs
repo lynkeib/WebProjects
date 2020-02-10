@@ -7,14 +7,15 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            ArrayList al = new ArrayList();
-            al.Add(1);
-            al.Add("ss");
-            foreach (var i in al)
-            {
-                Console.WriteLine(i);
-            }
-            
+            var student = new Student();
+            student.Name = Util.Console.Ask("Name?");
+            System.Console.Write(student.Name);
         }
+    }
+
+    class Student
+    {
+        public string Name { set; get; }
+        public int Phone { set; get; }
     }
 }
