@@ -46,14 +46,4 @@ namespace HelloWorld
         
     }
 
-    class Teacher : Member
-    {
-        public Teacher(string name, int grade, string birthday)
-        {
-            System.Console.WriteLine("Creating Teacher");
-            Name = name;
-            Grade = grade;
-            Birthday = birthday;
-        }
-    }
 }
