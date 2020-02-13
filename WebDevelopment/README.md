@@ -4,6 +4,7 @@ Useful websites:
   + [MDN](https://mdn.dev): Reference source
   + [Events References](https://developer.mozilla.org/en-US/docs/Web/Events): Event Reference
   + [Bootstrap 3 & 4](https://getbootstrap.com/docs/3.3/): The most popular CSS Framework
+  + [Semantic UI](https://semantic-ui.com): Another popular CSS Framework
   + [Google Fonts](https://fonts.google.com): Fonts gallery
   + [CodePen](https://codepen.io): Styles gallery
   + [Unsplash](https://unsplash.com): High-resolution photos collection
