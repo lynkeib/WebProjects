@@ -1,43 +1,72 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
+var express = require("express"),
+	app = express(),
+	bodyParser = require("body-parser"),
+	mongoose = require("mongoose");
 
+
+mongoose.connect("mongodb://localhost：27017/yelp_camp", {useNewUrlParser:true, useUnifiedTopology: true});
 app.use(bodyParser.urlencoded({extended:true}));
+
+// SCHEMA SETUP
+var campgroundSchema = new mongoose.Schema({
+	name:String,
+	image:String,
+	description:String
+})
+
+var Campground = mongoose.model("Campground", campgroundSchema)
 
 // adding landing page
 app.get("/", function(req, res){
 	res.render("landing.ejs")
 })
 
-var campgrounds = [
-		{"name":"this", "image":"https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-		{"name":"jenny", "image":"https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-		{"name":"lalala", "image":"https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-	{"name":"this", "image":"https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-		{"name":"jenny", "image":"https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-		{"name":"lalala", "image":"https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-	{"name":"this", "image":"https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-		{"name":"jenny", "image":"https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"},
-		{"name":"lalala", "image":"https://images.unsplash.com/photo-1471115853179-bb1d604434e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"}
-	]
-
-// campgrounds
+// INDEX - show all campgrounds
 app.get("/campgrounds", function(req, res){
-	res.render("campgrounds.ejs", params={"campgrounds":campgrounds})
+	// Get all campground from mongodb
+	Campground.find({}, function(err, allCampgrounds){
+		if(err){
+			console.log(err)
+		}else{
+			res.render("index.ejs", params={"campgrounds":allCampgrounds})
+		}
+	})
 })
 
-// campgrounds post
+// CREATE - add new campground to db
 app.post("/campgrounds", function(req, res){
 	// get data from form, and add to campground array
 	var name = req.body.name
 	var image = req.body.image
-	campgrounds.push({"name":name, "image":image})
-	// redirect back to campground page
-	res.redirect("/campgrounds")
+	var desc = req.body.desc
+	// Create a new campground into the db
+	Campground.create({"name":name, "image":image, "description":desc}, function(err, newCampground){
+		if(err){
+			cnosole.log(err)
+		}else{
+			// redirect back to campground page
+			res.redirect("/campgrounds")
+		}
+	})
+	
+	
 })
 
+// NEW - show form to create new campground
 app.get("/campgrounds/new", function(req, res){
 	res.render("new.ejs")
+})
+
+// SHOW - 
+app.get("/campgrounds/:id", function(req, res){
+	// res.send("This will be a SHOW page")
+	Campground.findById(req.params.id, function(err, foundCampground){
+		if(err){
+			console.log(err)
+		}else{
+			res.render("show.ejs", {"campground":foundCampground})
+		}
+	})
 })
 
 
