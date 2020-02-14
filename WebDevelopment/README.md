@@ -22,6 +22,7 @@ Useful websites:
     + body-parser
     + mongoose
     + method-override (to achieve PUT method for forms in html)
+    + express-sanitizer
 
 + Terms
   + MEAN Stack: MongoDB, Express, Angular, Node.js
