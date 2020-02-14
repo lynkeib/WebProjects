@@ -37,4 +37,4 @@ Useful websites:
       | SHOW   | /index/:id      | GET       | item.findById()          |
       | EDIT   | /index/:id/edit | GET       | item.findById()          |
       | UPDATE | /index/:id      | PUT       | item.findByIdAndUpdate() |
-      | DELETE | /index/:id      | DELETE    | item.findByIdAndRrmove() |
+      | DELETE | /index/:id      | DELETE    | item.findByIdAndRemove() |
