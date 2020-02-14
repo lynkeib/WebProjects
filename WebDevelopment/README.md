@@ -29,12 +29,12 @@ Useful websites:
   + CRUD: CREATE, READ, UPDATE, DESTROY
   + REST: REpresentational State Transfer, a mapping between HTTP routes and CRUD
   
-      | Name   | PATH            | HTTP Verb |
-      |--------|-----------------|-----------|
-      | INDEX  | /index          | GET       |
-      | NEW    | /index/new      | GET       |
-      | CREATE | /index          | POST      |
-      | SHOW   | /index/:id      | GET       |
-      | EDIT   | /index/:id/edit | GET       |
-      | UPDATE | /index/:id      | PUT       |
-      | DELETE | /index/:id      | DELETE    |
+      | Name   | PATH            | HTTP Verb | Mongoose Method          |
+      |--------|-----------------|-----------|--------------------------|
+      | INDEX  | /index          | GET       | item.find()              |
+      | NEW    | /index/new      | GET       | N/A                      |
+      | CREATE | /index          | POST      | item.create()            |
+      | SHOW   | /index/:id      | GET       | item.findById()          |
+      | EDIT   | /index/:id/edit | GET       | item.findById()          |
+      | UPDATE | /index/:id      | PUT       | item.findByIdAndUpdate() |
+      | DELETE | /index/:id      | DELETE    | item.findByIdAndRemove() |
