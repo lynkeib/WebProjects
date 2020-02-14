@@ -27,6 +27,7 @@ Useful websites:
   + MEAN Stack: MongoDB, Express, Angular, Node.js
   + CRUD: CREATE, READ, UPDATE, DESTROY
   + REST: REpresentational State Transfer, a mapping between HTTP routes and CRUD
+  
 | Name   | PATH            | HTTP Verb |
 |--------|-----------------|-----------|
 | INDEX  | /index          | GET       |
