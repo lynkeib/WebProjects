@@ -28,12 +28,12 @@ Useful websites:
   + CRUD: CREATE, READ, UPDATE, DESTROY
   + REST: REpresentational State Transfer, a mapping between HTTP routes and CRUD
   
-| Name   | PATH            | HTTP Verb |
-|--------|-----------------|-----------|
-| INDEX  | /index          | GET       |
-| NEW    | /index/new      | GET       |
-| CREATE | /index          | POST      |
-| SHOW   | /index/:id      | GET       |
-| EDIT   | /index/:id/edit | GET       |
-| UPDATE | /index/:id      | PUT       |
-| DELETE | /index/:id      | DELETE    |
+      | Name   | PATH            | HTTP Verb |
+      |--------|-----------------|-----------|
+      | INDEX  | /index          | GET       |
+      | NEW    | /index/new      | GET       |
+      | CREATE | /index          | POST      |
+      | SHOW   | /index/:id      | GET       |
+      | EDIT   | /index/:id/edit | GET       |
+      | UPDATE | /index/:id      | PUT       |
+      | DELETE | /index/:id      | DELETE    |
