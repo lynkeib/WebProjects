@@ -15,6 +15,10 @@
 					<%- blog["body"] %>
 				</p>
 			</div>
+			<a class="ui green basic button" href="/blogs/<%= blog["_id"] %>/edit">EDIT</a>
+			<form action="/blogs/<%= blog["_id"] %>?_method=DELETE" method="POST" id="delete">
+				<button class="ui red basic button">DELETE</button>
+			</form>
 		</div>
 	</div>
 </div>
