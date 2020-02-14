@@ -21,6 +21,7 @@ Useful websites:
     + ejs
     + body-parser
     + mongoose
+    + method-override
 
 + Terms
   + MEAN Stack: MongoDB, Express, Angular, Node.js
