@@ -15,8 +15,12 @@ Useful websites:
 + Backend:
   + [StackShare](https://stackshare.io): A website sharing different stacks using in different companies
   + [Goorm](https://ide.goorm.io): A Cloud IDE
-  + Packages
-    + npm
+  + Node.js Packages
+    + npm (package management)
+    + express
+    + ejs
+    + body-parser
+    + mongoose
 
 + Terms
   + MEAN Stack: MongoDB, Express, Angular, Node.js
