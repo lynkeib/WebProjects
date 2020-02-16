@@ -1,4 +1,4 @@
-Useful websites:
+Useful websites and key words:
 
 + Frontend:
   + [MDN](https://mdn.dev): Reference source
