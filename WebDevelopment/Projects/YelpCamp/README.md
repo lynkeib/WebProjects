@@ -2,12 +2,10 @@
 
 <p>Project Stack Intro:<P>
 
-<ul>
-  <p>Forntend</p>
-  <li>HTML5</li>
-  <li>HTML5</li>
-  <li>HTML5</li>
-</ul>
++Forntend
+  + HTML5
+  + CSS3
+  + Javascript
 
 + Backend
   + Language: Node.js/Express
