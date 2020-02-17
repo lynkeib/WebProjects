@@ -1,4 +1,4 @@
-<h4>Please have a visit of this [website](https://blooming-sands-22963.herokuapp.com/) and play around with it, have fun!</h4>
+<h4>Please have a visit of this <a href="https://blooming-sands-22963.herokuapp.com/">website</a> and play around with it, have fun!</h4>
 
 <p>Project Stack Intro:<P>
 
