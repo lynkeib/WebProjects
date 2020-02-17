@@ -2,7 +2,7 @@
 
 <p>Project Stack Intro:<P>
 
-+Forntend
++ Forntend
   + HTML5
   + CSS3
   + Javascript
