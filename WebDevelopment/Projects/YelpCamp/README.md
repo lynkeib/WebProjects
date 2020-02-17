@@ -1,4 +1,6 @@
-Stack Intro:
+Please have a visit of this [website](https://blooming-sands-22963.herokuapp.com/) and play around with it, have fun!
+
+Project Stack Intro:
 
 + Forntend
   + HTML5
@@ -11,5 +13,3 @@ Stack Intro:
 
 + Hosting Server
   + Heroku
-
-[hosting website](https://blooming-sands-22963.herokuapp.com/)
