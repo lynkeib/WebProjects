@@ -19,7 +19,13 @@ var commentRoutes = require("./routes/comments.js"),
 	indexRoutes = require("./routes/index.js")
 
 // seedDB()
-mongoose.connect("mongodb://localhost：27017/yelp_camp", {useNewUrlParser:true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://yelpcamp:"+ process.env.DBPassword +"@cluster0-gke6f.mongodb.net/test?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true, useCreateIndex: true}, function(err){
+	if(err){
+		console.log("Cannot connect")
+	}else{
+		console.log("Connected")
+	}
+})
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static(__dirname + "/public"))
 app.use(methodOVerride("_method"))
@@ -53,6 +59,6 @@ app.use("/campgrounds", campgroundRoutes)
 app.use("/campgrounds/:id/comments", commentRoutes)
 
 // PORT CONFIG
-app.listen(PORT=3000, function(){
+app.listen(PORT=process.env.PORT, function(){
 	console.log("YalpCamp Server started")
 })
