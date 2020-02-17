@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 var express = require("express"),
 	app = express(),
 	bodyParser = require("body-parser"),
@@ -8,7 +10,8 @@ var express = require("express"),
 	passport = require("passport"),
 	LocalStrategy = require("passport-local"),
 	User = require("./models/user.js"),
-	methodOVerride = require("method-override");
+	methodOVerride = require("method-override"),
+	flash = require("connect-flash");
 
 // link to outter files for routes management
 var commentRoutes = require("./routes/comments.js"),
@@ -20,6 +23,9 @@ mongoose.connect("mongodb://localhost：27017/yelp_camp", {useNewUrlParser:true,
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static(__dirname + "/public"))
 app.use(methodOVerride("_method"))
+app.use(flash())
+app.locals.moment = require("moment")
+
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -36,6 +42,8 @@ passport.deserializeUser(User.deserializeUser())
 // add user arguments for each url
 app.use(function(req, res, next){
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
 	next()
 })
 
