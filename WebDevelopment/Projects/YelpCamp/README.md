@@ -6,7 +6,7 @@ Stack Intro:
   + Javascript
 
 + Backend
-  + Language: Node.js
+  + Language: Node.js/Express
   + Server: 
   + Database: Mongo Atlas
 
