@@ -7,7 +7,7 @@ Stack Intro:
 
 + Backend
   + Language: Node.js/Express
-  + Database: Mongo Atlas
+  + Database: MongoDB Atlas
 
 + Hosting Server
   + Heroku
