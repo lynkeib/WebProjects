@@ -1,8 +1,14 @@
 Stack Intro:
 
 + Forntend
+  + HTML5
+  + CSS3
+  + Javascript
 
 + Backend
+  + Language: Node.js
+  + Server: 
+  + Database: Mongo Atlas
 
 + Hosting Server
   + Heroku
