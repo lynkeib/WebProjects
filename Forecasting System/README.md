@@ -1,3 +1,4 @@
+System diagram:
 <img src="Diagram/Forecasting System Diagram.jpeg"/>
 
 References:  
