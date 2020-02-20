@@ -23,6 +23,7 @@ Useful websites and key words:
     + mongoose
     + method-override (to achieve PUT method for forms in html)
     + express-sanitizer
+    + passport
 
 + Terms
   + MEAN Stack: MongoDB, Express, Angular, Node.js
