@@ -8,9 +8,9 @@ Introduction
         - Model (Data Structure)
         - View (UI)
         - Controller (User Interaction)
-        <p text-align="center">
-    <img src="https://raw.githubusercontent.com/Draveness/analyze/master/contents/architecture/images/mvx/Standard-MVC.jpg" width="50%"/>
-      </p>
+        <p align="center">
+          <img scr="https://raw.githubusercontent.com/Draveness/analyze/master/contents/architecture/images/mvx/Standard-MVC.jpg"/>
+        </p>
     * ASP (Active Server Pages) Url system
     * Razor
 + Entity Framework
