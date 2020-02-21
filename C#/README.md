@@ -9,7 +9,7 @@ Introduction
         - View (UI)
         - Controller (User Interaction)
         <p align="center">
-          <img src="https://raw.githubusercontent.com/Draveness/analyze/master/contents/architecture/images/mvx/Standard-MVC.jpg" height="40%"/>
+          <img src="https://raw.githubusercontent.com/Draveness/analyze/master/contents/architecture/images/mvx/Standard-MVC.jpg" width="40%"/>
         </p>
     * ASP (Active Server Pages) Url system
     * Razor
