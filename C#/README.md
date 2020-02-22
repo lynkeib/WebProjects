@@ -15,7 +15,7 @@
         + Can separate the operation (Model), data presentation (View) and logic control (Controller) from each other
         + Low coupling
         + High reusability
-        + High maintainability
+        + High maintainability  
         __Drawbacks__:
         + Hard to totally understand how it works
         + Structure is complex
