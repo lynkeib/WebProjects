@@ -16,7 +16,8 @@ namespace LanzhouBeefNoodles
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(options => { options.EnableEndpointRouting = false; });
+            //services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,20 +30,24 @@ namespace LanzhouBeefNoodles
 
             app.UseRouting();
 
-            app.Map("/test", build =>
+            app.UseMvc(route =>
             {
-                build.Run(async context =>
-                {
-                    await context.Response.WriteAsync("hello from test");
-                });
+                route.MapRoute(name:"default", template:"{controller=Home}/{action=index}/{id?}");
             });
 
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/", async context =>
+            //    {
+            //        await context.Response.WriteAsync("Hello World!");
+            //    });
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

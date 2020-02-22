@@ -11,6 +11,7 @@
         <p align="center">
           <img src="https://raw.githubusercontent.com/Draveness/analyze/master/contents/architecture/images/mvx/Standard-MVC.jpg" width="60%"/>
         </p>
+        Why using it?: Can separate the operation, data presentation and logic control from each other
     * ASP (Active Server Pages) Url system
     * Razor
 + Entity Framework
@@ -29,5 +30,11 @@ When doing the development, developers usually separate the environment into:
 + Testing Env
 + Staging Env
 + Production Env
+
+## Two Url Routing Mapping Patterns
++ Conventional routing
+    * Url consists of "controller" and "action". e.g. {domain}/{controller}/{action}
+    * using routing table to setup the rules of routing. e.g. using routes.MapRoute()
++ Attribute routing
 
 

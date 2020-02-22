@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{C045E646-D35D-45BF-A517-79D06F903E26}|Default">
   <MonoDevelop.Ide.ItemProperties.LanzhouBeefNoodles PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LanzhouBeefNoodles/Startup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LanzhouBeefNoodles/controllers/UserController.cs">
     <Files>
       <File FileName="LanzhouBeefNoodles/wwwroot.cs" Line="1" Column="1" />
       <File FileName="LanzhouBeefNoodles/appsettings.json" />
@@ -8,17 +8,22 @@
       <File FileName="LanzhouBeefNoodles/wwwroot/images/pattern.png" />
       <File FileName="LanzhouBeefNoodles/wwwroot/images/三细.png" />
       <File FileName="LanzhouBeefNoodles/wwwroot/lib/bootstrap/css/bootstrap.css" />
-      <File FileName="LanzhouBeefNoodles/Properties/launchSettings.json" />
-      <File FileName="LanzhouBeefNoodles/Startup.cs" Line="31" Column="38" />
-      <File FileName="LanzhouBeefNoodles/Program.cs" Line="23" Column="37" />
+      <File FileName="LanzhouBeefNoodles/Properties/launchSettings.json" Line="27" Column="2" />
+      <File FileName="LanzhouBeefNoodles/Startup.cs" Line="32" Column="1" />
+      <File FileName="LanzhouBeefNoodles/Program.cs" Line="13" Column="6" />
+      <File FileName="LanzhouBeefNoodles/controllers/HomeController.cs" Line="11" Column="39" />
+      <File FileName="LanzhouBeefNoodles/controllers/NoodleController.cs" Line="18" Column="6" />
+      <File FileName="LanzhouBeefNoodles/controllers/UserController.cs" Line="14" Column="22" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="LanzhouBeefNoodles" expanded="True">
             <Node name="LanzhouBeefNoodles" expanded="True">
+              <Node name="controllers" expanded="True">
+                <Node name="UserController.cs" selected="True" />
+              </Node>
               <Node name="Properties" expanded="True" />
-              <Node name="Startup.cs" selected="True" />
             </Node>
           </Node>
         </State>
