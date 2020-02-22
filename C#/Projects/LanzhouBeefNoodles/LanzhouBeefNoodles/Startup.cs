@@ -29,6 +29,14 @@ namespace LanzhouBeefNoodles
 
             app.UseRouting();
 
+            app.Map("/test", build =>
+            {
+                build.Run(async context =>
+                {
+                    await context.Response.WriteAsync("hello from test");
+                });
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>

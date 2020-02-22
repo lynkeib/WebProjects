@@ -20,7 +20,7 @@
       "outputPath": "/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/chengyinliu/.config/NuGet/NuGet.Config"
+        "/Users/chengyinliu/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"

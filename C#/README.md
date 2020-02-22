@@ -1,4 +1,4 @@
-Introduction
+## Introduction
 
 + Basic
     * .Net Core
@@ -21,5 +21,13 @@ Introduction
 + Identity
     * Authorization
     * Authentication
+
+## Environments
+When doing the development, developers usually separate the environment into: 
++ Development Env
++ Integration Env
++ Testing Env
++ Staging Env
++ Production Env
 
 
