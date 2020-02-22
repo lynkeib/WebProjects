@@ -11,7 +11,11 @@
         <p align="center">
           <img src="https://raw.githubusercontent.com/Draveness/analyze/master/contents/architecture/images/mvx/Standard-MVC.jpg" width="60%"/>
         </p>
-        Why using it?: Can separate the operation (Model), data presentation (View) and logic control (Controller) from each other
+        Why using it?: 
+        + Can separate the operation (Model), data presentation (View) and logic control (Controller) from each other
+        + Low coupling
+        + High reusability
+        + High maintainability
     * ASP (Active Server Pages) Url system
     * Razor
 + Entity Framework
