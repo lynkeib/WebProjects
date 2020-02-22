@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{C045E646-D35D-45BF-A517-79D06F903E26}|Default">
+  <MonoDevelop.Ide.ItemProperties.LanzhouBeefNoodles PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="LanzhouBeefNoodles/Startup.cs">
+    <Files>
+      <File FileName="LanzhouBeefNoodles/wwwroot.cs" Line="1" Column="1" />
+      <File FileName="LanzhouBeefNoodles/appsettings.json" />
+      <File FileName="LanzhouBeefNoodles/wwwroot/content/site.css" />
+      <File FileName="LanzhouBeefNoodles/wwwroot/images/pattern.png" />
+      <File FileName="LanzhouBeefNoodles/wwwroot/images/三细.png" />
+      <File FileName="LanzhouBeefNoodles/wwwroot/lib/bootstrap/css/bootstrap.css" />
+      <File FileName="LanzhouBeefNoodles/Properties/launchSettings.json" />
+      <File FileName="LanzhouBeefNoodles/Startup.cs" Line="31" Column="38" />
+      <File FileName="LanzhouBeefNoodles/Program.cs" Line="23" Column="37" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LanzhouBeefNoodles" expanded="True">
+            <Node name="LanzhouBeefNoodles" expanded="True">
+              <Node name="Properties" expanded="True" />
+              <Node name="Startup.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
