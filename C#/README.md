@@ -45,4 +45,8 @@ When doing the development, developers usually separate the environment into:
     * using routing table to setup the rules of routing. e.g. using routes.MapRoute()
 + Attribute routing
 
+## Additional Concepts:
++ MVVM: Model - View - View Model
+    Short explanation: View Model can manage multiple models
+
 

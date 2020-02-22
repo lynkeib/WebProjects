@@ -6,7 +6,7 @@ namespace LanzhouBeefNoodles.controllers
 {
     public class Test: Controller
     {
-        public ActionResult index()
+        public ActionResult Index()
         {
             return Content("Hello from test index");
         }

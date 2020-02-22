@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{C045E646-D35D-45BF-A517-79D06F903E26}|Default">
   <MonoDevelop.Ide.ItemProperties.LanzhouBeefNoodles PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LanzhouBeefNoodles/View/Test/Contact.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LanzhouBeefNoodles/Views/Test/Contact.cshtml">
     <Files>
       <File FileName="LanzhouBeefNoodles/wwwroot.cs" Line="1" Column="1" />
       <File FileName="LanzhouBeefNoodles/appsettings.json" />
@@ -9,13 +9,18 @@
       <File FileName="LanzhouBeefNoodles/wwwroot/images/三细.png" />
       <File FileName="LanzhouBeefNoodles/wwwroot/lib/bootstrap/css/bootstrap.css" />
       <File FileName="LanzhouBeefNoodles/Properties/launchSettings.json" Line="27" Column="2" />
-      <File FileName="LanzhouBeefNoodles/Startup.cs" Line="19" Column="83" />
+      <File FileName="LanzhouBeefNoodles/Startup.cs" Line="24" Column="78" />
       <File FileName="LanzhouBeefNoodles/Program.cs" Line="20" Column="29" />
-      <File FileName="LanzhouBeefNoodles/controllers/HomeController.cs" Line="15" Column="9" />
+      <File FileName="LanzhouBeefNoodles/controllers/HomeController.cs" Line="22" Column="32" />
       <File FileName="LanzhouBeefNoodles/controllers/NoodleController.cs" Line="18" Column="6" />
       <File FileName="LanzhouBeefNoodles/controllers/UserController.cs" Line="5" Column="1" />
-      <File FileName="LanzhouBeefNoodles/controllers/Test.cs" Line="19" Column="32" />
-      <File FileName="LanzhouBeefNoodles/View/Test/Contact.cshtml" Line="2" Column="12" />
+      <File FileName="LanzhouBeefNoodles/controllers/Test.cs" Line="8" Column="6" />
+      <File FileName="LanzhouBeefNoodles/View/Test/Contact.cshtml" Line="8" Column="1" />
+      <File FileName="LanzhouBeefNoodles/Models/Noodle.cs" Line="12" Column="6" />
+      <File FileName="LanzhouBeefNoodles/Models/INoodleRepository.cs" Line="9" Column="20" />
+      <File FileName="LanzhouBeefNoodles/Models/MockNoodleRepository.cs" Line="23" Column="130" />
+      <File FileName="LanzhouBeefNoodles/controllers/INoodelRepository.cs" />
+      <File FileName="LanzhouBeefNoodles/Views/Home/Index.cshtml" Line="5" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -26,8 +31,10 @@
                 <Node name="FrameworkReferences" expanded="True" />
               </Node>
               <Node name="controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
-              <Node name="View" expanded="True">
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
                 <Node name="Test" expanded="True">
                   <Node name="Contact.cshtml" selected="True" />
                 </Node>
