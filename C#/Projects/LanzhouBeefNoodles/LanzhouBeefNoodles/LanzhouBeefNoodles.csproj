@@ -10,5 +10,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
     <Folder Include="controllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
 </Project>
