@@ -1,28 +1,35 @@
 ﻿<Properties StartupConfiguration="{7219816A-F743-4E8E-99B6-5BF8C7C4A9F6}|Default">
   <MonoDevelop.Ide.ItemProperties.LanzhouBeefNoodles PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="libman.json">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/MockNoodleRepository.cs">
     <Files>
-      <File FileName="appsettings.json" Line="3" Column="105" />
+      <File FileName="appsettings.json" Line="13" Column="8" />
       <File FileName="controllers/FeedbackController.cs" />
       <File FileName="Models/Feedback.cs" />
       <File FileName="wwwroot/content/site.css" Line="1" Column="1" />
-      <File FileName="Properties/launchSettings.json" />
-      <File FileName="Startup.cs" Line="45" Column="49" />
+      <File FileName="Properties/launchSettings.json" Line="27" Column="2" />
+      <File FileName="Startup.cs" Line="55" Column="38" />
       <File FileName=".gitignore" />
       <File FileName="appsettings.Development.json" />
       <File FileName="Models/DbInitializer.cs" />
-      <File FileName="Program.cs" Line="25" Column="54" />
-      <File FileName="Models/Noodle.cs" />
+      <File FileName="Program.cs" Line="30" Column="18" />
+      <File FileName="Models/Noodle.cs" Line="13" Column="6" />
       <File FileName="Models/MockFeedbackRepository.cs" />
       <File FileName="Migrations/20200223192010_NoodleChanges.Designer.cs" />
       <File FileName="Migrations/AppDbContextModelSnapshot.cs" />
       <File FileName="Migrations/20200223192617_NoodleChanges4.cs" />
-      <File FileName="Views/Shared/_Layout.cshtml" Line="9" Column="8" />
-      <File FileName="Views/Home/Index.cshtml" />
+      <File FileName="Views/Shared/_Layout.cshtml" Line="20" Column="15" />
+      <File FileName="Views/Home/Index.cshtml" Line="7" Column="51" />
       <File FileName="Views/_ViewStart.cshtml" />
-      <File FileName="ViewModels/HomeViewModel.cs" />
+      <File FileName="ViewModels/HomeViewModel.cs" Line="16" Column="1" />
       <File FileName="wwwroot/lib/bootstrap/css/bootstrap.css" Line="1" Column="1" />
-      <File FileName="libman.json" Line="1" Column="1" />
+      <File FileName="libman.json" Line="10" Column="2" />
+      <File FileName="controllers/HomeController.cs" Line="38" Column="39" />
+      <File FileName="Views/Home/Detail.cshtml" Line="17" Column="7" />
+      <File FileName="Views/_ViewImports.cshtml" Line="3" Column="1" />
+      <File FileName="Views/Feedback/Index.cshtml" Line="6" Column="1" />
+      <File FileName="Views/Feedback/FeedbackComplete.cshtml" Line="6" Column="1" />
+      <File FileName="Models/NoodleRepository.cs" Line="1" Column="1" />
+      <File FileName="Models/MockNoodleRepository.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -31,10 +38,12 @@
             <Node name="LanzhouBeefNoodles" expanded="True">
               <Node name="Dependencies" expanded="True" />
               <Node name="controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="MockNoodleRepository.cs" selected="True" />
+              </Node>
               <Node name="Properties" expanded="True" />
-              <Node name="ViewModels" expanded="True" />
               <Node name="Views" expanded="True">
+                <Node name="Feedback" expanded="True" />
                 <Node name="Home" expanded="True" />
                 <Node name="Shared" expanded="True" />
               </Node>
@@ -44,7 +53,6 @@
                   <Node name="bootstrap" expanded="True" />
                 </Node>
               </Node>
-              <Node name="libman.json" selected="True" />
             </Node>
           </Node>
         </State>

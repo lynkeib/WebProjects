@@ -37,5 +37,10 @@ namespace LanzhouBeefNoodles.controllers
         {
             return "Hello from about";
         }
+
+        public IActionResult Detail(int id)
+        {
+            return View(_noodleRepository.GetNoodleById(id));
+        }
     }
 }
