@@ -1,19 +1,29 @@
 ﻿<Properties StartupConfiguration="{7219816A-F743-4E8E-99B6-5BF8C7C4A9F6}|Default">
   <MonoDevelop.Ide.ItemProperties.LanzhouBeefNoodles PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Migrations/20200223181205_lalala.Designer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Migrations/20200223192617_NoodleChanges4.cs">
     <Files>
-      <File FileName="appsettings.json" Line="13" Column="60" />
+      <File FileName="appsettings.json" Line="3" Column="105" />
       <File FileName="controllers/FeedbackController.cs" />
-      <File FileName="Models/Feedback.cs" />
+      <File FileName="Models/Feedback.cs" Line="32" Column="52" />
       <File FileName="wwwroot/content/site.css" />
       <File FileName="Migrations/20200223060919_InitialMigration.cs" Line="9" Column="10" />
       <File FileName="Migrations/20200223060919_InitialMigration.Designer.cs" Line="7" Column="48" />
       <File FileName="Properties/launchSettings.json" Line="27" Column="2" />
-      <File FileName="Startup.cs" Line="31" Column="32" />
+      <File FileName="Startup.cs" Line="17" Column="2" />
       <File FileName=".gitignore" Line="1" Column="1" />
       <File FileName="appsettings.Development.json" Line="1" Column="1" />
-      <File FileName="Migrations/20200223181205_lalala.cs" Line="1" Column="1" />
-      <File FileName="Migrations/20200223181205_lalala.Designer.cs" Line="1" Column="1" />
+      <File FileName="Migrations/20200223181205_lalala.Designer.cs" Line="43" Column="49" />
+      <File FileName="Models/DbInitializer.cs" Line="12" Column="24" />
+      <File FileName="Program.cs" Line="25" Column="54" />
+      <File FileName="Models/Noodle.cs" Line="13" Column="6" />
+      <File FileName="Migrations/20200223190542_NoodleChanges.Designer.cs" Line="32" Column="50" />
+      <File FileName="Migrations/20200223190542_NoodleChanges.cs" Line="1" Column="1" />
+      <File FileName="Migrations/20200223190816_NoodleChanges2.Designer.cs" Line="1" Column="1" />
+      <File FileName="Models/MockFeedbackRepository.cs" Line="17" Column="1" />
+      <File FileName="Migrations/20200223191729_NoodleChanges3.cs" Line="19" Column="29" />
+      <File FileName="Migrations/20200223192010_NoodleChanges.Designer.cs" Line="1" Column="1" />
+      <File FileName="Migrations/AppDbContextModelSnapshot.cs" Line="85" Column="1" />
+      <File FileName="Migrations/20200223192617_NoodleChanges4.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -26,9 +36,8 @@
               </Node>
               <Node name="controllers" expanded="True" />
               <Node name="Migrations" expanded="True">
-                <Node name="20200223181205_lalala.cs" expanded="True">
-                  <Node name="20200223181205_lalala.Designer.cs" selected="True" />
-                </Node>
+                <Node name="20200223192010_NoodleChanges.cs" expanded="True" />
+                <Node name="20200223192617_NoodleChanges4.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />

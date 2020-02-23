@@ -2,7 +2,7 @@
 
 namespace LanzhouBeefNoodles.Migrations
 {
-    public partial class lalala : Migration
+    public partial class NoodleChanges3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

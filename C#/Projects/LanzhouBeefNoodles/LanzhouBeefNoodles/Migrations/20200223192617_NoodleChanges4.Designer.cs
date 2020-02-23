@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LanzhouBeefNoodles.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200223165616_InitialMigration2")]
-    partial class InitialMigration2
+    [Migration("20200223192617_NoodleChanges4")]
+    partial class NoodleChanges4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -60,6 +60,9 @@ namespace LanzhouBeefNoodles.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsInStock")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LongDescription")
                         .HasColumnType("nvarchar(max)");
