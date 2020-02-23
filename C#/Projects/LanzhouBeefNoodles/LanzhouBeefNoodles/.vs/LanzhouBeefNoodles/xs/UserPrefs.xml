@@ -1,0 +1,38 @@
+﻿<Properties StartupConfiguration="{7219816A-F743-4E8E-99B6-5BF8C7C4A9F6}|Default">
+  <MonoDevelop.Ide.ItemProperties.LanzhouBeefNoodles PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Migrations/20200223060919_InitialMigration.cs">
+    <Files>
+      <File FileName="appsettings.json" Line="1" Column="1" />
+      <File FileName="controllers/FeedbackController.cs" Line="1" Column="1" />
+      <File FileName="Models/Feedback.cs" Line="1" Column="1" />
+      <File FileName="wwwroot/content/site.css" Line="1" Column="1" />
+      <File FileName="Migrations/20200223060919_InitialMigration.cs" Line="9" Column="10" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LanzhouBeefNoodles" expanded="True">
+            <Node name="LanzhouBeefNoodles" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="controllers" expanded="True" />
+              <Node name="Migrations" expanded="True">
+                <Node name="20200223060919_InitialMigration.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
