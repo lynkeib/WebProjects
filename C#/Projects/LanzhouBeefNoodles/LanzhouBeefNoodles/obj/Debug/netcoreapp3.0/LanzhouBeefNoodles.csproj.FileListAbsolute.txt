@@ -29,3 +29,4 @@
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/LanzhouBeefNoodles.csproj.CopyComplete
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/LanzhouBeefNoodles.csprojAssemblyReference.cache
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Views/Feedback/Index.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Views/Feedback/FeedbackComplete.cshtml.g.cs

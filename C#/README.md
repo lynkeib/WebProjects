@@ -26,7 +26,14 @@
     * Repository 
     * Code First
     * Mapping
-    * CRUD
+    * CRUD  
+    __Highlights__:
+    * Cross-platform
+    * Modeling
+    * CRUD (using Linq with sync/async)
+    * Concurrence
+    * Cache
+    * Data Migration  
 + Identity
     * Authorization
     * Authentication
@@ -48,5 +55,6 @@ When doing the development, developers usually separate the environment into:
 ## Additional Concepts:
 + MVVM: Model - View - View Model
     Short explanation: View Model can manage multiple models
+
 
 
