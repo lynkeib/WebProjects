@@ -1,26 +1,33 @@
 ﻿<Properties StartupConfiguration="{C045E646-D35D-45BF-A517-79D06F903E26}|Default">
   <MonoDevelop.Ide.ItemProperties.LanzhouBeefNoodles PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LanzhouBeefNoodles/Views/Test/Contact.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LanzhouBeefNoodles/Views/Feedback/FeedbackComplete.cshtml">
     <Files>
       <File FileName="LanzhouBeefNoodles/wwwroot.cs" Line="1" Column="1" />
-      <File FileName="LanzhouBeefNoodles/appsettings.json" />
+      <File FileName="LanzhouBeefNoodles/appsettings.json" Line="1" Column="1" />
       <File FileName="LanzhouBeefNoodles/wwwroot/content/site.css" />
       <File FileName="LanzhouBeefNoodles/wwwroot/images/pattern.png" />
       <File FileName="LanzhouBeefNoodles/wwwroot/images/三细.png" />
       <File FileName="LanzhouBeefNoodles/wwwroot/lib/bootstrap/css/bootstrap.css" />
       <File FileName="LanzhouBeefNoodles/Properties/launchSettings.json" Line="27" Column="2" />
-      <File FileName="LanzhouBeefNoodles/Startup.cs" Line="24" Column="78" />
+      <File FileName="LanzhouBeefNoodles/Startup.cs" Line="12" Column="1" />
       <File FileName="LanzhouBeefNoodles/Program.cs" Line="20" Column="29" />
-      <File FileName="LanzhouBeefNoodles/controllers/HomeController.cs" Line="22" Column="32" />
+      <File FileName="LanzhouBeefNoodles/controllers/HomeController.cs" Line="33" Column="15" />
       <File FileName="LanzhouBeefNoodles/controllers/NoodleController.cs" Line="18" Column="6" />
       <File FileName="LanzhouBeefNoodles/controllers/UserController.cs" Line="5" Column="1" />
       <File FileName="LanzhouBeefNoodles/controllers/Test.cs" Line="8" Column="6" />
       <File FileName="LanzhouBeefNoodles/View/Test/Contact.cshtml" Line="8" Column="1" />
-      <File FileName="LanzhouBeefNoodles/Models/Noodle.cs" Line="12" Column="6" />
-      <File FileName="LanzhouBeefNoodles/Models/INoodleRepository.cs" Line="9" Column="20" />
-      <File FileName="LanzhouBeefNoodles/Models/MockNoodleRepository.cs" Line="23" Column="130" />
+      <File FileName="LanzhouBeefNoodles/Models/Noodle.cs" Line="14" Column="1" />
+      <File FileName="LanzhouBeefNoodles/Models/INoodleRepository.cs" Line="2" Column="1" />
+      <File FileName="LanzhouBeefNoodles/Models/MockNoodleRepository.cs" Line="10" Column="1" />
       <File FileName="LanzhouBeefNoodles/controllers/INoodelRepository.cs" />
-      <File FileName="LanzhouBeefNoodles/Views/Home/Index.cshtml" Line="5" Column="5" />
+      <File FileName="LanzhouBeefNoodles/Views/Home/Index.cshtml" Line="28" Column="19" />
+      <File FileName="LanzhouBeefNoodles/Models/Feedback.cs" Line="6" Column="16" />
+      <File FileName="LanzhouBeefNoodles/Models/IFeedbackRepository.cs" Line="6" Column="22" />
+      <File FileName="LanzhouBeefNoodles/Models/MockFeedbackRepository.cs" Line="34" Column="35" />
+      <File FileName="LanzhouBeefNoodles/ViewModels/HomeViewModel.cs" Line="15" Column="2" />
+      <File FileName="LanzhouBeefNoodles/controllers/FeedbackController.cs" Line="36" Column="27" />
+      <File FileName="LanzhouBeefNoodles/Views/Feedback/Index.cshtml" Line="19" Column="11" />
+      <File FileName="LanzhouBeefNoodles/Views/Feedback/FeedbackComplete.cshtml" Line="7" Column="12" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -33,11 +40,13 @@
               <Node name="controllers" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
+              <Node name="ViewModels" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Test" expanded="True">
-                  <Node name="Contact.cshtml" selected="True" />
+                <Node name="Feedback" expanded="True">
+                  <Node name="FeedbackComplete.cshtml" selected="True" />
                 </Node>
+                <Node name="Home" expanded="True" />
+                <Node name="Test" expanded="True" />
               </Node>
             </Node>
           </Node>

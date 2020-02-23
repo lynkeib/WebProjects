@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using LanzhouBeefNoodles.ViewModels;
 
 
 namespace LanzhouBeefNoodles
@@ -20,6 +21,7 @@ namespace LanzhouBeefNoodles
         {
             services.AddMvc(options => { options.EnableEndpointRouting = false; });
             services.AddTransient<INoodleRepository, MockNoodleRepository>();
+            services.AddTransient<IFeedbackRepository, MockFeedbackRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
