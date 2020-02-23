@@ -30,7 +30,7 @@ namespace LanzhouBeefNoodles
                 }
                 catch (Exception)
                 {
-                    //故意留空，以后可以添加日志
+                    //Logger
                 }
             }
 

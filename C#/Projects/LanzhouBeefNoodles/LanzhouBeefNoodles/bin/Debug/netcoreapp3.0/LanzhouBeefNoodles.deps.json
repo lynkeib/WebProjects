@@ -28,6 +28,7 @@
           "Microsoft.EntityFrameworkCore.Design": "3.1.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.2",
           "Microsoft.EntityFrameworkCore.Sqlite.Core": "3.1.2",
+          "Microsoft.Web.LibraryManager.Build": "2.0.96",
           "Pomelo.EntityFrameworkCore.MySql": "3.0.1",
           "Microsoft.AspNetCore.Antiforgery": "3.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.0.0.0",
@@ -240,7 +241,7 @@
           "System.Runtime.InteropServices.RuntimeInformation": "4.0.3.0",
           "System.Runtime.InteropServices.WindowsRuntime": "4.0.3.0",
           "System.Runtime.Intrinsics": "4.0.0.0",
-          "System.Runtime.Loader": "4.1.0.0",
+          "System.Runtime.Loader.Reference": "4.1.0.0",
           "System.Runtime.Numerics": "4.1.1.0",
           "System.Runtime.Serialization": "4.0.0.0",
           "System.Runtime.Serialization.Formatters.Reference": "4.0.3.0",
@@ -668,6 +669,11 @@
       },
       "Microsoft.NETCore.Platforms/2.0.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Microsoft.Web.LibraryManager.Build/2.0.96": {
+        "dependencies": {
+          "System.Runtime.Loader": "4.3.0"
+        }
+      },
       "Microsoft.Win32.Registry/4.5.0": {
         "dependencies": {
           "System.Security.AccessControl": "4.5.0",
@@ -1156,6 +1162,13 @@
           "System.Reflection.Primitives": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Handles": "4.3.0"
+        }
+      },
+      "System.Runtime.Loader/4.3.0": {
+        "dependencies": {
+          "System.IO": "4.3.0",
+          "System.Reflection": "4.3.0",
+          "System.Runtime": "4.3.0"
         }
       },
       "System.Runtime.Serialization.Formatters/4.3.0": {
@@ -2643,7 +2656,7 @@
         },
         "compileOnly": true
       },
-      "System.Runtime.Loader/4.1.0.0": {
+      "System.Runtime.Loader.Reference/4.1.0.0": {
         "compile": {
           "System.Runtime.Loader.dll": {}
         },
@@ -3171,6 +3184,13 @@
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
     },
+    "Microsoft.Web.LibraryManager.Build/2.0.96": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-E6673JBzjfwoe3HlVAAxRchfUYloRsCwO/uWyjHswb0PZeFdRjYUJsLU3v4o3l2RQ596bGrLKv6rCWfbVDy0iQ==",
+      "path": "microsoft.web.librarymanager.build/2.0.96",
+      "hashPath": "microsoft.web.librarymanager.build.2.0.96.nupkg.sha512"
+    },
     "Microsoft.Win32.Registry/4.5.0": {
       "type": "package",
       "serviceable": true,
@@ -3513,6 +3533,13 @@
       "sha512": "sha512-uv1ynXqiMK8mp1GM3jDqPCFN66eJ5w5XNomaK2XD+TuCroNTLFGeZ+WCmBMcBDyTFKou3P6cR6J/QsaqDp7fGQ==",
       "path": "system.runtime.interopservices/4.3.0",
       "hashPath": "system.runtime.interopservices.4.3.0.nupkg.sha512"
+    },
+    "System.Runtime.Loader/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DHMaRn8D8YCK2GG2pw+UzNxn/OHVfaWx7OTLBD/hPegHZZgcZh3H6seWegrC4BYwsfuGrywIuT+MQs+rPqRLTQ==",
+      "path": "system.runtime.loader/4.3.0",
+      "hashPath": "system.runtime.loader.4.3.0.nupkg.sha512"
     },
     "System.Runtime.Serialization.Formatters/4.3.0": {
       "type": "package",
@@ -4723,7 +4750,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "System.Runtime.Loader/4.1.0.0": {
+    "System.Runtime.Loader.Reference/4.1.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

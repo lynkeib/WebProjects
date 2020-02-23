@@ -76,3 +76,6 @@
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Newtonsoft.Json.dll
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Pomelo.EntityFrameworkCore.MySql.dll
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Pomelo.JsonObject.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Views/Shared/_Layout.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Views/_ViewStart.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/libman.json

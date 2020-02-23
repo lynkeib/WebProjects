@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[3.1.2, )"
             },
+            "Microsoft.Web.LibraryManager.Build": {
+              "target": "Package",
+              "version": "[2.0.96, )"
+            },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[3.0.1, )"

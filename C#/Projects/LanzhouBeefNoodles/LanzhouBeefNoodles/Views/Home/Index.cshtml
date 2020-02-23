@@ -10,20 +10,35 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+
+
+<h2>Product List</h2>
 @foreach (var noodle in Model.Noodels)
 {
-    <div>
-        <h2>@noodle.Name</h2>
-        <h3>$ @noodle.Price</h3>
-        <p>@noodle.ShortDescription</p>
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <img src="@noodle.ImageUrl" alt="">
+            <div class="caption">
+                <h3 class="pull-right">￥@noodle.Price</h3>
+                <h3>
+                    <a>@noodle.Name</a>
+                </h3>
+                <p>@noodle.ShortDescription</p>
+            </div>
+        </div>
     </div>
 }
 
 <h2>Feedback</h2>
-@foreach (var feedback in Model.Feedbacks)
-{
-    <h2>@feedback.Name</h2>
-    <h3>@feedback.CreateDateUTC</h3>
-    <p>@feedback.Message</p>
-}
+<div class="list-group">
+    @foreach (var feedback in Model.Feedbacks)
+    {
+        <a class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="list-group-item-heading">@feedback.Name</h5>
+                <small class="pull-right">@feedback.CreateDateUTC</small>
+            </div>
+            <p class="list-group-item-text">@feedback.Message</p>
+        </a>
+    }
+</div>
