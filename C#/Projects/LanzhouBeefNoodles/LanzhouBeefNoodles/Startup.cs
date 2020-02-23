@@ -28,6 +28,7 @@ namespace LanzhouBeefNoodles
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc(options => { options.EnableEndpointRouting = false; });
             services.AddTransient<INoodleRepository, NoodleRepository>();

@@ -64,3 +64,15 @@
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/LanzhouBeefNoodles.pdb
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/LanzhouBeefNoodles.csprojAssemblyReference.cache
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Microsoft.Bcl.HashCode.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/System.Collections.Immutable.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/System.ComponentModel.Annotations.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/System.Diagnostics.DiagnosticSource.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/System.Runtime.CompilerServices.Unsafe.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/System.Text.Encodings.Web.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/System.Text.Json.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/MySqlConnector.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Newtonsoft.Json.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Pomelo.EntityFrameworkCore.MySql.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Pomelo.JsonObject.dll
