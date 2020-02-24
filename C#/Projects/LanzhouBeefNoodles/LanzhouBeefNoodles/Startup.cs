@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using LanzhouBeefNoodles.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace LanzhouBeefNoodles
@@ -47,6 +48,7 @@ namespace LanzhouBeefNoodles
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseRouting();
 

@@ -81,3 +81,16 @@
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/libman.json
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Views/Home/Detail.cshtml.g.cs
 /Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Views/_ViewImports.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/LanzhouBeefNoodles.StaticWebAssets.xml
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.UI.Views.V3.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.UI.dll
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/LanzhouBeefNoodles.MvcApplicationPartsAssemblyInfo.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Areas/Identity/Pages/Account/Login.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Areas/Identity/Pages/Account/Logout.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Areas/Identity/Pages/Account/Register.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Areas/Identity/Pages/Account/_ViewImports.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Areas/Identity/Pages/_ViewImports.cshtml.g.cs
+/Users/chengyinliu/D/Projects/WebProjects/C#/Projects/LanzhouBeefNoodles/LanzhouBeefNoodles/obj/Debug/netcoreapp3.0/Razor/Views/Shared/_LoginPartial.cshtml.g.cs
