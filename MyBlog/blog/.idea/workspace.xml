@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f37e89c2-6305-4f09-b3a1-2a74cfd055d3" name="Default Changelist" comment="" />
+    <list default="true" id="f37e89c2-6305-4f09-b3a1-2a74cfd055d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,61 +20,8 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>a</find>
-      <find>full</find>
-      <find>single</find>
-      <find>post post-1</find>
-      <find>main</find>
-      <find>black</find>
-      <find>create_</find>
-      <find>widge</find>
-      <find>geturl</find>
-      <find>post</find>
-      <find>order</find>
-      <find>rss</find>
-      <find>RSS</find>
-      <find>blog.</find>
-      <find>index.html</find>
-      <find>full-width.html</find>
-      <find>about.html</find>
-      <find>contact.html</find>
-      <find>cs</find>
-      <find>assets</find>
-      <find>img</find>
-      <find>cl-effect-11</find>
-      <find>index</find>
-      <find>home</find>
-      <find>navbar-header</find>
-      <find>mb2</find>
-      <find>container</find>
-      <find>facebook</find>
-      <find>social li a</find>
-      <find>.probootstrap_cover</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>/static/images/</replace>
-      <replace>index.html</replace>
-      <replace>/static/js/</replace>
-      <replace>/static/css/</replace>
-      <replace>{% static</replace>
-      <replace>{% static &quot;</replace>
-      <replace>{% url 'index' %}</replace>
-      <replace>{% url 'detail' %}</replace>
-      <replace>{% url 'articles' %}</replace>
-      <replace>{% url 'about' %}</replace>
-      <replace>{% url 'contact' %}</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="762" />
-    <option name="y" value="-1057" />
-    <option name="width" value="1230" />
-    <option name="height" value="1057" />
   </component>
   <component name="ProjectId" id="1RpyRS10N9SIhzk8sQb3Bd1BRrC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -149,7 +98,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

@@ -1,0 +1,24 @@
+{% include "partials/header.html" %}
+<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+    {% for business in business_list %}
+
+
+    <div class="col-md-3  col-sm-6">
+        <div class="thumbnail">
+            <img src=" {{ business.image_url }}">
+            <div class="caption">
+                <h4>
+                    {{ business.name }}
+                </h4>
+            </div>
+            <p>
+                <a href="#" class="btn btn-primary">More Info</a>
+            </p>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% include "partials/footer.html" %}
