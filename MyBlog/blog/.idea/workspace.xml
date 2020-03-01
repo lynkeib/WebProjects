@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f37e89c2-6305-4f09-b3a1-2a74cfd055d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/EatterHelper/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/EatterHelper/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/EatterHelper/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/EatterHelper/version_1_0.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/EatterHelper/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/views/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/apis/views/yelpapi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/static/css/show.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/templates/partials/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/templates/partials/header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/EatterHelper/templates/show.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../EatterHelper/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
