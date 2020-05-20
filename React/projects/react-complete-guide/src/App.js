@@ -3,6 +3,22 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 import person from './Person/Person';
+// import Radium, {StyleRoot} from 'radium';
+import styled from 'styled-components';
+
+
+const StyledButton = styled.button`
+  background-color: ${props => props.alt === true ? 'red' : 'green'};
+  color:white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${props => props.alt === true ? 'lightred' : 'lightgreen'};
+    color:black;
+  }
+`;
 
 class App extends Component {
 
@@ -29,22 +45,28 @@ class App extends Component {
 
   nameChangeHandler = (e, id) => {
     const personIndex = this.state.persons.findIndex(p => p.id === id);
-    const person = {...this.state.persons[personIndex]};
+    const person = { ...this.state.persons[personIndex] };
     person.name = e.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({persons:persons});
+    this.setState({ persons: persons });
   }
 
+
+
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color:'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color:'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover':{
+    //     backgroundColor:'lightgreen',
+    //     color:'black'
+    //   }
+    // };
 
     let persons = null;
     if (this.state.hidden) {
@@ -61,21 +83,26 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = 'red';
+      // style.backgroundColor = 'red';
+      // style[':hover']={
+      //   backgroundColor:'lightred',
+      //   color:'black'
+      // }
     }
 
     const classes = [];
-    if(this.state.persons.length <= 2){
+    if (this.state.persons.length <= 2) {
       classes.push("red");
     }
-    if(this.state.persons.length <= 1){
+    if (this.state.persons.length <= 1) {
       classes.push("bold");
     }
 
     return (
       <div className="App">
         <h1 className={classes.join(' ')}>Test</h1>
-        <button onClick={this.togglePersonHandler} style={style}>Switch name</button>
+        {/* <button onClick={this.togglePersonHandler} style={style}>Switch name</button> */}
+        <StyledButton alt={this.state.hidden} onClick={this.togglePersonHandler}>Switch name</StyledButton>
         {persons}
       </div>
     );
