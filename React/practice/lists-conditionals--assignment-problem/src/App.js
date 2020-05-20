@@ -19,7 +19,6 @@ class App extends Component {
   deleteHandler = (event, index) => {
     const string = [...this.state.string];
     string.splice(index, 1);
-
     this.setState({ string: string.join("")});
   }
 
@@ -37,7 +36,7 @@ class App extends Component {
     return (
       <div className="App">
         <input type="text" onChange={(event) => this.changeHandler(event)} value={this.state.string}></input>
-        <p id='wordLength'>0</p>
+        <p id='wordLength'>{this.state.string.length}</p>
         <Validation textLength = {this.state.string.length}></Validation>
         {/* {this.state.string.map((char, index) => {
           return <box style={this.style}></box>
