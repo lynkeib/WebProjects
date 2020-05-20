@@ -2,32 +2,38 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+import person from './Person/Person';
 
 class App extends Component {
 
   state = {
     persons: [
-      { name: "Max", age: 12 },
-      { name: "1234", age: 123 },
-      { name: "12345", age: 345 }
+      { id: '1', name: "Max", age: 12 },
+      { id: '2', name: "1234", age: 123 },
+      { id: '3', name: "12345", age: 345 }
     ],
     hidden: false
   }
 
-  switchNameHandler = () => {
-    // this.state.persons[0].name = "KKK";
-    this.setState({
-      persons: [
-        { name: "KKKK", age: 12 },
-        { name: "1234", age: 123 },
-        { name: "12345", age: 345 }
-      ]
-    });
+  deletePersonHandler = (index) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(index, 1);
+    this.setState({ persons: persons });
   }
 
   togglePersonHandler = () => {
     let doesShow = this.state.hidden;
     this.setState({ hidden: !doesShow });
+  }
+
+  nameChangeHandler = (e, id) => {
+    const personIndex = this.state.persons.findIndex(p => p.id === id);
+    const person = {...this.state.persons[personIndex]};
+    person.name = e.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+    this.setState({persons:persons});
   }
 
   render() {
@@ -43,8 +49,15 @@ class App extends Component {
     if (this.state.hidden) {
       persons = (
         <div>
-          <Person name={this.state.persons[0].name} />
-          <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>Just test</Person>
+          {this.state.persons.map((person, index) => {
+            return <Person
+              name={person.name}
+              age={person.age}
+              key={person.id}
+              click={this.deletePersonHandler.bind(this, index)}
+              changed={(event) => this.nameChangeHandler(event, person.id)}>
+            </Person>
+          })}
         </div>
       );
     }
