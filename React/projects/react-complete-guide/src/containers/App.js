@@ -10,6 +10,12 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
 
+  constructor(props){
+    super(props);
+    
+  }
+
+
   state = {
     persons: [
       { id: '1', name: "Max", age: 12 },

@@ -4,6 +4,19 @@
 	+ Elements in .js that are similiar to HTML, they are not HTML, they are JXS, JS in HTML format. Therefore, some props names are different from HTML
 	+ Functional & class-based components
 		+ Use class if you need to manage State or access to Lifecycle Hooks and you don't want to use React Hooks.
+	+ Components Lifecycle - Creation
+		+ constructor(props)
+		+ getDerivedStateFromProps(props, state)
+		+ render()
+		+ Render Child Components
+		+ componentDidMount()
+	+ Components Lifecycle - Update
+		+ getDerivedStateFromProps(props, state)
+		+ shouldComponentUpdate(nextProps, nextState)
+		+ render()
+		+ Update Child Components Props
+		+ getSnapShotBeforeUpdate(prevProps, prevState)
+		+ comopnentDidUpdate()
 		
 + Useful Packages
 	+ Radium
