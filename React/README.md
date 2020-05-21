@@ -17,7 +17,7 @@
 		+ Update Child Components Props
 		+ getSnapShotBeforeUpdate(prevProps, prevState)
 		+ comopnentDidUpdate()
-		
+
 + Useful Packages
 	+ Radium
-	+ Styled-Components	
+	+ Styled-Components	(using style tag as component)
