@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person';
-import person from './Person/Person';
+import Persons from '../components/Persons/Persons';
 // import Radium, {StyleRoot} from 'radium';
-import styled from 'styled-components';
+
+import Cockpit from '../components/Cockpit/Cockpit'
 
 
-const StyledButton = styled.button`
-  background-color: ${props => props.alt === true ? 'red' : 'green'};
-  color:white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${props => props.alt === true ? 'lightred' : 'lightgreen'};
-    color:black;
-  }
-`;
 
 class App extends Component {
 
@@ -52,8 +40,6 @@ class App extends Component {
     this.setState({ persons: persons });
   }
 
-
-
   render() {
     // const style = {
     //   backgroundColor: 'green',
@@ -72,15 +58,11 @@ class App extends Component {
     if (this.state.hidden) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              click={this.deletePersonHandler.bind(this, index)}
-              changed={(event) => this.nameChangeHandler(event, person.id)}>
-            </Person>
-          })}
+          <Persons 
+          persons={this.state.persons} 
+          clicked= {this.deletePersonHandler}
+          changed={this.nameChangeHandler}
+          />    
         </div>
       );
       // style.backgroundColor = 'red';
@@ -89,25 +71,17 @@ class App extends Component {
       //   color:'black'
       // }
     }
-
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push("red");
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push("bold");
-    }
-
     return (
       <div className="App">
-        <h1 className={classes.join(' ')}>Test</h1>
-        {/* <button onClick={this.togglePersonHandler} style={style}>Switch name</button> */}
-        <StyledButton alt={this.state.hidden} onClick={this.togglePersonHandler}>Switch name</StyledButton>
+        <Cockpit 
+        hidden = {this.state.hidden}
+        persons = {this.state.persons}
+        clicked={this.togglePersonHandler}
+        />
         {persons}
       </div>
     );
   }
-
 }
 
 export default App;
