@@ -21,8 +21,9 @@
 		+ Combine functionalities of all class-based lifecycle hocks into one REact hock.
 	+ React.memo() (used on functional components for controlling update process == shouldComponentUpdate in class-based)
 	+ PureComponent (implemented all the props check in shouldComponetUpdate for Component extention)
-	+ Rendering adjacent root JSX elements => using array of elements like [<p key=></p>, <div key=></div>, <input key=/>] in render function __OR__ using Top Level Component wraps all the tags 
+	+ Rendering adjacent root JSX elements => using array of elements like [<p key=></p>, <div key=></div>, <input key=/>] in render function __OR__ using Higher Order Component wraps all the tags (Self-defined or <Fragment>)
 	+ 
 + Useful Packages
 	+ Radium
 	+ Styled-Components	(using style tag as component)
+	+ Prop-Types (props typing)
