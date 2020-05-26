@@ -35,3 +35,6 @@
 	+ Styled-Components	(using style tag as component)
 	+ Prop-Types (props typing)
 	+ Axios (Http requests)
+
++ Server
+	+ Firebase (Google)
