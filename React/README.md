@@ -17,6 +17,13 @@
 		+ Update Child Components Props
 		+ getSnapShotBeforeUpdate(prevProps, prevState, snapshot)
 		+ comopnentDidUpdate()
+	+ Components Lifecycle - Update (triggered by Parent)
+		+ componentWillReceiveProps(nextProps)
+		+ shouldComponentUpdate(nextProps, nextState)
+		+ componentWillUpdate(nextProps, nextState)
+		+ render()
+		+ Update Child Components Props
+		+ comopnentDidUpdate()
 	+ UseEffect
 		+ Combine functionalities of all class-based lifecycle hocks into one REact hock.
 	+ React.memo() (used on functional components for controlling update process == shouldComponentUpdate in class-based)
