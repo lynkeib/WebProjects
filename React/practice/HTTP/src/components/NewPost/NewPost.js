@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import './NewPost.css';
 
@@ -7,6 +8,10 @@ class NewPost extends Component {
         title: '',
         content: '',
         author: 'Max'
+    }
+
+    postDataHandler = () => {
+        axios.post();
     }
 
     render () {
