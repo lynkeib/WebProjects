@@ -35,6 +35,7 @@
 	+ Styled-Components	(using style tag as component)
 	+ Prop-Types (props typing)
 	+ Axios (Http requests)
+	+ React-Router, React-Router-Dom (Add Router function)
 
 + Server
 	+ Firebase (Google)
