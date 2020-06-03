@@ -18,4 +18,5 @@
   + Lazy Cache (loading componenets when needed)
   + Forms and Form Validation
   + Global State Management (using Redux)
+  + Aysnc Code in Redux
   + Self-designed Middlewares
