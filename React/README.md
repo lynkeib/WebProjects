@@ -29,13 +29,13 @@
 	+ React.memo() (used on functional components for controlling update process == shouldComponentUpdate in class-based)
 	+ PureComponent (implemented all the props check in shouldComponetUpdate for Component extention)
 	+ Rendering adjacent root JSX elements => using array of elements like [<p key=></p>, <div key=></div>, <input key=/>] in render function __OR__ using Higher Order Component wraps all the tags (Self-defined or <Fragment>)
-	+ 
+	+ Redux Workflow: <img src="https://gdurl.com/4ynX" width="80%"/>
+	+ About Redux: Action Creators can run Async Code, Reduce can only run Sync Code
+
 + Useful Packages
 	+ Radium
 	+ Styled-Components	(using style tag as component)
 	+ Prop-Types (props typing)
 	+ Axios (Http requests)
 	+ React-Router, React-Router-Dom (Add Router function)
-
-+ Server
-	+ Firebase (Google)
+	+ Redux (Global State Management)
