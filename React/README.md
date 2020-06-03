@@ -30,9 +30,10 @@
 	+ PureComponent (implemented all the props check in shouldComponetUpdate for Component extention)
 	+ Rendering adjacent root JSX elements => using array of elements like [<p key=></p>, <div key=></div>, <input key=/>] in render function __ORÏ__ using Higher Order Component wraps all the tags (Self-defined or <Fragment>)
 	+ Redux Workflow:   
-	<div style="text-align: center">
+	<div>
 		<img src="https://gdurl.com/4ynX" width="80%"/>  
-	</div>
+	</div>  
+
 	+ About Redux: Action Creators can run Async Code, Reduce can only run Sync Code
 
 + Useful Packages
