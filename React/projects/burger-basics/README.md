@@ -14,6 +14,7 @@
 
 + Highlights:
   + Typing (using prop-types)
+  + Higher Order Component (ErrorHandler)
   + Multiple Pages in this single App (using Axios)
   + Lazy Cache (loading componenets when needed)
   + Forms and Form Validation
