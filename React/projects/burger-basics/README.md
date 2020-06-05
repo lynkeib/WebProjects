@@ -15,7 +15,8 @@
 + Highlights:
   + Typing (using prop-types)
   + Higher Order Component (ErrorHandler)
-  + Multiple Pages in this single App (using Axios)
+  + Http requests (using Axios)
+  + Multiple Pages in this single App (using React-Router)
   + Lazy Cache (loading componenets when needed)
   + Forms and Form Validation
   + Global State Management (using Redux)
