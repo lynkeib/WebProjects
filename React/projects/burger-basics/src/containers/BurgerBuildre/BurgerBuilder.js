@@ -46,7 +46,12 @@ class BurgerBuilder extends Component {
     }
 
     purchaseHandler = () => {
-        this.setState({ purchasing: true });
+        if (this.props.isAuthenticated) {
+            this.setState({ purchasing: true });
+        }else{
+            this.props.history.push('/auth')
+        }
+
     }
 
     // addIngredientHandler = (type) => {
@@ -110,14 +115,17 @@ class BurgerBuilder extends Component {
         let orderSummary = null;
         let burger = this.props.error ? <p>Ingredients cannot be loaded</p> : <Spinner />
         if (this.props.ings) {
-            burger = (<Aux><Burger ingredients={this.props.ings} />
+            burger = (<Aux>
+                <Burger ingredients={this.props.ings} />
                 <BuildControls
                     ingredientAdded={this.props.onIngredientAdded}
                     ingredientRemove={this.props.onIngredientRemoved}
                     disabled={disableInfo}
                     price={this.props.price}
                     purchasable={this.updatePurchaseState(this.props.ings)}
-                    ordered={this.purchaseHandler} /></Aux>);
+                    ordered={this.purchaseHandler}
+                    isAuth={this.props.isAuthenticated} />
+            </Aux>);
             orderSummary = <OrderSummary
                 ingredients={this.props.ings}
                 price={this.props.price}
@@ -152,7 +160,8 @@ const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        error: state.burgerBuilder.error
+        error: state.burgerBuilder.error,
+        isAuthenticated: state.auth.token !== null
     };
 };
 
