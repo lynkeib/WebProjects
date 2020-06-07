@@ -22,3 +22,4 @@
   + Global State Management (using Redux)
   + Aysnc Actions in Redux
   + Self-designed Middlewares
+  + Support Redux DevTools
