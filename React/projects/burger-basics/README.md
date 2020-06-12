@@ -10,7 +10,7 @@
   + Database: Firebase
 
 + Hosting Server
-  + Firebase
+  + Firebase (URL: https://react-burger-71fca.web.app)
 
 + Highlights:
   + Typing (using prop-types)
