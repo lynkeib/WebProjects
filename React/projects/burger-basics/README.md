@@ -10,7 +10,7 @@
   + Database: Firebase
 
 + Hosting Server
-  + TBD
+  + Firebase
 
 + Highlights:
   + Typing (using prop-types)
