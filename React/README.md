@@ -43,3 +43,4 @@
 	+ Axios (Http requests)
 	+ React-Router, React-Router-Dom (Add Router function)
 	+ Redux (Global State Management)
+	+ Enzyme (Unit Test)

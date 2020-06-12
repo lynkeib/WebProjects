@@ -23,3 +23,4 @@
   + Aysnc Actions in Redux
   + Self-designed Middlewares
   + Support Redux DevTools
+  + Enzyme for unit tests
