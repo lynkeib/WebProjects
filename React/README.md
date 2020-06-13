@@ -25,16 +25,19 @@
 		+ Update Child Components Props
 		+ comopnentDidUpdate()
 	+ UseEffect
-		+ Combine functionalities of all class-based lifecycle hocks into one REact hock.
+		+ Combine functionalities of all class-based lifecycle hocks into one React hock.
 	+ React.memo() (used on functional components for controlling update process == shouldComponentUpdate in class-based)
 	+ PureComponent (implemented all the props check in shouldComponetUpdate for Component extention)
-	+ Rendering adjacent root JSX elements => using array of elements like [<p key=></p>, <div key=></div>, <input key=/>] in render function __ORÏ__ using Higher Order Component wraps all the tags (Self-defined or <Fragment>)
+	+ Rendering adjacent root JSX elements => using array of elements like [<p key=></p>, <div key=></div>, <input key=/>] in render function __OR__ using Higher Order Component wraps all the tags (Self-defined or <Fragment>)
 	+ Redux Workflow:   
 	<div>
 		<img src="https://gdurl.com/4ynX" width="80%"/>  
 	</div>  
 
 	+ About Redux: Action Creators can run Async Code, Reduce can only run Sync Code
+	+ When using State in Functional Components, it is needed to update all the proporties in the original state since it's not like state in Class-based Components which has setState to merge original state and the updated state object
+	+ Hocks can noly be used in the root level of a Functional Component
+	+ Add the second argument of useEffect can make it run only once (after the first render) (an empty array [] can be that second argument, or, the dependency of useEffect) (like componentDidMount)
 
 + Useful Packages
 	+ Radium

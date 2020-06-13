@@ -24,3 +24,4 @@
   + Self-designed Middlewares
   + Support Redux DevTools
   + Enzyme for unit tests
+  + Hooks, the new feature of React 16, are used in the project
