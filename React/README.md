@@ -38,6 +38,10 @@
 	+ When using State in Functional Components, it is needed to update all the proporties in the original state since it's not like state in Class-based Components which has setState to merge original state and the updated state object
 	+ Hocks can noly be used in the root level of a Functional Component
 	+ Add the second argument of useEffect can make it run only once (after the first render) (an empty array [] can be that second argument, or, the dependency of useEffect) (like componentDidMount)
+	+ React Projects Demo (react.rocks, madewithReact)
+	+ React Native is a JavaScript library to use JS and React to build mobile web app
+	+ Material-UI, a component library (like React bootstrap)
+	+ PReact (Light version of React)
 
 + Useful Packages
 	+ Radium
