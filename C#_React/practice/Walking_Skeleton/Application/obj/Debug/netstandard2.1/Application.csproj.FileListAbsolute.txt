@@ -1,0 +1,13 @@
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/bin/Debug/netstandard2.1/Application.deps.json
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/bin/Debug/netstandard2.1/Application.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/bin/Debug/netstandard2.1/Application.pdb
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/bin/Debug/netstandard2.1/Domain.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/bin/Debug/netstandard2.1/Persistence.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/bin/Debug/netstandard2.1/Domain.pdb
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/bin/Debug/netstandard2.1/Persistence.pdb
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/obj/Debug/netstandard2.1/Application.csprojAssemblyReference.cache
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/obj/Debug/netstandard2.1/Application.AssemblyInfoInputs.cache
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/obj/Debug/netstandard2.1/Application.AssemblyInfo.cs
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/obj/Debug/netstandard2.1/Application.csproj.CopyComplete
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/obj/Debug/netstandard2.1/Application.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Application/obj/Debug/netstandard2.1/Application.pdb

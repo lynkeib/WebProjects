@@ -1,0 +1,11 @@
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/bin/Debug/netstandard2.0/Persistence.deps.json
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/bin/Debug/netstandard2.0/Persistence.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/bin/Debug/netstandard2.0/Persistence.pdb
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/bin/Debug/netstandard2.0/Domain.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/bin/Debug/netstandard2.0/Domain.pdb
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/obj/Debug/netstandard2.0/Persistence.csprojAssemblyReference.cache
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/obj/Debug/netstandard2.0/Persistence.AssemblyInfoInputs.cache
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/obj/Debug/netstandard2.0/Persistence.AssemblyInfo.cs
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/obj/Debug/netstandard2.0/Persistence.csproj.CopyComplete
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/obj/Debug/netstandard2.0/Persistence.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Persistence/obj/Debug/netstandard2.0/Persistence.pdb
