@@ -1,8 +1,0 @@
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/bin/Debug/netstandard2.0/Domain.deps.json
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/bin/Debug/netstandard2.0/Domain.dll
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/bin/Debug/netstandard2.0/Domain.pdb
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/obj/Debug/netstandard2.0/Domain.csprojAssemblyReference.cache
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfoInputs.cache
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/obj/Debug/netstandard2.0/Domain.AssemblyInfo.cs
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/obj/Debug/netstandard2.0/Domain.dll
-/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/Domain/obj/Debug/netstandard2.0/Domain.pdb
