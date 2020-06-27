@@ -46,3 +46,5 @@
 /Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/API/obj/Debug/netcoreapp3.0/API.csproj.CopyComplete
 /Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/API/obj/Debug/netcoreapp3.0/API.dll
 /Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/API/obj/Debug/netcoreapp3.0/API.pdb
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/API/bin/Debug/netcoreapp3.0/MediatR.dll
+/Users/chengyinliu/D/Github/WebProjects/C#_React/practice/Walking_Skeleton/API/bin/Debug/netcoreapp3.0/MediatR.Extensions.Microsoft.DependencyInjection.dll
