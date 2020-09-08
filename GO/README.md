@@ -15,3 +15,15 @@ Like extention in C#
 
 ## Test
 naming: name_test.go
+
+## Structs
+Python -> dictionary, JavaScript -> Object
+
+## Zero Value
+- string -> ""
+- int -> 0
+- float -> 0
+- bool -> false
+
+## Init struct
+when initializing a new struct in multiple lines, need to put a common at teh end of the last line
