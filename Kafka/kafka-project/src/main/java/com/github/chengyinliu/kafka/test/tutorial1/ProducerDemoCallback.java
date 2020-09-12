@@ -1,4 +1,4 @@
-package com.github.chengyinliu.kafka.test;
+package com.github.chengyinliu.kafka.test.tutorial1;
 
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;

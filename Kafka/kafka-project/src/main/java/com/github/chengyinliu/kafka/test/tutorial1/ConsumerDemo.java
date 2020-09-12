@@ -1,4 +1,4 @@
-package com.github.chengyinliu.kafka.test;
+package com.github.chengyinliu.kafka.test.tutorial1;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Properties;
 
 public class ConsumerDemo {
@@ -21,7 +20,7 @@ public class ConsumerDemo {
         String groupId = "test-group";
         String topic = "Test-Topic";
 
-        // create consumer config
+        // create consumer config.properties
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
