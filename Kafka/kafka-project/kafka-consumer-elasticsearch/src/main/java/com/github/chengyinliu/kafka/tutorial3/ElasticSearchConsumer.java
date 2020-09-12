@@ -13,6 +13,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.lucene.index.IndexReader;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -34,7 +36,7 @@ public class ElasticSearchConsumer {
     private static Logger logger = LoggerFactory.getLogger(ElasticSearchConsumer.class);
     private static JsonParser jsonParser = new JsonParser();
 
-    public static RestHighLevelClient createClient(){
+    public static RestHighLevelClient createClient() {
         Properties prop = getProperties();
         System.out.println(prop.getProperty("host_name"));
         System.out.println(prop.getProperty("username"));
@@ -57,7 +59,7 @@ public class ElasticSearchConsumer {
         return restClient;
     }
 
-    private static KafkaConsumer<String, String> createConsumer(String topic){
+    private static KafkaConsumer<String, String> createConsumer(String topic) {
         String bootstrapServer = "127.0.0.1:9092";
         String groupId = "kafka-consumer-elasticsearch";
 //        String topic = "twitter_tweets";
@@ -70,7 +72,7 @@ public class ElasticSearchConsumer {
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
-        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "10");
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100");
 
         // create consumer
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties);
@@ -84,12 +86,15 @@ public class ElasticSearchConsumer {
 
 
         KafkaConsumer<String, String> consumer = createConsumer("twitter_tweets");
-        while(true){
+        while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
-            logger.info("Received " + records.count() + " records");
+            int recordsCount = records.count();
+            logger.info("Received " + recordsCount + " records");
 
-            for(ConsumerRecord<String, String> record : records){
+            BulkRequest bulkRequest = new BulkRequest();
+
+            for (ConsumerRecord<String, String> record : records) {
 //                logger.info("Key: " + record.key() + ", Value: " + record.value());
 //                logger.info("Partition: " + record.partition() + ", Offset: " + record.offset());
 
@@ -98,31 +103,45 @@ public class ElasticSearchConsumer {
 //                String id = record.topic() + "_" + record.partition() + "_" + record.offset();
 
                 // twitter feed specific id
-                String id = extractIdFromTweet(record.value());
+                try{
+                    String id = extractIdFromTweet(record.value());
+                    String jsonString = record.value();
+                    IndexRequest indexRequest = new IndexRequest("twitter", "tweets", id).source(jsonString, XContentType.JSON);
 
-                String jsonString = record.value();
-                IndexRequest indexRequest = new IndexRequest("twitter", "tweets", id).source(jsonString, XContentType.JSON);
-                IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
-                logger.info(indexResponse.getId());
+                    bulkRequest.add(indexRequest);
+                }catch(NullPointerException e){
+                    logger.warn("skipping bad data: " + record.value());
+                }
+
+
+
+
+//                IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
+//                logger.info(indexResponse.getId());
+
+
+//                try {
+//                    Thread.sleep(10);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+            }
+            if(recordsCount > 0){
+                BulkResponse bulkResponse = client.bulk(bulkRequest, RequestOptions.DEFAULT);
+                logger.info("Committing offsets ... ");
+                consumer.commitSync();
+                logger.info("Offsets have been committed... ");
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-            logger.info("Committing offsets ... ");
-            consumer.commitSync();
-            logger.info("Offsets have been committed... ");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
 //        client.close();
     }
 
-    private static String extractIdFromTweet(String tweetJson){
+    private static String extractIdFromTweet(String tweetJson) {
         return jsonParser.parse(tweetJson).getAsJsonObject().get("id_str").getAsString();
     }
 
