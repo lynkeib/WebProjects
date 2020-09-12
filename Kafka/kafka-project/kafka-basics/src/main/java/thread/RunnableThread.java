@@ -1,4 +1,4 @@
-package test.thread;
+package thread;
 
 // 创建多线程，方式二：实现Runnable接口
 // 1、创建一个实现了Runnable接口的类

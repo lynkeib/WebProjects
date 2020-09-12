@@ -1,4 +1,4 @@
-package test.thread;
+package thread;
 
 // 多线程创建， 方式一： 继承于Thread类
 // 1、 创建一个继承与Thread类的子类
@@ -6,8 +6,6 @@ package test.thread;
 // 3、 创建Thread类的子类的对象
 // 4、 通过此对象调用start()
 
-
-import sun.jvm.hotspot.runtime.Threads;
 
 // 1、 创建一个继承与Thread类的子类
 class MyClass extends Thread {
