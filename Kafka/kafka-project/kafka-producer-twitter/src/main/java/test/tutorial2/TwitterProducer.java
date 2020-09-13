@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class TwitterProducer {
 
     static Logger logger = LoggerFactory.getLogger(TwitterProducer.class);
-    List<String> terms = Lists.newArrayList("kafka",  "java", "bitcoin");
+    List<String> terms = Lists.newArrayList("kafka",  "java", "bitcoin", "animation", "apple");
 
     public TwitterProducer() {
 
