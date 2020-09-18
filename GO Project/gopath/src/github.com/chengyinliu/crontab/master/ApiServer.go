@@ -136,6 +136,42 @@ func handleJobList(resp http.ResponseWriter, req *http.Request){
 		}
 }
 
+// kill job interface
+// POST {"name":"job1"}
+func handleJobKill(resp http.ResponseWriter, req *http.Request){
+
+	var (
+		jobName string
+		bytes []byte
+	)
+
+	// 1. parse post
+	err := req.ParseForm()
+	if err != nil{
+		goto ERR
+	}
+
+	// 2. take job info
+	jobName = req.PostForm.Get("name")
+
+	// 3. kill job
+	err = G_jobManager.KillJob(jobName)
+	if err == nil{
+		bytes, err = common.BuildResponse(0, "success", nil)
+		if err == nil{
+			resp.Write(bytes)
+		}
+	}
+
+	return
+
+	ERR:
+		bytes, err = common.BuildResponse(-1, err.Error(), nil)
+		if err == nil{
+			resp.Write(bytes)
+		}
+}
+
 // initialize service
 func InitApiServer()(err error){
 	// config url
@@ -143,6 +179,7 @@ func InitApiServer()(err error){
 	mux.HandleFunc("/job/save", handleJobSave)
 	mux.HandleFunc("/job/delete", handleJobDelete)
 	mux.HandleFunc("/job/list", handleJobList)
+	mux.HandleFunc("/job/kill", handleJobKill)
 
 	// start TCP listen
 	listener, err := net.Listen("tcp", ":" + strconv.Itoa(G_config.ApiPort))

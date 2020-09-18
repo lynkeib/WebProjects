@@ -128,3 +128,26 @@ func (jobManager *JobManager) DeleteJob(name string)(oldJob *common.Job, err err
 	return nil, err
 
 }
+
+// kill job
+func (jobManager *JobManager) KillJob(name string)(err error){
+
+	// write name to /cron/killer/
+	killerKey := common.JOB_KILL_DIR+ name
+
+	// only for notification, so we assign an expiration time for this key (1s)
+	leaseGrantResp, err := jobManager.lease.Grant(context.TODO(), 1)
+	if err != nil{
+		return err
+	}
+
+	leaseID := leaseGrantResp.ID
+
+	// save to etcd
+	_, err = jobManager.kv.Put(context.TODO(), killerKey,"", clientv3.WithLease(leaseID))
+	if err != nil{
+		return err
+	}
+
+	return
+}
