@@ -75,6 +75,34 @@ func (jobManager *JobManager) SaveJob(job *common.Job)(oldJob *common.Job, err e
 	return nil, nil
 }
 
+// list job
+func (jobManager *JobManager) ListJobs()(jobList []*common.Job, err error){
+	var(
+		dirKey string
+	)
+	dirKey = common.JOB_SAVE_DIR
+
+	getResp,err := jobManager.kv.Get(context.TODO(), dirKey, clientv3.WithPrefix())
+	if err != nil{
+		return
+	}
+
+	jobList = make([]*common.Job, 0)
+
+	for _, kv := range getResp.Kvs{
+		job := &common.Job{}
+		err = json.Unmarshal(kv.Value, job)
+		if err != nil{
+			// allow deserialize failures
+			err = nil
+			continue
+		}
+		jobList = append(jobList, job)
+	}
+
+	return
+}
+
 
 // delete job
 func (jobManager *JobManager) DeleteJob(name string)(oldJob *common.Job, err error){

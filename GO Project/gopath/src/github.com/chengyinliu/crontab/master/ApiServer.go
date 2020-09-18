@@ -102,7 +102,35 @@ func handleJobDelete(resp http.ResponseWriter, req *http.Request){
 	return
 
 	ERR:
-		bytes, err = common.BuildResponse(0, err.Error(), nil)
+		bytes, err = common.BuildResponse(-1, err.Error(), nil)
+		if err == nil{
+			resp.Write(bytes)
+		}
+}
+
+// list job interface
+// GET
+func handleJobList(resp http.ResponseWriter, req *http.Request){
+	var(
+		err error
+		bytes []byte
+	)
+	jobs, err := G_jobManager.ListJobs()
+	if err != nil{
+		goto ERR
+	}
+
+	// return normal response
+	// {err:0, message:"",data:{...}}
+	bytes, err = common.BuildResponse(0, "success", jobs)
+	if err == nil{
+		resp.Write(bytes)
+	}
+
+	return
+
+	ERR:
+		bytes, err = common.BuildResponse(-1, err.Error(), nil)
 		if err == nil{
 			resp.Write(bytes)
 		}
@@ -114,6 +142,7 @@ func InitApiServer()(err error){
 	mux := http.NewServeMux()
 	mux.HandleFunc("/job/save", handleJobSave)
 	mux.HandleFunc("/job/delete", handleJobDelete)
+	mux.HandleFunc("/job/list", handleJobList)
 
 	// start TCP listen
 	listener, err := net.Listen("tcp", ":" + strconv.Itoa(G_config.ApiPort))
