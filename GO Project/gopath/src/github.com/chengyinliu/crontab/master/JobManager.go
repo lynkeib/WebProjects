@@ -1,6 +1,9 @@
 package master
 
 import (
+	"context"
+	"encoding/json"
+	"github.com/chengyinliu/crontab/common"
 	"github.com/coreos/etcd/clientv3"
 	"time"
 )
@@ -43,4 +46,57 @@ func InitJobManager()(err error){
 	}
 
 	return
+}
+
+// save job
+func (jobManager *JobManager) SaveJob(job *common.Job)(oldJob *common.Job, err error){
+	// save job to "/cron/jobs/<jobName>" : json
+	jobKey := common.JOB_SAVE_DIR + job.Name
+	jobValue, err := json.Marshal(job)
+	if err != nil{
+		return nil, err
+	}
+	// save to etcd
+	putResp, err := jobManager.kv.Put(context.TODO(), jobKey,string(jobValue), clientv3.WithPrevKV())
+	if err != nil{
+		return nil, err
+	}
+
+	// if we are updating then return old value
+	if putResp.PrevKv != nil{
+		var oldJobObj *common.Job
+		err = json.Unmarshal(putResp.PrevKv.Value, &oldJobObj)
+		if err != nil{
+			return nil, err
+		}
+		oldJob = oldJobObj
+		return oldJob, nil
+	}
+	return nil, nil
+}
+
+
+// delete job
+func (jobManager *JobManager) DeleteJob(name string)(oldJob *common.Job, err error){
+	// delete job from "/cron/jobs/<jobName>" : json
+	jobKey := common.JOB_SAVE_DIR+ name
+
+	// delete from etcd
+	delResp, err := jobManager.kv.Delete(context.TODO(), jobKey, clientv3.WithPrevKV())
+	if err != nil{
+		return nil, err
+	}
+
+	// return deleted job info
+	if len(delResp.PrevKvs) != 0{
+		var oldJobObj *common.Job
+		err = json.Unmarshal(delResp.PrevKvs[0].Value, &oldJobObj)
+		if err != nil{
+			return nil, err
+		}
+		oldJob = oldJobObj
+		return oldJob, nil
+	}
+	return nil, err
+
 }

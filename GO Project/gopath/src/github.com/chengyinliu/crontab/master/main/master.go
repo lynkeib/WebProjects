@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/chengyinliu/crontab/master"
 	"runtime"
+	"time"
 )
 
 var (
@@ -52,6 +53,10 @@ func main() {
 	err = master.InitApiServer()
 	if err != nil{
 		goto ERR
+	}
+
+	for{
+		time.Sleep(1 * time.Second)
 	}
 
 	// regular exit
