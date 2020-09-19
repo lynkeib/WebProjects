@@ -69,15 +69,14 @@ func (jobManager *JobManager) watchJobs() (err error){
 			continue
 		}
 		jobEvent := common.BuildJobEvent(common.JOB_EVENT_SAVE, job)
-		jobEvent = jobEvent
-		//TODO: send this job to Scheduler
-
+		// send this job to Scheduler
+		G_scheduler.PushJobEvent(jobEvent)
 	}
 
 	// 2. listen events from this revision
 	go func(){
 		watchStartRevision := getResp.Header.Revision + 1
-		watchChan := jobManager.watcher.Watch(context.TODO(), common.JOB_SAVE_DIR, clientv3.WithRev(watchStartRevision))
+		watchChan := jobManager.watcher.Watch(context.TODO(), common.JOB_SAVE_DIR, clientv3.WithRev(watchStartRevision), clientv3.WithPrefix())
 		for watchResp := range watchChan{
 			for _, watchEvent := range watchResp.Events{
 				switch watchEvent.Type{
@@ -87,15 +86,16 @@ func (jobManager *JobManager) watchJobs() (err error){
 						continue
 					}
 					jobEvent := common.BuildJobEvent(common.JOB_EVENT_SAVE, job)
-					jobEvent = jobEvent
-					// TODO: push to scheduler
-					break
+					// push to scheduler
+					G_scheduler.PushJobEvent(jobEvent)
+
 				case mvccpb.DELETE:
 					jobName := common.ExtractJobName(string(watchEvent.Kv.Key))
 					jobEvent := common.BuildJobEvent(common.JOB_EVENT_SAVE, &common.Job{Name:jobName})
 					jobEvent = jobEvent
-					// TODO: push to scheduler
-					break
+					// push to scheduler
+					G_scheduler.PushJobEvent(jobEvent)
+
 				}
 			}
 

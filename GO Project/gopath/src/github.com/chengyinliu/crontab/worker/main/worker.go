@@ -43,7 +43,13 @@ func main() {
 		goto ERR
 	}
 
-	// init jon manager
+	// init job scheduler
+	err = worker.InitScheduler()
+	if err != nil{
+		goto ERR
+	}
+
+	// init job manager
 	err = worker.InitJobManager()
 	if err != nil{
 		goto ERR
