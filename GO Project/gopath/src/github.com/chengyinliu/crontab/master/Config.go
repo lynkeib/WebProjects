@@ -12,6 +12,7 @@ type Config struct{
 	ApiWriteTimeout int `json:"API_INTERFACE_WRITE_TIMEOUT"`
 	EtcdEndpoints []string `json:"ETCD_ENDPOINTS"`
 	EtcdDialTimeout int `json:"ECTD_DIALTIMEOUT"`
+	Webroot string `json:"WEBROOT"`
 }
 
 // singleton
