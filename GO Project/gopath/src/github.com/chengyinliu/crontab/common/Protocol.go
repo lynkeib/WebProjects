@@ -34,6 +34,22 @@ type JobSchedulePlan struct{
 	NextTime time.Time
 }
 
+// job execution status
+type JobExecutionStatus struct{
+	Job *Job
+	PlanTime time.Time
+	RealTime time.Time
+}
+
+// job execution result
+type JobExecutionResult struct{
+	ExecutionStatus *JobExecutionStatus
+	Output []byte
+	Err error
+	StartTime time.Time
+	EndTime time.Time
+}
+
 // build response
 func BuildResponse(error int, message string, data interface{}) (res []byte, err error){
 	// define a response
@@ -85,6 +101,28 @@ func BuildJobSchedulePlan(job *Job)(jobSchedulePlan *JobSchedulePlan, err error)
 		job,
 		expr,
 		expr.Next(time.Now()),
+	}
+	return
+}
+
+// build job execution status
+func BuildJobExecutionStatus(jobSchedulePlan *JobSchedulePlan) (jobExecutionStatus *JobExecutionStatus){
+	jobExecutionStatus = &JobExecutionStatus{
+		jobSchedulePlan.Job,
+		jobSchedulePlan.NextTime,
+		time.Now(),
+	}
+	return
+}
+
+// build job result
+func BuildJobExecutionResult(info *JobExecutionStatus, output []byte, err error, startTime time.Time, endTime time.Time)(jobExecutionResult *JobExecutionResult){
+	jobExecutionResult = &JobExecutionResult{
+		info,
+		output,
+		err,
+		startTime,
+		endTime,
 	}
 	return
 }

@@ -43,6 +43,12 @@ func main() {
 		goto ERR
 	}
 
+	// start executor
+	err = worker.InitExecutor()
+	if err!= nil{
+		goto ERR
+	}
+
 	// init job scheduler
 	err = worker.InitScheduler()
 	if err != nil{
