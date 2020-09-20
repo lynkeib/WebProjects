@@ -19,4 +19,4 @@ Project Stack Intro:
     - Need go to the machine to check and config cron
 
 - How we solve?
-<img src="img/Solution Framework.png"/>
+<img src="img/Solution Framework.png" width="40%"/>
