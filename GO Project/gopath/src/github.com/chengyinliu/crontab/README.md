@@ -20,8 +20,8 @@ Project Stack Intro:
 
 - How we solve?
     - Solution overall framework
-    <img src="img/Solution Framework.png" width="40%"/>
+        <img src="img/Solution Framework.png" width="40%"/>
     - Master framework
-    <img />
+        <img src="img/Master.png" width="40%"/>
     - Worker framework
-    <img />
+        <img src="img/Worker.png" width="40%"/>
