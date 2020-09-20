@@ -1,14 +1,11 @@
 package worker
 
 import (
-	"encoding/json"
+	"context"
 	"fmt"
 	"github.com/chengyinliu/crontab/common"
 	"github.com/mongodb/mongo-go-driver/mongo"
-	"context"
 	"github.com/mongodb/mongo-go-driver/mongo/clientopt"
-	"io/ioutil"
-	"os"
 	"time"
 )
 
@@ -17,12 +14,6 @@ type LogSink struct {
 	logCollection *mongo.Collection
 	logChan chan *common.JobLog
 	autoCommitChan chan *common.LogBatch
-}
-
-
-type ConfigMongo struct{
-	Username string
-	Password string
 }
 
 var (
@@ -81,7 +72,7 @@ func InitLogSink() (err error) {
 	var (
 		client *mongo.Client
 	)
-	config := getConfig()
+	config := common.GetConfig()
 	uri := "mongodb+srv://"+ config.Username + ":"+ config.Password +"@cluster0.gke6f.mongodb.net/GO?retryWrites=true&w=majority"
 	client, err = mongo.Connect(context.TODO(), uri, clientopt.ConnectTimeout(time.Duration(G_config.MongodbConnectTimeout) * time.Millisecond))
 	if err != nil{
@@ -109,19 +100,3 @@ func (logSink *LogSink) Append(jobLog *common.JobLog) {
 	}
 }
 
-func getConfig() ConfigMongo{
-	var config ConfigMongo
-	file, err := os.Open("config.json")
-	if err != nil{
-		fmt.Println(err)
-		return config
-	}
-	defer file.Close()
-	byteValue, _ := ioutil.ReadAll(file)
-	err = json.Unmarshal(byteValue, &config)
-	if err != nil{
-		fmt.Println(err)
-		return config
-	}
-	return config
-}

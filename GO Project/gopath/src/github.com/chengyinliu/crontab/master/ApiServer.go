@@ -172,6 +172,60 @@ func handleJobKill(resp http.ResponseWriter, req *http.Request){
 		}
 }
 
+// query job log
+func handleJobLog(resp http.ResponseWriter, req *http.Request){
+
+	var (
+		err error
+		name string
+		skipParam string
+		limitParam string
+		skip int
+		limit int
+		bytes []byte
+		logs []*common.JobLog
+	)
+
+	// parse arguments
+	err = req.ParseForm()
+	if err != nil{
+		goto ERR
+	}
+
+	// /job/log/?name=job10&skip=0&limit=5
+	name = req.Form.Get("name")
+	skipParam = req.Form.Get("skip")
+	limitParam = req.Form.Get("limit")
+
+	skip, err = strconv.Atoi(skipParam)
+	if err != nil{
+		skip = 0
+	}
+	limit, err = strconv.Atoi(limitParam)
+	if err != nil{
+		limit = 20
+	}
+
+	logs, err = G_logManager.ListLog(name, skip, limit)
+	if err != nil{
+		goto ERR
+	}
+
+	bytes, err = common.BuildResponse(0, "success", logs)
+	if err == nil{
+		resp.Write(bytes)
+	}
+
+	return
+
+	ERR:
+	bytes, err = common.BuildResponse(-1, "success", nil)
+	if err == nil{
+		resp.Write(bytes)
+	}
+	return
+}
+
 // initialize service
 func InitApiServer()(err error){
 	// config url
@@ -180,6 +234,7 @@ func InitApiServer()(err error){
 	mux.HandleFunc("/job/delete", handleJobDelete)
 	mux.HandleFunc("/job/list", handleJobList)
 	mux.HandleFunc("/job/kill", handleJobKill)
+	mux.HandleFunc("/job/log", handleJobLog)
 
 	// static sources
 	staticDir := http.Dir(G_config.Webroot)

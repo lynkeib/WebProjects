@@ -13,6 +13,7 @@ type Config struct{
 	EtcdEndpoints []string `json:"ETCD_ENDPOINTS"`
 	EtcdDialTimeout int `json:"ECTD_DIALTIMEOUT"`
 	Webroot string `json:"WEBROOT"`
+	MongodbConnectTimeout int `json:"MONGODB_CONNECT_TIMEOUT"`
 }
 
 // singleton

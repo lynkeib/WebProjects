@@ -3,7 +3,10 @@ package common
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/gorhill/cronexpr"
+	"io/ioutil"
+	"os"
 	"strings"
 	"time"
 )
@@ -51,6 +54,21 @@ type JobExecutionResult struct{
 	Err error
 	StartTime time.Time
 	EndTime time.Time
+}
+
+type ConfigMongo struct{
+	Username string
+	Password string
+}
+
+// search log filters
+type JobLogFilter struct{
+	JobName string `bson:"jobName"`
+}
+
+// log order
+type SortLogByStartTime struct{
+	SortOrder int `bson:"startTime"` // order by startTime:-1
 }
 
 // job log
@@ -151,4 +169,22 @@ func BuildJobExecutionResult(info *JobExecutionStatus, output []byte, err error,
 		endTime,
 	}
 	return
+}
+
+
+func GetConfig() ConfigMongo{
+	var config ConfigMongo
+	file, err := os.Open("config.json")
+	if err != nil{
+		fmt.Println(err)
+		return config
+	}
+	defer file.Close()
+	byteValue, _ := ioutil.ReadAll(file)
+	err = json.Unmarshal(byteValue, &config)
+	if err != nil{
+		fmt.Println(err)
+		return config
+	}
+	return config
 }
