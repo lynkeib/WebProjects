@@ -19,4 +19,4 @@ Project Stack Intro:
     - Need go to the machine to check and config cron
 
 - How we solve?
-<img src="https://drive.google.com/file/d/12_Sis8nCD8Adm_reNkTWnAhRf8wfdMHv/view?usp=sharing"/>
+<img src="img/Solution Framework.png"/>
