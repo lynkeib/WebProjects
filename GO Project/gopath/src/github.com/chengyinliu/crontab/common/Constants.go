@@ -9,4 +9,6 @@ const(
 	JOB_EVENT_SAVE = 1
 	// delete event
 	JOB_EVENT_DELETE = 2
+	// lock dir
+	JOB_LOCK_DIR = "/cron/lock/"
 )
