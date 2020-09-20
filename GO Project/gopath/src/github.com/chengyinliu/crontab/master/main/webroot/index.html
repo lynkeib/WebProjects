@@ -85,6 +85,39 @@
             </div>
         </div>
     </div>
+    <div id="log-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog model-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Job Log</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-strip" id="log-list">
+                        <thead>
+                            <tr>
+                                <th>Shell Command</th>
+                                <th>Error</th>
+                                <th>Output</th>
+                                <th>Plan Time</th>
+                                <th>Real Time</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <script>
 
     function getJobList(){
@@ -108,6 +141,7 @@
                     toolbar.append("<button class='btn btn-info edit'>Edit</buttoon>");
                     toolbar.append("<button class='btn btn-danger delete'>Delete</buttoon>");
                     toolbar.append("<button class='btn btn-warning kill'>Kill</buttoon>");
+                    toolbar.append("<button class='btn btn-success log'>Log</buttoon>");
                     tr.append($("<td>").append(toolbar));
                     $("#job-list tbody").append(tr);
                 }
@@ -130,6 +164,27 @@
         })
     }
 
+    function paddingNum(num, n) {
+        var len = num.toString().length
+        while (len < n) {
+            num = '0' + num
+            len++
+        }
+        return num
+    }
+
+    function timeFormat(time){
+        var date = new Date(time)
+        var year = date.getFullYear()
+        var month = paddingNum(date.getMonth() + 1, 2)
+        var day = paddingNum(date.getDate(), 2)
+        var hour = paddingNum(date.getHours(), 2)
+        var minute = paddingNum(date.getMinutes(), 2)
+        var second = paddingNum(date.getSeconds(), 2)
+        var millsecond = paddingNum(date.getMilliseconds(), 3)
+        return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second + "." + millsecond
+    }
+
     $(document).ready(function(){
         $("#job-list").on("click", ".edit",function(event){
             $("#edit-name").val($(this).parents("tr").children(".job-name").text());
@@ -143,6 +198,38 @@
             $("#edit-command").val("");
             $("#edit-cronExpr").val("");
             $("#edit-modal").modal("show");
+
+        })
+        $("#job-list").on("click", ".log",function(event){
+            $("#log-list tbody").empty();
+            var jobName = $(this).parents("tr").children(".job-name").text()
+            $.ajax({
+                url:"/job/log",
+                method:"POST",
+                dataType:"JSON",
+                data:{
+                    name:jobName
+                },
+                success: function(resp){
+                    if(resp.err != 0){
+                        return
+                    };
+                    var logList = resp.data;
+                    for (var i = 0; i < logList.length; i++){
+                        var log = logList[i];
+                        var tr = $("<tr>");
+                        tr.append($("<td>").html(log.command))
+                        tr.append($("<td>").html(log.error))
+                        tr.append($("<td>").html(log.output))
+                        tr.append($("<td>").html(timeFormat(log.planTime)))
+                        tr.append($("<td>").html(timeFormat(log.scheduleTime)))
+                        tr.append($("<td>").html(timeFormat(log.startTime)))
+                        tr.append($("<td>").html(timeFormat(log.endTime)))
+                        $("#log-list tbody").append(tr);
+                    }
+                }
+            })
+            $("#log-modal").modal("show");
 
         })
         $("#job-list").on("click", ".delete",function(event){

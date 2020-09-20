@@ -73,14 +73,14 @@ type SortLogByStartTime struct{
 
 // job log
 type JobLog struct{
-	JobName string `bson:"jobName"`
-	Command string `bson:"command"`
-	Err string `bson:"error"`
-	Output string `bson:"output"`
-	PlanTime int64 `bson:"planTime"`
-	ScheduleTime int64 `bson:"scheduleTime"`
-	StartTime int64 `bson:"startTime"`
-	EndTime int64 `bson:"endTime"`
+	JobName string `json:"jobName" bson:"jobName"`
+	Command string `json:"command" bson:"command"`
+	Err string `json:"error" bson:"error"`
+	Output string `json:"output" bson:"output"`
+	PlanTime int64 `json:"planTime" bson:"planTime"`
+	ScheduleTime int64 `json:"scheduleTime" bson:"scheduleTime"`
+	StartTime int64 `json:"startTime" bson:"startTime"`
+	EndTime int64 `json:"endTime" bson:"endTime"`
 }
 
 // log batch
