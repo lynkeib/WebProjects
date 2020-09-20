@@ -19,9 +19,9 @@ Project Stack Intro:
     - Need go to the machine to check and config cron
 
 - How we solve?
-    - Solution overall framework
+    - Solution overall framework  
         <img src="img/Solution Framework.png" width="40%"/>
-    - Master framework
+    - Master framework  
         <img src="img/Master.png" width="40%"/>
-    - Worker framework
+    - Worker framework  
         <img src="img/Worker.png" width="40%"/>
