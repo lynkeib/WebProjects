@@ -43,6 +43,12 @@ func main() {
 		goto ERR
 	}
 
+	// init worker manager
+	err = master.InitWorkManager()
+	if err != nil{
+		goto ERR
+	}
+
 	// init log manager
 	err = master.InitLogManager()
 	if err != nil{

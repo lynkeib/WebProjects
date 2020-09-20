@@ -124,6 +124,11 @@ func ExtractKillerName(killerKey string)(string){
 	return strings.TrimPrefix(killerKey, JOB_KILL_DIR)
 }
 
+// get work ip from etcd keys
+func ExtractWorkerIP(workKey string)(string){
+	return strings.TrimPrefix(workKey, JOB_WORKER_DIR)
+}
+
 func BuildJobEvent(eventType int, job *Job) (event *JobEvent){
 	return &JobEvent{
 		EventType: eventType,

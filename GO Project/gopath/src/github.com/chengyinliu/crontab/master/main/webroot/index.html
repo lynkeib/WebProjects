@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-12">
                 <button type="button" class="btn btn-primary" id="new-job">New Task</button>
-
+                <button type="button" class="btn btn-success" id="list-worker">Workers</button>
             </div>
         </div>
         <br/>
@@ -106,6 +106,33 @@
                                 <th>Start Time</th>
                                 <th>End Time</th>
                             </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="worker-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog model-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Job Log</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-strip" id="worker-list">
+                        <thead>
+                        <tr>
+                            <th>IP address</th>
+                        </tr>
                         </thead>
                         <tbody>
 
@@ -230,7 +257,27 @@
                 }
             })
             $("#log-modal").modal("show");
-
+        })
+        $("#list-worker").on("click", function(){
+            $("#worker-list tbody").empty();
+            $.ajax({
+                url:"/worker/list",
+                method:"POST",
+                dataType:"JSON",
+                success: function(resp){
+                    if(resp.err != 0){
+                        return
+                    }
+                    var workerList = resp.data;
+                    for(var i = 0; i < workerList.length; i++){
+                        var worker = workerList[i];
+                        var tr = $("<tr>");
+                        tr.append($("<td>").html(worker))
+                        $("#worker-list tbody").append(tr);
+                    }
+                }
+            })
+            $("#worker-modal").modal("show");
         })
         $("#job-list").on("click", ".delete",function(event){
             var jobName = $(this).parents("tr").children(".job-name").text();

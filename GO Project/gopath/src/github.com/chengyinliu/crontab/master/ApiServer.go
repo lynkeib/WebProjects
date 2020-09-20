@@ -136,6 +136,34 @@ func handleJobList(resp http.ResponseWriter, req *http.Request){
 		}
 }
 
+// list workers interface
+// GET
+func handleWorkerList(resp http.ResponseWriter, req *http.Request){
+	var(
+		err error
+		bytes []byte
+	)
+	workers, err := G_workManager.ListWorkers()
+	if err != nil{
+		goto ERR
+	}
+
+	// return normal response
+	// {err:0, message:"",data:{...}}
+	bytes, err = common.BuildResponse(0, "success", workers)
+	if err == nil{
+		resp.Write(bytes)
+	}
+
+	return
+
+ERR:
+	bytes, err = common.BuildResponse(-1, err.Error(), nil)
+	if err == nil{
+		resp.Write(bytes)
+	}
+}
+
 // kill job interface
 // POST {"name":"job1"}
 func handleJobKill(resp http.ResponseWriter, req *http.Request){
@@ -235,6 +263,7 @@ func InitApiServer()(err error){
 	mux.HandleFunc("/job/list", handleJobList)
 	mux.HandleFunc("/job/kill", handleJobKill)
 	mux.HandleFunc("/job/log", handleJobLog)
+	mux.HandleFunc("/worker/list", handleWorkerList)
 
 	// static sources
 	staticDir := http.Dir(G_config.Webroot)
