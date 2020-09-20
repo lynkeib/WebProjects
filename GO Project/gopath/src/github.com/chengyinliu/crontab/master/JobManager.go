@@ -133,7 +133,7 @@ func (jobManager *JobManager) DeleteJob(name string)(oldJob *common.Job, err err
 func (jobManager *JobManager) KillJob(name string)(err error){
 
 	// write name to /cron/killer/
-	killerKey := common.JOB_KILL_DIR+ name
+	killerKey := common.JOB_KILL_DIR + name
 
 	// only for notification, so we assign an expiration time for this key (1s)
 	leaseGrantResp, err := jobManager.lease.Grant(context.TODO(), 1)

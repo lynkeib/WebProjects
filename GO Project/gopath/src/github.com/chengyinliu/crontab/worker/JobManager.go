@@ -2,6 +2,7 @@ package worker
 
 import (
 	"context"
+	"fmt"
 	"github.com/chengyinliu/crontab/common"
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/mvcc/mvccpb"
@@ -48,9 +49,37 @@ func InitJobManager()(err error){
 		watcher:watcher,
 	}
 
-	// start listening
+	// start listening jobs
 	G_jobManager.watchJobs()
 
+	// start listening killer
+	G_jobManager.watchKiller()
+
+	return
+}
+
+// listen job changes
+func (jobManager *JobManager) watchKiller() (err error){
+	// 2. listen events from this revision
+	go func(){
+		watchChan := jobManager.watcher.Watch(context.TODO(), common.JOB_KILL_DIR, clientv3.WithPrefix())
+		for watchResp := range watchChan{
+			for _, watchEvent := range watchResp.Events{
+
+				switch watchEvent.Type{
+				case mvccpb.PUT:
+					fmt.Println("Entered jobkill Manager")
+					killerName := common.ExtractKillerName(string(watchEvent.Kv.Key))
+					job := &common.Job{
+						Name:killerName,
+					}
+					jobEvent := common.BuildJobEvent(common.JOB_EVENT_KILL, job)
+					G_scheduler.PushJobEvent(jobEvent)
+				case mvccpb.DELETE:
+				}
+			}
+		}
+	}()
 	return
 }
 
@@ -91,14 +120,12 @@ func (jobManager *JobManager) watchJobs() (err error){
 
 				case mvccpb.DELETE:
 					jobName := common.ExtractJobName(string(watchEvent.Kv.Key))
-					jobEvent := common.BuildJobEvent(common.JOB_EVENT_SAVE, &common.Job{Name:jobName})
-					jobEvent = jobEvent
+					jobEvent := common.BuildJobEvent(common.JOB_EVENT_DELETE, &common.Job{Name:jobName})
 					// push to scheduler
 					G_scheduler.PushJobEvent(jobEvent)
 
 				}
 			}
-
 		}
 	}()
 

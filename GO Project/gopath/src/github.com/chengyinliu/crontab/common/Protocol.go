@@ -1,6 +1,7 @@
 package common
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/gorhill/cronexpr"
 	"strings"
@@ -39,6 +40,8 @@ type JobExecutionStatus struct{
 	Job *Job
 	PlanTime time.Time
 	RealTime time.Time
+	CancelCtx context.Context
+	CancelFunc context.CancelFunc
 }
 
 // job execution result
@@ -81,6 +84,11 @@ func ExtractJobName(jobKey string)(string){
 	return strings.TrimPrefix(jobKey, JOB_SAVE_DIR)
 }
 
+// get job name from etcd keys
+func ExtractKillerName(killerKey string)(string){
+	return strings.TrimPrefix(killerKey, JOB_KILL_DIR)
+}
+
 func BuildJobEvent(eventType int, job *Job) (event *JobEvent){
 	return &JobEvent{
 		EventType: eventType,
@@ -108,10 +116,11 @@ func BuildJobSchedulePlan(job *Job)(jobSchedulePlan *JobSchedulePlan, err error)
 // build job execution status
 func BuildJobExecutionStatus(jobSchedulePlan *JobSchedulePlan) (jobExecutionStatus *JobExecutionStatus){
 	jobExecutionStatus = &JobExecutionStatus{
-		jobSchedulePlan.Job,
-		jobSchedulePlan.NextTime,
-		time.Now(),
+		Job:jobSchedulePlan.Job,
+		PlanTime: jobSchedulePlan.NextTime,
+		RealTime: time.Now(),
 	}
+	jobExecutionStatus.CancelCtx, jobExecutionStatus.CancelFunc = context.WithCancel(context.TODO())
 	return
 }
 

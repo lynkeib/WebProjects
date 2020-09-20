@@ -34,6 +34,11 @@ func (scheduler *Scheduler) handleJobEvent(JobEvent *common.JobEvent){
 		if jobExists{
 			delete(scheduler.jobPlanTable, JobEvent.Job.Name)
 		}
+	case common.JOB_EVENT_KILL:
+		jobExecuteStatus, isExecuting := scheduler.jobExecutionTable[JobEvent.Job.Name]
+		if isExecuting {
+			jobExecuteStatus.CancelFunc()
+		}
 	}
 }
 
@@ -58,7 +63,7 @@ func (scheduler *Scheduler) TryStartJob(jobPlan *common.JobSchedulePlan){
 
 	// save
 	scheduler.jobExecutionTable[jobPlan.Job.Name] = jobExecutionStatus
-
+	fmt.Println("JOb Execution table ", scheduler.jobExecutionTable)
 	// execution
 	fmt.Println("Executing Job " + jobPlan.Job.Name)
 	G_executor.ExecuteJob(jobExecutionStatus)
@@ -82,7 +87,7 @@ func (scheduler *Scheduler) TrySchedule()(scheduleAfter time.Duration){
 	// 1. loop through all jobs
 	for _, jobPlan := range scheduler.jobPlanTable{
 		if jobPlan.NextTime.Before(curr) || jobPlan.NextTime.Equal(curr){
-			// TODO: try execute job
+			// try execute job
 			scheduler.TryStartJob(jobPlan)
 			jobPlan.NextTime = jobPlan.Expr.Next(curr)
 		}

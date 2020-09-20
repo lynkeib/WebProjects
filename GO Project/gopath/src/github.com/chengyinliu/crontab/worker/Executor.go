@@ -1,8 +1,8 @@
 package worker
 
 import (
-	"context"
 	"github.com/chengyinliu/crontab/common"
+	"math/rand"
 	"os/exec"
 	"time"
 )
@@ -25,18 +25,20 @@ func (executor *Executor) ExecuteJob(info *common.JobExecutionStatus){
 	)
 
 	go func(){
-		cmd := exec.CommandContext(context.TODO(), "/bin/bash", "-c", info.Job.Command)
-
 		// get lock first
 		jobLock := G_jobManager.CreateJobLock(info.Job.Name)
 
 		startTIme = time.Now()
+
+		// random sleep for distributing jobs evenly
+		time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
 		err = jobLock.TryLock()
 		defer jobLock.Unlock()
 
 		if err != nil{
 			endTime = time.Now()
 		}else{
+			cmd := exec.CommandContext(info.CancelCtx, "/bin/bash", "-c", info.Job.Command)
 			startTIme = time.Now()
 			output, err = cmd.CombinedOutput()
 			endTime = time.Now()
