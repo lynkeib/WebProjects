@@ -12,3 +12,11 @@ Project Stack Intro:
     - High availability
     - Partition tolerance 
     - etcd based status management
+    
+- Problems for traditional crontab
+    - Tasks schedule would be terminated if the machine malfunctioning. 
+    - Need human force to migrate tasks if one single machine running out of resources by having too many tasks
+    - Need go to the machine to check and config cron
+
+- How we solve?
+<img src="https://drive.google.com/file/d/12_Sis8nCD8Adm_reNkTWnAhRf8wfdMHv/view?usp=sharing"/>
