@@ -43,6 +43,12 @@ func main() {
 		goto ERR
 	}
 
+	// init log
+	err = worker.InitLogSink()
+	if err != nil{
+		goto ERR
+	}
+
 	// start executor
 	err = worker.InitExecutor()
 	if err!= nil{

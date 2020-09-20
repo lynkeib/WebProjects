@@ -46,7 +46,30 @@ func (scheduler *Scheduler) handleJobEvent(JobEvent *common.JobEvent){
 func (scheduler *Scheduler) handleJobResult(jobResult *common.JobExecutionResult){
 	// delete execution table
 	delete(scheduler.jobExecutionTable, jobResult.ExecutionStatus.Job.Name)
+
 	fmt.Println("Job Done: " + jobResult.ExecutionStatus.Job.Name, string(jobResult.Output), jobResult.Err)
+
+	// generate job log
+	if jobResult.Err != common.ERR_LOCK_ALREADY_REQUIRED{
+		jobLog := &common.JobLog{
+			JobName:jobResult.ExecutionStatus.Job.Name,
+			Command: jobResult.ExecutionStatus.Job.Command,
+			Output: string(jobResult.Output),
+			PlanTime: jobResult.ExecutionStatus.PlanTime.UnixNano() / 1000 / 1000,
+			ScheduleTime: jobResult.ExecutionStatus.RealTime.UnixNano() / 1000 / 1000,
+			StartTime: jobResult.StartTime.UnixNano()  / 1000 / 1000,
+			EndTime: jobResult.EndTime.UnixNano()  / 1000 / 1000,
+		}
+		if jobResult.Err != nil{
+			jobLog.Err = jobResult.Err.Error()
+		}else{
+			jobLog.Err = ""
+		}
+		// save to mongoDB
+		G_logSink.Append(jobLog)
+	}
+
+
 }
 
 // try start job

@@ -9,6 +9,9 @@ import (
 type Config struct{
 	EtcdEndpoints []string `json:"ETCD_ENDPOINTS"`
 	EtcdDialTimeout int `json:"ECTD_DIALTIMEOUT"`
+	MongodbConnectTimeout int `json:"MONGODB_CONNECT_TIMEOUT"`
+	LogBatchSize int `json:"JOB_LOG_BATCH_SIZE"`
+	AutoLogCommitTime int `json:"AUTO_LOG_COMMIT_TIME"`
 }
 
 // singleton

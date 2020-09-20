@@ -53,6 +53,23 @@ type JobExecutionResult struct{
 	EndTime time.Time
 }
 
+// job log
+type JobLog struct{
+	JobName string `bson:"jobName"`
+	Command string `bson:"command"`
+	Err string `bson:"error"`
+	Output string `bson:"output"`
+	PlanTime int64 `bson:"planTime"`
+	ScheduleTime int64 `bson:"scheduleTime"`
+	StartTime int64 `bson:"startTime"`
+	EndTime int64 `bson:"endTime"`
+}
+
+// log batch
+type LogBatch struct {
+	Logs []interface{}
+}
+
 // build response
 func BuildResponse(error int, message string, data interface{}) (res []byte, err error){
 	// define a response
