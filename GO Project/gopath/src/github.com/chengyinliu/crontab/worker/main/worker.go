@@ -43,6 +43,12 @@ func main() {
 		goto ERR
 	}
 
+	// register service
+	err = worker.InitRegister()
+	if err != nil{
+		goto ERR
+	}
+
 	// init log
 	err = worker.InitLogSink()
 	if err != nil{

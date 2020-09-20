@@ -13,4 +13,6 @@ const(
 	JOB_EVENT_KILL = 3
 	// lock dir
 	JOB_LOCK_DIR = "/cron/lock/"
+	// service registration dir
+	JOB_WORKER_DIR = "/cron/workers/"
 )
