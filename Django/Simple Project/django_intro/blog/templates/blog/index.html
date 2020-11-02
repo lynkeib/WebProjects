@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container page-header">
+    <h1>
+        Django Test <small> -- By Chengyin</small>
+    </h1>
+
+</div>
+<div class="container page-body">
+    <div class="col-md-9" role="main">
+        <div class="body-main">
+            {% for article in articles %}
+            <div>
+                <h2>{{article.Title}}</h2>
+                <p>{{article.BriefContent}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-3" role="complementary">
+        <div>
+            <h2>Newest</h2>
+            {% for article in articles %}
+            <h4><a href="#">{{article.Title}}</a></h4>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
