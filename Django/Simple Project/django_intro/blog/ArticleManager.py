@@ -14,3 +14,8 @@ class ArticleManager:
     def get_all(cls) -> List[Article]:
         logger.info("Getting all articles")
         return Article.objects.all()
+
+    @classmethod
+    def get_by_id(cls, id: int) -> Article:
+        logger.info(f"Getting article id: {id}")
+        return Article.objects.get(pk=id)

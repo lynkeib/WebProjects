@@ -10,19 +10,20 @@ from blog.ArticleManager import ArticleManager
 from blog.models import Article
 
 
-def hello_world(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("Hello World")
+def get_index_page(request: HttpRequest) -> HttpResponse:
+    articles: List[Article] = ArticleManager.get_all()
+    return render(request, "blog/index.html", {"articles": articles})
+
+
+def get_detail_page(request: HttpRequest, article_id: int) -> HttpResponse:
+    article: Article = ArticleManager.get_by_id(article_id)
+    return render(request, "blog/detail.html", {"article": article})
 
 
 def article_content(request: HttpRequest) -> HttpResponse:
     this_article: Article = ArticleManager.get_all()[0]
     data: Dict = wrap_article_response(this_article)
     return HttpResponse(data)
-
-
-def get_index_page(request: HttpRequest) -> HttpResponse:
-    articles: List[Article] = ArticleManager.get_all()
-    return render(request, "blog/index.html", {"articles": articles})
 
 
 def wrap_article_response(article: Article) -> Dict:
