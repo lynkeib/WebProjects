@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework import viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -27,17 +28,56 @@ class HelloApiView(APIView):
         if serializer.is_valid():
             name = serializer.validated_data.get("name")
             message = f"Hello {name}"
-            return Response({"message": message})
+            return Response({"message": message}, status=status.HTTP_200_OK)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request: Request, pk=None) -> Response:
         """Handle updating an object"""
-        return Response(data={"message": "PUT"})
+        return Response(data={"message": "PUT"}, status=status.HTTP_200_OK)
 
     def patch(self, request: Request, pk=None) -> Response:
         """Handle a partiel update an object"""
-        return Response(data={"message": "PATCH"})
+        return Response(data={"message": "PATCH"}, status=status.HTTP_200_OK)
 
     def delete(self, request: Request, pk=None) -> Response:
         """Delete an object"""
-        return Response(data={"message": "DELETE"})
+        return Response(data={"message": "DELETE"}, status=status.HTTP_200_OK)
+
+
+class HelloViewSet(viewsets.ViewSet):
+    """Test Api ViewSet"""
+    serializer_class = serializers.HelloSerializer
+
+    def list(self, request: Request) -> Response:
+        """Retrun hellp message"""
+        a_viewset = [
+            "Uses actions: list, create, retrieve, update, partial_update, destroy",
+            "Automatically maps to URLs using Routers",
+            "Provides more functionality with less code",
+        ]
+        return Response(data={"message": "Hello", "an_apiview": a_viewset}, status=status.HTTP_200_OK)
+
+    def create(self, request: Request) -> Response:
+        """Create a new hello message"""
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            name = serializer.validated_data.get("name")
+            message = f"Hello {name}"
+            return Response({"message": message}, status=status.HTTP_200_OK)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request: Request, pk=None) -> Response:
+        """Handle getting an object by its ID"""
+        return Response(data={"message": "GET"}, status=status.HTTP_200_OK)
+
+    def update(self, request: Request, pk=None) -> Response:
+        """Handle updating an object"""
+        return Response(data={"message": "PUT"}, status=status.HTTP_200_OK)
+
+    def partial_update(self, request: Request, pk=None) -> Response:
+        """Handle updating part of an object"""
+        return Response(data={"message": "PATCH"}, status=status.HTTP_200_OK)
+
+    def destroy(self, request: Request, pk=None) -> Response:
+        """Handle removing an object"""
+        return Response(data={"message": "DELETE"}, status=status.HTTP_200_OK)
