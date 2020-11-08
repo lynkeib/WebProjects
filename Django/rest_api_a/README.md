@@ -1,5 +1,6 @@
 ## Tech Stack
 = Docker
+- Travis CI
 - Python
 - Django
 - Django Rest Framework
